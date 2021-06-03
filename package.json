@@ -1,0 +1,38 @@
+{
+  "name": "prodigy",
+  "version": "1.0.0",
+  "description": "Prodigy is a Discord bot with many features",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThaddeusKKR/Prodigy.git"
+  },
+  "author": "ThaddeusKKR",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/ThaddeusKKR/Prodigy/issues"
+  },
+  "homepage": "https://github.com/ThaddeusKKR/Prodigy#readme",
+  "dependencies": {
+    "@keyv/mongo": "^1.1.0",
+    "bufferutil": "^4.0.3",
+    "cat-loggr": "^1.1.0",
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0",
+    "erela.js": "^2.3.3",
+    "erela.js-spotify": "^1.2.0",
+    "erlpack": "github:discord/erlpack",
+    "express": "^4.17.1",
+    "keyv": "^4.0.3",
+    "libsodium-wrappers": "^0.7.9",
+    "pretty-ms": "^7.0.1",
+    "utf-8-validate": "^5.0.5",
+    "zlib-sync": "^0.1.7"
+  },
+  "devDependencies": {
+    "eslint": "^7.27.0"
+  }
+}

@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+    prodigy:
+        build: .
+        container_name: prodigy
+        restart: on-failure
+        tty: true
+        environment: 
+            - token=notyet
