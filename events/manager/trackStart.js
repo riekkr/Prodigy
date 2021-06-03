@@ -11,4 +11,4 @@ module.exports = async (client, player, track) => {
         .setThumbnail(track.thumbnail);
     channel.send(embed);
     client.logger.log(track);
-};
+};  

@@ -1,6 +1,7 @@
 version: '3.7'
 services:
     prodigy:
+        image: thaddeuskkr/prodigy
         build: .
         container_name: prodigy
         restart: on-failure
