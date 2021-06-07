@@ -4,7 +4,7 @@ module.exports = {
     name: 'prefix',
     description: 'Changes the prefix for the current server.',
     aliases: ['pre'],
-    usage: '{p}prefix [new prefix]',
+    usage: '{p}prefix [newPrefix]',
     ownerOnly: false,
     requiredPermissions: ['MANAGE_MESSAGES'],
 

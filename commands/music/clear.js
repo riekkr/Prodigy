@@ -1,8 +1,8 @@
 module.exports = {
-    name: 'stop', // Command name
-    description: 'Stops the music for the server', // Short description of what the command does
-    aliases: ['st'], // An array of alternate commands that trigger the command
-    usage: '{p}stop', // How the command is invocated, "{p}" is replaced by the prefix in the server
+    name: 'clear', // Command name
+    description: 'Clears the music queue.', // Short description of what the command does
+    aliases: ['clr'], // An array of alternate commands that trigger the command
+    usage: '{p}clear', // How the command is invocated, "{p}" is replaced by the prefix in the server
     ownerOnly: false, // Restricts the command to the bot owner
     requiredPermissions: [], // An array of permissions the user needs to run the command
     dj: true, // Whether DJ only mode being on will prevent the command from being run
@@ -12,7 +12,8 @@ module.exports = {
         const channel = message.member.voice.channel;
         if (!channel) return message.reply('you aren\'t in a voice channel.');
         if (channel.id !== player.voiceChannel) return message.reply('you aren\'t in the same voice channel as the bot.');
-        player.destroy();
-        return message.reply('stopped the music.');
+        if (player.queue.length < 1) return message.reply('there aren\'t any songs in the queue to shuffle.');
+        player.queue.clear();
+        return message.channel.send('Cleared the queue for this server.');
     }
 };

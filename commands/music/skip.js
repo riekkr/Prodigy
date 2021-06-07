@@ -7,8 +7,7 @@ module.exports = {
     requiredPermissions: [], // An array of permissions the user needs to run the command
     dj: true,
 
-    async execute(client, message) {
-        const player = client.manager.get(message.guild.id);
+    async execute(client, message, args, prefix, player) {
         if (!player) return message.reply('there is nothing playing in this server.');
         const channel = message.member.voice.channel;
         if (!channel) return message.reply('you aren\'t in a voice channel.');
@@ -20,5 +19,7 @@ module.exports = {
         player.stop();
 
         message.channel.send('Successfully skipped ' + `**${title}**` + '.');
+
+        if (message) message.delete({ timeout: 10000 });
     }
 };

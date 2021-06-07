@@ -8,6 +8,7 @@ const logger = new Catloggr();
 const fs = require('fs');
 const config = require('./config.json');
 const Keyv = require('keyv');
+const { version } = require('./package.json');
 
 const nodes = [
     {
@@ -26,6 +27,7 @@ db.on('error', (err) => {
 client.db = db;
 client.logger = logger;
 client.config = config;
+client.config.defaultFooter = client.config.defaultFooter.replace('{version}', 'v' + version);
 client.commands = new Discord.Collection();
 
 const manager = new Manager({

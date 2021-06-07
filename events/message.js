@@ -80,7 +80,8 @@ module.exports = async (client, message) => {
     }
 
     try {
-        command.execute(client, message, args, prefix);
+        let player = client.manager.get(message.guild.id);
+        command.execute(client, message, args, prefix, player);
         // client.logger.log(`${message.author.tag} ran command ${command.name} in ${message.guild.name}`);
     } catch (err) {
         client.logger.error(err);

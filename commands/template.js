@@ -12,7 +12,6 @@ module.exports = {
     requiredPermissions: [], // An array of permissions the user needs to run the command
     dj: false, // Whether DJ only mode being on will prevent the command from being run
 
-    async execute(client, message, args, prefix) {
-
+    async execute(client, message, args, prefix, player) {
     }
-}
+};

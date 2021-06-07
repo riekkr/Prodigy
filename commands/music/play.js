@@ -5,6 +5,7 @@ module.exports = {
     usage: '{p}play <songTitle>',
     ownerOnly: false,
     requiredPermissions: ['MANAGE_MESSAGES'],
+    sameVC: true, // Whether the user needs to be in the same channel as the bot to use the command
     dj: true,
 
     async execute(client, message, args) {

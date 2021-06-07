@@ -1,6 +1,6 @@
 {
   "name": "prodigy",
-  "version": "1.0.0",
+  "version": "1.4.0",
   "description": "Prodigy is a Discord bot with many features",
   "main": "index.js",
   "scripts": {
@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "keyv": "^4.0.3",
     "libsodium-wrappers": "^0.7.9",
+    "lodash": "^4.17.21",
     "pretty-ms": "^7.0.1",
     "utf-8-validate": "^5.0.5",
     "zlib-sync": "^0.1.7"
