@@ -1,6 +1,6 @@
 module.exports = {
     name: 'debug',
-    description: 'Debug command (owner only)',
+    description: 'Debug command',
     aliases: ['d'],
     usage: '{p}debug',
     ownerOnly: true,

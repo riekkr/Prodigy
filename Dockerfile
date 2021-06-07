@@ -1,9 +1,8 @@
 FROM node:15
-FROM thaddeuskkr/prodigy
 
 WORKDIR /usr/src/app
 COPY package*.json ./
-COPY *config.json ./
 RUN npm install
 
+COPY . . 
 CMD [ "node", "index.js" ]

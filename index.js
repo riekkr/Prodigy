@@ -60,6 +60,8 @@ for (const file of managerEvents) {
 
 const music = fs.readdirSync('./commands/music').filter(file => file.endsWith('.js'));
 const info = fs.readdirSync('./commands/info').filter(file => file.endsWith('.js'));
+const owner = fs.readdirSync('./commands/owner').filter(file => file.endsWith('.js'));
+const admin = fs.readdirSync('./commands/admin').filter(file => file.endsWith('.js'));
 
 for (const file of music) {
     const cmd = require(`./commands/music/${file}`);
@@ -69,5 +71,18 @@ for (const file of info) {
     const cmd = require(`./commands/info/${file}`);
     client.commands.set(cmd.name.toLowerCase(), cmd);
 }
+for (const file of owner) {
+    const cmd = require(`./commands/owner/${file}`);
+    client.commands.set(cmd.name.toLowerCase(), cmd);
+}
+for (const file of admin) {
+    const cmd = require(`./commands/admin/${file}`);
+    client.commands.set(cmd.name.toLowerCase(), cmd);
+}
+logger.info(`${client.commands.size} commands and ${Object.keys(client._events).length} events loaded.`);
+
+process.on('unhandledRejection', async (err) => {
+    logger.error('Unhandled rejection: ' + err.message);
+});
 
 client.login(config.token);

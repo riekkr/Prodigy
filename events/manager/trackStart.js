@@ -9,6 +9,7 @@ module.exports = async (client, player, track) => {
         .setFooter(`${player.queue.size} tracks in queue | ${client.config.defaultFooter}`)
         .setColor(client.config.defaultColor)
         .setThumbnail(track.thumbnail);
-    channel.send(embed);
-    client.logger.log(track);
+    let msg = await channel.send(embed);
+    if (channel.lastNowPlayingMessage) channel.lastNowPlayingMessage.delete();
+    channel.lastNowPlayingMessage = msg;
 };  

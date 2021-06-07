@@ -81,8 +81,9 @@ module.exports = async (client, message) => {
 
     try {
         command.execute(client, message, args, prefix);
-        client.logger.log(`${message.author.tag} ran command ${command.name} in ${message.guild.name}`);
+        // client.logger.log(`${message.author.tag} ran command ${command.name} in ${message.guild.name}`);
     } catch (err) {
+        client.logger.error(err);
         const errorEmbed = new Discord.MessageEmbed()
             .setAuthor('Error')
             .setDescription('**An unknown error has occurred.**\nA bug report has been sent to my owners.')
