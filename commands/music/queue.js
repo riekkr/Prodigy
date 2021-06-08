@@ -18,10 +18,7 @@ module.exports = {
         }
         const finalMessages = [];
         let chunked = _.chunk(player.queue, 10);
-        let totalDuration = 0;
-        player.queue.forEach(track => {
-            totalDuration = totalDuration + track.duration;
-        });
+        let totalDuration = player.queue.duration;
         for (let i = 0; i < chunked.length; i++) {
             let text;
             let messageArr = [];
