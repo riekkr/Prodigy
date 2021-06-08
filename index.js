@@ -1,14 +1,18 @@
 require('dotenv').config();
 const Discord = require('discord.js');
 // const express = require('express');
-const { Manager } = require('erela.js');
-const Spotify = require('erela.js-spotify');
 const Catloggr = require('cat-loggr');
 const logger = new Catloggr();
 const fs = require('fs');
 const config = require('./config.json');
 const Keyv = require('keyv');
 const { version } = require('./package.json');
+
+// Erela.js
+const { Manager } = require('erela.js');
+const Spotify = require('erela.js-spotify');
+const Deezer = require('erela.js-deezer');
+const Facebook = require('erela.js-facebook');
 
 const nodes = [
     {
@@ -36,7 +40,9 @@ const manager = new Manager({
         new Spotify({
             clientID: config.spotifyClientID,
             clientSecret: config.spotifyClientSecret
-        })
+        }),
+        new Deezer(),
+        new Facebook()
     ],
     shards: 1,
     send(id, payload) {
