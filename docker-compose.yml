@@ -7,3 +7,4 @@ services:
         tty: true
         environment: 
             - token=notyet
+        ports: 6969:6969

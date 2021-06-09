@@ -1,6 +1,5 @@
 require('dotenv').config();
 const Discord = require('discord.js');
-// const express = require('express');
 const Catloggr = require('cat-loggr');
 const logger = new Catloggr();
 const fs = require('fs');
