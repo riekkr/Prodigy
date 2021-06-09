@@ -6,6 +6,16 @@ const fs = require('fs');
 const config = require('./config.json');
 const Keyv = require('keyv');
 const { version } = require('./package.json');
+const express = require('express');
+
+const server = express();
+server.get('/', (req, res) => {
+    res.json({ CODE: 200, MESSAGE: 'Success' });
+});
+
+server.listen(config.port, () => {
+    logger.info('Listening on port ' + config.port);
+});
 
 // Erela.js
 const { Manager } = require('erela.js');
