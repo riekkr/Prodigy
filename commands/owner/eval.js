@@ -23,6 +23,7 @@ module.exports = {
         Object.defineProperty(this, '_sensitivePattern', { value: null, configurable: true });
         /* eslint-disable no-unused-vars */
         const player = client.manager.get(message.guild.id);
+        const guild = message.guild;
         const msg = message;
         const ctx = client;
         const lastResult = this.lastResult;
@@ -39,10 +40,12 @@ module.exports = {
             }
         };
         /* eslint-enable no-unused-vars */
-
+        // This doesn't work right now
+        /*
         if (args.script.startsWith('```') && args.script.endsWith('```')) {
             args.script = args.script.replace(/(^.*?\s)|(\n.*$)/g, '');
         }
+        */ 
 
         let hrDiff;
         try {
