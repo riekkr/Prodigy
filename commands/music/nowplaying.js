@@ -65,7 +65,7 @@ module.exports = {
             const progressText = '▇'.repeat(progress);
             const emptyProgressText = '—'.repeat(emptyProgress);
             
-            const bar = `[${progressText}${emptyProgressText}]`;
+            const bar = `\`[${progressText}${emptyProgressText}]\``;
             return bar;
         }
     }
