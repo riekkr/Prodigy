@@ -23,8 +23,8 @@ module.exports = {
         const noCollector = msg.createReactionCollector(noFilter, { time: 5 * 60 * 1000 });
         yesCollector.on('collect', async () => {
             msg.reactions.removeAll();
-            let rmd = player.queue.remove(trackPosition);
-            await msg.edit(`Removed **${rmd.title}** from the queue.`);
+            player.queue.remove(trackPosition);
+            await msg.edit(`Removed **${trackRemoved.title}** from the queue.`);
             return;
         });
         noCollector.on('collect', async () => {
