@@ -9,10 +9,6 @@ const { version } = require('./package.json');
 const express = require('express');
 
 const server = express();
-server.get('/', (req, res) => {
-    res.json({ CODE: 200, MESSAGE: 'Success' });
-});
-
 server.listen(config.port, () => {
     logger.info('Listening on port ' + config.port);
 });
@@ -102,4 +98,8 @@ process.on('unhandledRejection', async (err) => {
     logger.error('Unhandled rejection: ' + err.message);
 });
 
+const apiFiles = fs.readdirSync('./api').filter(file => file.endsWith('.js'));
+for (const file of apiFiles) {
+    require(`./api/${file}`)(server, client);
+}
 client.login(config.token);

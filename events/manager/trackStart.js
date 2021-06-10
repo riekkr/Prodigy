@@ -3,7 +3,7 @@ const prettyms = require('pretty-ms');
 
 module.exports = async (client, player, track) => {
     let channel = client.channels.cache.get(player.textChannel);
-    await player.queue[0].resolve();
+    if (!player.queue[0].uri) await player.queue[0].resolve();
 
     const embed = new MessageEmbed()
         .setAuthor('Now playing')
