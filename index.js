@@ -75,22 +75,30 @@ const music = fs.readdirSync('./commands/music').filter(file => file.endsWith('.
 const info = fs.readdirSync('./commands/info').filter(file => file.endsWith('.js'));
 const owner = fs.readdirSync('./commands/owner').filter(file => file.endsWith('.js'));
 const admin = fs.readdirSync('./commands/admin').filter(file => file.endsWith('.js'));
+const util = fs.readdirSync('./util').filter(file => file.endsWith('.js'));
 
 for (const file of music) {
     const cmd = require(`./commands/music/${file}`);
+    cmd.category = 'music';
     client.commands.set(cmd.name.toLowerCase(), cmd);
 }
 for (const file of info) {
     const cmd = require(`./commands/info/${file}`);
+    cmd.category = 'info';
     client.commands.set(cmd.name.toLowerCase(), cmd);
 }
 for (const file of owner) {
     const cmd = require(`./commands/owner/${file}`);
+    cmd.category = 'owner';
     client.commands.set(cmd.name.toLowerCase(), cmd);
 }
 for (const file of admin) {
     const cmd = require(`./commands/admin/${file}`);
+    cmd.category = 'admin';
     client.commands.set(cmd.name.toLowerCase(), cmd);
+}
+for (const file of util) {
+    client[file] = require(`./util/${file}`);
 }
 logger.info(`${client.commands.size} commands and ${Object.keys(client._events).length} events loaded.`);
 
