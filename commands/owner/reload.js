@@ -13,8 +13,8 @@ module.exports = {
             return message.reply('that\'s not a valid command.');
         } else {
             cmd = client.commands.find(cmd => cmd.aliases.includes(args.join(' '))) || client.commands.get(args.join(' '));
-            client.unloadCommand(client, args.join(' '));
-            client.loadCommand(client, args.join(' '), cmd.category);
+            client.util.unloadCommand(client, args.join(' '));
+            client.util.loadCommand(client, args.join(' '), cmd.category);
             return message.reply('reloaded command ' + `\`${cmd.name}\`` + '.');
         }
     }
