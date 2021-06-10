@@ -13,6 +13,8 @@ module.exports = {
         if (!channel) return message.reply('you aren\'t in a voice channel.');
         if (channel.id !== player.voiceChannel) return message.reply('you aren\'t in the same voice channel as the bot.');
         player.destroy();
+        if (message.channel.lastNowPlayingMessage) message.channel.lastNowPlayingMessage.delete();
+        message.channel.lastNowPlayingMessage = false;
         return message.reply('stopped the music.');
     }
 };
