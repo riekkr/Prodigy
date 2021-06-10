@@ -13,6 +13,7 @@ module.exports = async (client, player, track) => {
         let msg = await channel.send(embed);
         if (channel.lastNowPlayingMessage) channel.lastNowPlayingMessage.delete();
         channel.lastNowPlayingMessage = msg;
+        return;
     }
     if (!player.queue[0].uri) await player.queue[0].resolve();
 
