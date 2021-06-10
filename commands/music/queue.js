@@ -14,7 +14,7 @@ module.exports = {
         if (!player) return message.reply('there is nothing playing in this server.');
         if (!player.queue.current) return message.reply('there is nothing playing.');
         if (player.queue.length < 1) {
-            return message.channel.send(`**Now playing:** ${player.queue.current.title} (<${player.queue.current.uri}>) \`${prettyms(player.queue.current.duration, { colonNotation: true })}\`\n\n*No tracks in queue.*`);
+            return message.channel.send(`**Now playing:** ${player.queue.current.title} (<${player.queue.current.uri}>) \`${prettyms(player.queue.current.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\`\n\n*No tracks in queue.*`);
         }
         const finalMessages = [];
         let chunked = _.chunk(player.queue, 10);
@@ -24,7 +24,7 @@ module.exports = {
             let messageArr = [];
             messageArr.push(`**__Queue for ${message.guild.name}__**`);
             messageArr.push(`**Total duration:** \`${prettyms(totalDuration, { colonNotation: true, secondsDecimalDigits: 0 })}\``);
-            messageArr.push(`**Now playing:** ${player.queue.current.title} (<${player.queue.current.uri}>) \`${prettyms(player.queue.current.duration, { colonNotation: true })}\`\n`);
+            messageArr.push(`**Now playing:** ${player.queue.current.title} (<${player.queue.current.uri}>) \`${prettyms(player.queue.current.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\`\n`);
             for (let e = 0; e < chunked[i].length; e++) {
                 let track = chunked[i][e];
                 messageArr.push(`**\`${e+(10*i)+1}\`**: **${track.title}** \`${prettyms(track.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\` | Requested by **${track.requester.tag}**`);
