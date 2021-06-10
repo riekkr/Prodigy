@@ -15,10 +15,14 @@ module.exports = {
         if (!player.queue.current) return message.reply('there is nothing playing.');
 
         let np = player.queue.current;
+        let bar = createProgressBar(player.position, player.queue.current.duration, 20);
+        let songDuration = prettyms(np.duration, { colonNotation: true, secondsDecimalDigits: 0 });
+        let currentPosition = prettyms(player.position, { colonNotation: true, secondsDecimalDigits: 0 });
 
         const embed = new MessageEmbed()
             .setAuthor(message.guild.name, message.guild.iconURL())
             .setTitle('Now playing')
+            .setDescription(`${bar} ${currentPosition} / ${songDuration}`)
             .setImage(np.displayThumbnail('maxresdefault') || np.displayThumbnail('hqdefault') || np.displayThumbnail('mqdefault') || np.thumbnail)
             .setColor(client.config.defaultColor)
             .setFooter(`${player.queue.size} tracks in queue | ${client.config.defaultFooter}`)
@@ -33,7 +37,7 @@ module.exports = {
                 },
                 {
                     name: 'Duration',
-                    value: prettyms(np.duration, { colonNotation: true, secondsDecimalDigits: 0 })
+                    value: songDuration
                 },
                 {
                     name: 'Requested by',
@@ -51,5 +55,18 @@ module.exports = {
                 }
             ]);
         return message.channel.send(embed);
+
+        function createProgressBar (current, end, size) {
+            if (isNaN(current) || isNaN(end)) return 'Arguments current and end have to be integers.';
+            const percentage = current / end;
+            const progress = Math.round((size * percentage));
+            const emptyProgress = size - progress;
+
+            const progressText = '▇'.repeat(progress);
+            const emptyProgressText = '—'.repeat(emptyProgress);
+            
+            const bar = `[${progressText}${emptyProgressText}]`;
+            return bar;
+        }
     }
 };
