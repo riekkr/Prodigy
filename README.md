@@ -2,7 +2,6 @@
 **Rewritten and faster than ever!**
 
 ### Platform Support
-**Prodigy** supports these platforms:  
 - YouTube
 - Spotify (Converted)
 - SoundCloud
@@ -15,6 +14,4 @@
 - Live streams
 
 ### Links
-- [Invite](https://prdg.tk/invite)
-- [Website](https://prdg.tk) (WIP)
-- [GitHub](https://prdg.tk/github)
+- WIP
