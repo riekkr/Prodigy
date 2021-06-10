@@ -41,7 +41,7 @@ module.exports = {
         const upFilter = (reaction, user) => reaction.emoji.name == '🔺' && user.id === message.author.id;
         const downFilter = (reaction, user) => reaction.emoji.name == '🔻' && user.id === message.author.id;
         const jumpFilter = (reaction, user) => reaction.emoji.name == '🔹' && user.id === message.author.id;
-        const collector1 = m.createReactionCollector(upFilter, { time: 5 * 60 * 1000});
+        const collector1 = m.createReactionCollector(upFilter, { time: 5 * 60 * 1000 });
         const collector2 = m.createReactionCollector(downFilter, { time: 5 * 60 * 1000 });
         const collector3 = m.createReactionCollector(jumpFilter, { time: 5 * 60 * 1000 });
         collector1.on('collect', async (reaction, user) => { // Up
