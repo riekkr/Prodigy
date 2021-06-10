@@ -98,6 +98,7 @@ for (const file of admin) {
     client.commands.set(cmd.name.toLowerCase(), cmd);
 }
 for (const file of util) {
+    client.util = {};
     client.util[file.split('.')[0]] = require(`./util/${file}`);
 }
 logger.info(`${client.commands.size} commands and ${Object.keys(client._events).length} events loaded.`);
