@@ -28,7 +28,7 @@ module.exports = {
             messageArr.push(`**Now playing:** ${player.queue.current.title} (<${player.queue.current.uri}>) \`${prettyms(player.queue.current.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\`\n`);
             for (let e = 0; e < chunked[i].length; e++) {
                 let track = chunked[i][e];
-                messageArr.push(`**\`${e+(10*i)+1}\`**: **${track.title}** \`${prettyms(track.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\` | Requested by **${track.requester.tag}**`);
+                messageArr.push(`**\`${e+(10*i)+1}\`**: **${track.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** \`${prettyms(track.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\` | Requested by **${track.requester.tag}**`);
             }
             messageArr.push(`\n**${player.queue.length}** tracks in queue | Page **${i+1}** of **${chunked.length}**`);
             text = messageArr.join('\n');
