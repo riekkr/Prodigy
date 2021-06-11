@@ -7,7 +7,7 @@ module.exports = async (client, player, track) => {
     if (player.queue.length < 1) {
         const embed = new MessageEmbed()
             .setAuthor('Now playing', track.requester.avatarURL())
-            .setDescription(`**[${track.title}](${track.uri})** \`${prettyms(track.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\`\nRequested by: **${track.requester.tag}** (${track.requester.toString()})`)
+            .setDescription(`**[${track.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}](${track.uri})** \`${prettyms(track.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\`\nRequested by: **${track.requester.tag}** (${track.requester.toString()})`)
             .setFooter(`No tracks in queue | ${client.config.defaultFooter}`, channel.guild.iconURL())
             .setColor(client.config.defaultColor)
             .setThumbnail(track.displayThumbnail('maxresdefault') || track.displayThumbnail('hqdefault') || track.displayThumbnail('mqdefault') || track.thumbnail);
@@ -20,7 +20,7 @@ module.exports = async (client, player, track) => {
 
     const embed = new MessageEmbed()
         .setAuthor('Now playing', track.requester.avatarURL())
-        .setDescription(`**[${track.title}](${track.uri})** \`${prettyms(track.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\`\nRequested by: **${track.requester.tag}** (${track.requester.toString()})\n\n**Next in queue**\n[${player.queue[0].title}](${player.queue[0].uri}) \`${prettyms(player.queue[0].duration, { colonNotation: true, secondsDecimalDigits: 0 })}\`\nRequested by: **${player.queue[0].requester.tag}** (${player.queue[0].requester.toString()})`)
+        .setDescription(`**[${track.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}](${track.uri})** \`${prettyms(track.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\`\nRequested by: **${track.requester.tag}** (${track.requester.toString()})\n\n**Next in queue**\n[${player.queue[0].title}](${player.queue[0].uri}) \`${prettyms(player.queue[0].duration, { colonNotation: true, secondsDecimalDigits: 0 })}\`\nRequested by: **${player.queue[0].requester.tag}** (${player.queue[0].requester.toString()})`)
         .setFooter(`${player.queue.size} track(s) in queue | ${client.config.defaultFooter}`, channel.guild.iconURL())
         .setColor(client.config.defaultColor)
         .setThumbnail(track.displayThumbnail('maxresdefault') || track.displayThumbnail('hqdefault') || track.displayThumbnail('mqdefault') || track.thumbnail);

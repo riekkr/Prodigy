@@ -30,7 +30,7 @@ module.exports = {
             break;
         case 'TRACK_LOADED':
             player.queue.add(res.tracks[0]);
-            message.channel.send(`Enqueued track **${res.tracks[0].title}**.`);
+            message.channel.send(`Enqueued track **${res.tracks[0].title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}**.`);
             if (!player.playing && !player.paused && !player.queue.size) {
                 player.play();
             }
@@ -38,11 +38,11 @@ module.exports = {
         case 'PLAYLIST_LOADED':
             player.queue.add(res.tracks);
             if (!player.playing && !player.paused && player.queue.totalSize === res.tracks.length) player.play();
-            message.channel.send(`Enqueued playlist **${res.playlist.name}** with **${res.tracks.length}** songs.`);
+            message.channel.send(`Enqueued playlist **${res.playlist.name.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** with **${res.tracks.length}** songs.`);
             break;
         case 'SEARCH_RESULT':
             player.queue.add(res.tracks[0]);
-            message.channel.send(`Enqueued track **${res.tracks[0].title}**.`);
+            message.channel.send(`Enqueued track **${res.tracks[0].title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}**.`);
             if (!player.playing && !player.paused && !player.queue.size) player.play();
             break;
         default:

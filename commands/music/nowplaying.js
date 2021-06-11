@@ -30,11 +30,11 @@ module.exports = {
             .addFields([
                 {
                     name: 'Track',
-                    value: `[${np.title}](${np.uri})`
+                    value: `[${np.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}](${np.uri})`
                 },
                 {
                     name: 'Channel',
-                    value: np.author
+                    value: np.author.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')
                 },
                 {
                     name: 'Duration',

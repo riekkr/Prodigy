@@ -15,7 +15,7 @@ module.exports = {
         if (args[0] > player.queue.length) return message.channel.send('**Invalid usage:** Command `remove` has to be above 1 and below ' + player.queue.length + '.');
         const trackPosition = args[0] - 1;
         const trackRemoved = player.queue[trackPosition];
-        const msg = await message.reply(`remove **${trackRemoved.title}** from the queue?`);
+        const msg = await message.reply(`remove **${trackRemoved.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** from the queue?`);
         await msg.react('❌');
         await msg.react('✅');
         const yesFilter = (reaction, user) => reaction.emoji.name == '✅' && user.id === message.author.id;
@@ -25,7 +25,7 @@ module.exports = {
         yesCollector.on('collect', async () => {
             msg.reactions.removeAll();
             player.queue.remove(trackPosition);
-            await msg.edit(`Removed **${trackRemoved.title}** from the queue.`);
+            await msg.edit(`Removed **${trackRemoved.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** from the queue.`);
             return;
         });
         noCollector.on('collect', async () => {

@@ -21,7 +21,7 @@ module.exports = {
         } else {
             let vc = message.guild.channels.cache.find(c => c.id == player.voiceChannel);
             player.pause(true);
-            return message.channel.send(`Paused **${player.queue.current.title}** in **${vc.name}**.`);
+            return message.channel.send(`Paused **${player.queue.current.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** in **${vc.name}**.`);
         }
     }
 };

@@ -14,7 +14,7 @@ module.exports = {
         if (!player) return message.reply('there is nothing playing in this server.');
         if (!player.queue.current) return message.reply('there is nothing playing.');
         if (player.queue.length < 1) {
-            return message.channel.send(`**Now playing:** ${player.queue.current.title} (<${player.queue.current.uri}>) \`${prettyms(player.queue.current.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\`\n\n*No tracks in queue.*`);
+            return message.channel.send(`**Now playing:** ${player.queue.current.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')} (<${player.queue.current.uri}>) \`${prettyms(player.queue.current.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\`\n\n*No tracks in queue.*`);
         }
         if (!player.textChannel) player.textChannel = message.channel.id;
         const finalMessages = [];

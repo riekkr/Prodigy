@@ -19,7 +19,7 @@ module.exports = {
 
         player.stop();
 
-        message.channel.send('Successfully skipped ' + `**${title}**` + '.');
+        message.channel.send('Successfully skipped ' + `**${title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}**` + '.');
 
         if (message) message.delete({ timeout: 10000 });
     }
