@@ -1,6 +1,6 @@
 {
   "name": "prodigy",
-  "version": "1.8.0",
+  "version": "1.8.3",
   "description": "Prodigy is a Discord bot with many features",
   "main": "index.js",
   "scripts": {
@@ -21,10 +21,10 @@
   "dependencies": {
     "@keyv/mongo": "^1.1.0",
     "bufferutil": "^4.0.3",
-    "cat-loggr": "^1.1.0",
+    "cat-loggr": "^1.2.2",
     "child_process": "^1.0.2",
     "child-process": "^1.0.2",
-    "common-tags": "^1.8.0",
+    "common-tags": "^2.0.0-alpha.1",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
     "erela.js": "^2.3.3",
@@ -32,7 +32,7 @@
     "erela.js-facebook": "^1.0.4",
     "erela.js-spotify": "^1.2.0",
     "erlpack": "github:discord/erlpack",
-    "express": "^4.17.1",
+    "express": "^5.0.0-alpha.8",
     "keyv": "^4.0.3",
     "libsodium-wrappers": "^0.7.9",
     "lodash": "^4.17.21",
@@ -42,7 +42,7 @@
     "zlib-sync": "^0.1.7"
   },
   "devDependencies": {
-    "eslint": "^7.27.0",
+    "eslint": "^7.28.0",
     "nodemon": "^2.0.7"
   }
 }
