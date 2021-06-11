@@ -18,6 +18,7 @@ module.exports = {
             } else if (client.commands.find(c => c.aliases.includes(name))) {
                 command = client.commands.find(c => c.aliases.includes(name));
             }
+            if (!command) return message.reply('that\'s not a valid command.');
             let av;
             if (command.dj == true && command.ownerOnly == true) {
                 av = 'Owner only and requires DJ role when DJ mode is on';
