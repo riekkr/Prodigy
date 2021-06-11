@@ -1,0 +1,15 @@
+{
+    "token": "",
+    "lavalinkHost": "",
+    "lavalinkPort": 1100,
+    "lavalinkPassword": "",
+    "mongoURL": "",
+    "globalPrefix": "",
+    "defaultFooter": "",
+    "defaultColor": "",
+    "unknownCommandMessage": false,
+    "owners": [],
+    "spotifyClientID": "",
+    "spotifyClientSecret": "",
+    "port": 6969
+}
