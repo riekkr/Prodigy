@@ -22,9 +22,9 @@ module.exports = {
             let av;
             if (command.dj == true && command.ownerOnly == true) {
                 av = 'Owner only and requires DJ role when DJ mode is on';
-            } else if (command.dj == true && command.ownerOnly == false) {
+            } else if (command.dj == true && !command.ownerOnly) {
                 av = 'Requires DJ role when DJ mode is on';
-            } else if (command.dj == false && command.ownerOnly == true) {
+            } else if (!command.dj && command.ownerOnly == true) {
                 av = 'Owner only';
             }
             const inf = new MessageEmbed()
@@ -63,10 +63,10 @@ module.exports = {
         } else {
             const embed = new MessageEmbed()
                 .setColor(client.config.defaultColor)
-                .setFooter(client.config.defaultFooter)
-                .setAuthor('Prodigy | Help')
+                .setFooter(client.config.defaultFooter, client.user.avatarURL())
+                .setAuthor('Prodigy | Help', )
                 .setTitle('Commands')
-                .setDescription(`Prodigy is a Discord bot mainly written for music, created by tkkr#7552.\nFor more information, use \`${prefix}info\`.\nFor more information about a command, use \`${prefix}help \``)
+                .setDescription(`Prodigy is a Discord bot mainly written for music, created by tkkr#7552.\nFor more information, use \`${prefix}info\`.\nFor more information about a command, use \`${prefix}help\``)
                 .addFields([
                     {
                         name: 'Admin',
