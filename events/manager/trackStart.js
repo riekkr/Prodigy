@@ -2,6 +2,7 @@ const { MessageEmbed } = require('discord.js');
 const prettyms = require('pretty-ms');
 
 module.exports = async (client, player, track) => {
+    if (!player.textChannel) return;
     let channel = client.channels.cache.get(player.textChannel);
     if (player.queue.length < 1) {
         const embed = new MessageEmbed()

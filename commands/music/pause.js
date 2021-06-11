@@ -13,6 +13,7 @@ module.exports = {
         if (!channel) return message.reply('you aren\'t in a voice channel.');
         if (channel.id !== player.voiceChannel) return message.reply('you aren\'t in the same voice channel as the bot.');
         if (!player.queue.current) return message.reply('there is nothing playing.');
+        if (!player.textChannel) player.textChannel = message.channel.id;
         if (player.paused == true) {
             message.reply('the player is already paused. Resuming.');
             player.pause(false);

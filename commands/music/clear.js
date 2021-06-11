@@ -13,6 +13,7 @@ module.exports = {
         if (!channel) return message.reply('you aren\'t in a voice channel.');
         if (channel.id !== player.voiceChannel) return message.reply('you aren\'t in the same voice channel as the bot.');
         if (player.queue.length < 1) return message.reply('there aren\'t any songs in the queue to shuffle.');
+        if (!player.textChannel) player.textChannel = message.channel.id;
         player.queue.clear();
         return message.channel.send('Cleared the queue for this server.');
     }

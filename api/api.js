@@ -1,6 +1,6 @@
-module.exports = async (app, client) => {
+module.exports = async (app) => {
     app.get('/', async (req, res) => {
+        res.status(200);
         res.json({ code: 200, message: 'Prodigy is online.' });
-        client.logger.log('GET request recieved');
     });
 };

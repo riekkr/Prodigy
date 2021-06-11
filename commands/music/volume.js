@@ -13,6 +13,7 @@ module.exports = {
         if (!channel) return message.reply('you aren\'t in a voice channel.');
         if (channel.id !== player.voiceChannel) return message.reply('you aren\'t in the same voice channel as the bot.');
         if (!player.queue.current) return message.reply('there is nothing playing.');
+        if (!player.textChannel) player.textChannel = message.channel.id;
         if (args.length < 1) return message.channel.send(`**Current volume:** \`${player.volume}%\`.`);
         const newVolume = args[0].replace('%', '');
         const oldVolume = player.volume;

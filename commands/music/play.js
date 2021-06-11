@@ -20,6 +20,7 @@ module.exports = {
             selfDeafen: true,
             selfMute: true
         });
+        if (!player.textChannel) player.textChannel = message.channel.id;
         if (player.state !== 'CONNECTED') player.connect();
 
         switch (res.loadType) {

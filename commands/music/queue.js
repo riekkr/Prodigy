@@ -16,6 +16,7 @@ module.exports = {
         if (player.queue.length < 1) {
             return message.channel.send(`**Now playing:** ${player.queue.current.title} (<${player.queue.current.uri}>) \`${prettyms(player.queue.current.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\`\n\n*No tracks in queue.*`);
         }
+        if (!player.textChannel) player.textChannel = message.channel.id;
         const finalMessages = [];
         let chunked = _.chunk(player.queue, 10);
         let totalDuration = player.queue.duration;

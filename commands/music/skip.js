@@ -15,6 +15,7 @@ module.exports = {
 
         if (!player.queue.current) return message.reply('there is nothing playing.');
         const title = player.queue.current.title;
+        if (!player.textChannel) player.textChannel = message.channel.id;
 
         player.stop();
 

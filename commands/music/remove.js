@@ -11,6 +11,7 @@ module.exports = {
         if (!player) return message.reply('there is nothing playing in this server.');
         if (!player.queue.current) return message.reply('there is nothing playing.');
         if (isNaN(args[0])) return message.channel.send('**Invalid usage:** Command `remove` requires exactly 1 integer argument.');
+        if (!player.textChannel) player.textChannel = message.channel.id;
         if (args[0] > player.queue.length) return message.channel.send('**Invalid usage:** Command `remove` has to be above 1 and below ' + player.queue.length + '.');
         const trackPosition = args[0] - 1;
         const trackRemoved = player.queue[trackPosition];
