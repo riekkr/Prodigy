@@ -56,7 +56,7 @@ module.exports = {
                     },
                     {
                         name: 'Required permissions',
-                        value: `\`${command.requiredPermissions.forEach(permission => permission.replace('_', ' ')).join('`, `') || 'None'}\``
+                        value: `\`${command.requiredPermissions.join('`, `') || 'None'}\``
                     }
                 ]);
             message.channel.send(inf);

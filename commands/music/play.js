@@ -4,7 +4,7 @@ module.exports = {
     aliases: ['p'],
     usage: '{p}play <songTitle>',
     ownerOnly: false,
-    requiredPermissions: ['MANAGE_MESSAGES'],
+    requiredPermissions: ['CONNECT'],
     sameVC: true, // Whether the user needs to be in the same channel as the bot to use the command
     dj: true,
 
