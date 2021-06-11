@@ -2,7 +2,7 @@ module.exports = {
     name: 'remove', // Command name
     description: 'Removes a track from the queue', // Short description of what the command does
     aliases: ['rm', 'rmv'], // An array of alternate commands that trigger the command
-    usage: '{p}remove <trackIndex>', // How the command is invocated, "{p}" is replaced by the prefix in the server
+    usage: '{p}remove <trackIndex|startIndex>', // How the command is invocated, "{p}" is replaced by the prefix in the server
     ownerOnly: false, // Restricts the command to the bot owner
     requiredPermissions: [], // An array of permissions the user needs to run the command
     dj: true, // Whether DJ only mode being on will prevent the command from being run
