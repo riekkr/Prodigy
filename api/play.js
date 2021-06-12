@@ -1,8 +1,13 @@
 module.exports = async (app, client) => {
     app.get('/play', async (req, res) => {
+        res.status(405);
         res.json({ code: 405, message: 'Request type not supported' });
     });
     app.post('/play', async (req, res) => {
+        res.status(405);
+        res.json({ code: 405, message: 'API updated - use a PUT request instead' });
+    });
+    app.put('/play', async (req, res) => {
         const params = req.query;
         if (!params.guildID || !params.userID || !params.query) {
             res.status(400);
