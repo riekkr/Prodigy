@@ -78,7 +78,7 @@ module.exports = async (client, message) => {
             }
         }
     }
-
+    /*
     let guildDJ = await client.db.get(`${message.guild.id}-djrole`);
     let guildDJState = await client.db.get(`${message.guild.id}-djonly`);
     let guildDJRole;
@@ -102,6 +102,7 @@ module.exports = async (client, message) => {
             return;
         }
     } 
+    */
 
     try {
         let player = client.manager.get(message.guild.id);
