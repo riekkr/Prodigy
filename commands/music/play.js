@@ -46,7 +46,7 @@ module.exports = {
             if (!player.playing && !player.paused && !player.queue.size) player.play();
             break;
         default:
-            client.logger.info('Unknown switch.');
+            client.logger.error('Unknown loadType: ' + res.loadType);
             break;
         }
     }

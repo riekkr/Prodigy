@@ -47,8 +47,7 @@ module.exports = async (app, client) => {
             if (!player.playing && !player.paused && !player.queue.size) player.play();
             break;
         default:
-            client.logger.info('Unknown switch.');
-            client.logger.error(result.loadType);
+            client.logger.error('Unknown loadType: ' + result.loadType);
             break;
         }
     });
