@@ -46,6 +46,14 @@ module.exports = async (app, client) => {
             res.json({ code: 200, message: 'Success', track: result.tracks[0] });
             if (!player.playing && !player.paused && !player.queue.size) player.play();
             break;
+        case 'LOAD_FAILED':
+            res.status(403);
+            res.json({ code: 403, message: 'Error - load failed', exception: res.exception });
+            client.logger.error(`LOAD_FAILED for query: "${req.query}"`);
+            client.logger.error('Details:');
+            client.logger.error(`Severity: ${res.exception.severity}`);
+            client.logger.error(`Message: ${res.exception.message}`);
+            break;
         default:
             client.logger.error('Unknown loadType: ' + result.loadType);
             break;
