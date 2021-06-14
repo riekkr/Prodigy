@@ -79,6 +79,30 @@ module.exports = async (client, message) => {
         }
     }
 
+    let guildDJ = await client.db.get(`${message.guild.id}-djrole`);
+    let guildDJState = await client.db.get(`${message.guild.id}-djonly`);
+    let guildDJRole;
+    if (guildDJState == 'on') {
+        guildDJRole = await message.guild.roles.cache.get(`${guildDJ}`);
+        guildDJState = true;
+    } else if (!guildDJ) {
+        guildDJState = false;
+    } else {
+        guildDJState = false;
+    }
+
+    if (command.dj && command.dj == true && guildDJState == true) {
+        if (!message.member.roles.cache.has(`${guildDJ}`)) {
+            const embed = new Discord.MessageEmbed()
+                .setAuthor('Error')
+                .setDescription(`An error occurred while executing the command:\n\`DJ only mode is on and you do not have the DJ role (${guildDJRole.name})\``)
+                .setColor('RED')
+                .setFooter(config.defaultFooter);
+            message.channel.send(embed);
+            return;
+        }
+    } 
+
     try {
         let player = client.manager.get(message.guild.id);
         command.execute(client, message, args, prefix, player);
