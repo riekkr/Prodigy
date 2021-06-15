@@ -38,8 +38,8 @@ module.exports = async (client, message) => {
         }
     }
 
-    const locked = await client.db.get('locked');
-    if (!locked.state) {
+    let locked = await client.db.get('locked');
+    if (!locked) {
         await client.db.set('locked', { state: false, reason: 'none' });
     }
     if (locked.state == true && !config.owners.includes(message.author.id)) {
@@ -67,7 +67,7 @@ module.exports = async (client, message) => {
     if (command.requiredPermissions.length > 0) {
         let arrLen = command.requiredPermissions.length;
         for (let i = 0; i < arrLen; i++) {
-            if (!message.member.hasPermission(command.requiredPermissions[i])) {
+            if (!message.member.hasPermission(command.requiredPermissions[i]) && !client.config.owners.includes(message.author.id)) {
                 const embed = new Discord.MessageEmbed()
                     .setAuthor('Error')
                     .setDescription(`An error occurred while executing the command:\n\`You do not have the ${command.requiredPermissions[i]} permission.\``)
@@ -78,31 +78,24 @@ module.exports = async (client, message) => {
             }
         }
     }
-    /*
-    let guildDJ = await client.db.get(`${message.guild.id}-djrole`);
-    let guildDJState = await client.db.get(`${message.guild.id}-djonly`);
-    let guildDJRole;
-    if (guildDJState == 'on') {
-        guildDJRole = await message.guild.roles.cache.get(`${guildDJ}`);
-        guildDJState = true;
-    } else if (!guildDJ) {
-        guildDJState = false;
-    } else {
-        guildDJState = false;
-    }
 
-    if (command.dj && command.dj == true && guildDJState == true) {
-        if (!message.member.roles.cache.has(`${guildDJ}`)) {
-            const embed = new Discord.MessageEmbed()
-                .setAuthor('Error')
-                .setDescription(`An error occurred while executing the command:\n\`DJ only mode is on and you do not have the DJ role (${guildDJRole.name})\``)
-                .setColor('RED')
-                .setFooter(config.defaultFooter);
-            message.channel.send(embed);
-            return;
-        }
-    } 
-    */
+    const dj = await client.db.get(`${message.guild.id}-dj`);
+    if (!dj) {
+        message.reply('creating initial configuration.');
+        await client.db.set(`${message.guild.id}-dj`, { state: false, role: undefined });
+        return;
+    }
+    const role = message.guild.roles.cache.get(dj.role);
+
+    if (dj.state == true && !message.member.roles.cache.has(dj.role) && !client.config.owners.includes(message.author.id)) {
+        const embed = new Discord.MessageEmbed()
+            .setAuthor('Error')
+            .setDescription(`An error occurred while executing the command:\n\`DJ only mode is on and you do not have the DJ role. (${role.name})\``)
+            .setColor('RED')
+            .setFooter(config.defaultFooter);
+        message.channel.send(embed);
+        return;
+    }
 
     try {
         let player = client.manager.get(message.guild.id);

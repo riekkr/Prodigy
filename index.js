@@ -104,7 +104,7 @@ for (const file of util) {
 logger.info(`${client.commands.size} commands and ${Object.keys(client._events).length} events loaded.`);
 
 process.on('unhandledRejection', async (err) => {
-    logger.error('Unhandled rejection: ' + err.message);
+    logger.error('Unhandled rejection: ' + err);
 });
 
 const apiFiles = fs.readdirSync('./api').filter(file => file.endsWith('.js'));
