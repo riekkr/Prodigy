@@ -75,6 +75,7 @@ const music = fs.readdirSync('./commands/music').filter(file => file.endsWith('.
 const info = fs.readdirSync('./commands/info').filter(file => file.endsWith('.js'));
 const owner = fs.readdirSync('./commands/owner').filter(file => file.endsWith('.js'));
 const admin = fs.readdirSync('./commands/admin').filter(file => file.endsWith('.js'));
+const osu = fs.readdirSync('./commands/osu').filter(file => file.endsWith('.js'));
 const util = fs.readdirSync('./util').filter(file => file.endsWith('.js'));
 
 for (const file of music) {
@@ -95,6 +96,11 @@ for (const file of owner) {
 for (const file of admin) {
     const cmd = require(`./commands/admin/${file}`);
     cmd.category = 'admin';
+    client.commands.set(cmd.name.toLowerCase(), cmd);
+}
+for (const file of osu) {
+    const cmd = require(`./commands/osu/${file}`);
+    cmd.category = 'osu';
     client.commands.set(cmd.name.toLowerCase(), cmd);
 }
 for (const file of util) {

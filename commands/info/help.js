@@ -39,6 +39,10 @@ module.exports = {
                         value: `\`${command.name}\``
                     },
                     {
+                        name: 'Category',
+                        value: `\`${command.category}\``
+                    },
+                    {
                         name: 'Description',
                         value: command.description
                     },
@@ -79,6 +83,10 @@ module.exports = {
                     {
                         name: 'Music',
                         value: '`' + client.commands.filter(cmd => cmd.category == 'music').map(c => c.name).join('`, `') + '`'
+                    },
+                    {
+                        name: 'osu!',
+                        value: '`' + client.commands.filter(cmd => cmd.category == 'osu').map(c => c.name).join('`, `') + '`'
                     },
                     {
                         name: 'Owner',
