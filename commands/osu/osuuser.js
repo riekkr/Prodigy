@@ -54,7 +54,7 @@ module.exports = {
                 let res = await fetch(url);
                 res = await res.json();
                 res = res[0];
-                let raw = `**[${res.title}](https://osu.ppy.sh/beatmapsets/${res.beatmapset_id})** (mapped by [${res.creator}](https://osu.ppy.sh/users/${res.creator_id})) | \`${Number(res.difficultyrating).toFixed(3)} stars\``;
+                let raw = `**[${res.title}](https://osu.ppy.sh/beatmapsets/${res.beatmapset_id})** (mapped by [${res.creator}](https://osu.ppy.sh/users/${res.creator_id}))\n**Difficulty:** ${Number(res.difficultyrating).toFixed(3)}`;
                 let rs = `${raw}\n**Score:** ${recentArr[i].score}\n**Max. Combo:** ${recentArr[i].maxcombo}\n**Misses:** ${recentArr[i].countmiss}\n**Mods Enabled:** ${recentArr[i].enabled_mods}\n**Rank:** ${recentArr[i].rank}\n**Date:** ${recentArr[i].date}`;
                 rawPlays.push(rs);
                 rawPlays.push('\n');
@@ -168,15 +168,24 @@ module.exports = {
                     name: 'Total Seconds Played',
                     value: json.total_seconds_played,
                     inline: true
-                },
-                {
-                    name: 'Recent plays',
-                    value: rawPlays.join('\n')
                 }
             ])
             .setColor(client.config.defaultColor)
-            .setFooter(client.config.defaultFooter)
             .setThumbnail(`https://s.ppy.sh/a/${json.user_id}`);
-        return message.channel.send(embed);
+        const half = Math.ceil(rawPlays.length / 2);
+        const firstHalf = rawPlays.slice(0, half);
+        const secondHalf = rawPlays.slice(-half);
+        const recentEmb1 = new MessageEmbed()
+            .setTitle('Recent plays')
+            .setColor(client.config.defaultColor)
+            .setDescription(firstHalf.join('\n'));
+        const recentEmb2 = new MessageEmbed()
+            .setColor(client.config.defaultColor)
+            .setFooter(client.config.defaultFooter)
+            .setDescription(secondHalf.join('\n'));
+        message.channel.send(embed);
+        message.channel.send(recentEmb1);
+        message.channel.send(recentEmb2);
+        return;
     }
 };
