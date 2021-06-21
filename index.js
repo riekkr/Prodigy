@@ -14,7 +14,6 @@ server.listen(config.port, () => {
     logger.info('Listening on port ' + config.port);
 });
 
-// Erela.js
 const { Manager } = require('erela.js');
 const Spotify = require('erela.js-spotify');
 const Deezer = require('erela.js-deezer');
@@ -118,7 +117,7 @@ for (const file of util) {
 logger.info(`${client.commands.size} commands and ${Object.keys(client._events).length} events loaded.`);
 
 process.on('unhandledRejection', async (err) => {
-    logger.error('Unhandled rejection: ');
+    logger.error('Unhandled rejection:');
     console.log(err);
 });
 
