@@ -7,6 +7,7 @@ const config = require('./config.json');
 const Keyv = require('keyv');
 const { version } = require('./package.json');
 const express = require('express');
+const genshin = require('genshin-db');
 
 const server = express();
 server.listen(config.port, () => {
@@ -38,6 +39,7 @@ client.logger = logger;
 client.config = config;
 client.config.defaultFooter = client.config.defaultFooter.replace('{version}', 'v' + version);
 client.commands = new Discord.Collection();
+client.genshin = genshin;
 
 const manager = new Manager({
     nodes: nodes,
@@ -76,6 +78,7 @@ const info = fs.readdirSync('./commands/info').filter(file => file.endsWith('.js
 const owner = fs.readdirSync('./commands/owner').filter(file => file.endsWith('.js'));
 const admin = fs.readdirSync('./commands/admin').filter(file => file.endsWith('.js'));
 const osu = fs.readdirSync('./commands/osu').filter(file => file.endsWith('.js'));
+const gen = fs.readdirSync('./commands/genshin').filter(file => file.endsWith('.js'));
 const util = fs.readdirSync('./util').filter(file => file.endsWith('.js'));
 
 for (const file of music) {
@@ -103,6 +106,11 @@ for (const file of osu) {
     cmd.category = 'osu';
     client.commands.set(cmd.name.toLowerCase(), cmd);
 }
+for (const file of gen) {
+    const cmd = require(`./commands/genshin/${file}`);
+    cmd.category = 'genshin';
+    client.commands.set(cmd.name.toLowerCase(), cmd);
+}
 for (const file of util) {
     if (!client.util) client.util = {};
     client.util[file.split('.')[0]] = require(`./util/${file}`);
@@ -110,7 +118,8 @@ for (const file of util) {
 logger.info(`${client.commands.size} commands and ${Object.keys(client._events).length} events loaded.`);
 
 process.on('unhandledRejection', async (err) => {
-    logger.error('Unhandled rejection: ' + err);
+    logger.error('Unhandled rejection: ');
+    console.log(err);
 });
 
 const apiFiles = fs.readdirSync('./api').filter(file => file.endsWith('.js'));
