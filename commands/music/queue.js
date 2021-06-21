@@ -35,7 +35,7 @@ module.exports = {
             finalMessages.push(text);
         }
         let m = await message.channel.send(finalMessages[0]);
-        let currentPage = 1;
+        let currentPage = 0;
         await m.react('🔺');
         await m.react('🔻');
         await m.react('🔹');
@@ -47,13 +47,23 @@ module.exports = {
         const collector3 = m.createReactionCollector(jumpFilter, { time: 5 * 60 * 1000 });
         collector1.on('collect', async (reaction, user) => { // Up
             reaction.users.remove(user.id);
-            await m.edit(finalMessages[currentPage-1]);
-            currentPage--;
+            if (currentPage == 0) {
+                await m.edit(finalMessages[finalMessages.length - 1]);
+                currentPage = finalMessages.length - 1;
+            } else {
+                await m.edit(finalMessages[currentPage - 1]);
+                currentPage--;
+            }
         });
         collector2.on('collect', async (reaction, user) => { // Down
             reaction.users.remove(user.id);
-            await m.edit(finalMessages[currentPage]);
-            currentPage++;
+            if (currentPage == finalMessages.length - 1) {
+                await m.edit(finalMessages[0]);
+                currentPage = 0;
+            } else {
+                await m.edit(finalMessages[currentPage + 1]);
+                currentPage++;
+            }
         });
         collector3.on('collect', async (reaction, user) => { // Jump
             reaction.users.remove(user.id);
@@ -68,7 +78,7 @@ module.exports = {
                     return;
                 }
                 m.edit(finalMessages[Number(ms.content) - 1]);
-                currentPage = Number(ms.content);
+                currentPage = Number(ms.content) - 1;
                 collector.stop();
                 msg.delete();
                 ms.delete();

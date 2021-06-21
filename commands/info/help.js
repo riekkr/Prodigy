@@ -89,6 +89,10 @@ module.exports = {
                         value: '`' + client.commands.filter(cmd => cmd.category == 'osu').map(c => c.name).join('`, `') + '`'
                     },
                     {
+                        name: 'Genshin Impact',
+                        value: '`' + client.commands.filter(cmd => cmd.category == 'genshin').map(c => c.name).join('`, `') + '`'
+                    },
+                    {
                         name: 'Owner',
                         value: '`' + client.commands.filter(cmd => cmd.category == 'owner').map(c => c.name).join('`, `') + '`'
                     }

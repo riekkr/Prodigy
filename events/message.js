@@ -6,7 +6,7 @@ module.exports = async (client, message) => {
     let args;
     let prefix;
     const guildPrefix = await client.db.get(message.guild.id);
-    if (message.guild) {
+    if (message.guild) { 
         if (message.content.startsWith(config.globalPrefix)) {
             if (typeof guildPrefix == 'undefined') {
                 prefix = config.globalPrefix;
