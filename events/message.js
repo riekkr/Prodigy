@@ -53,10 +53,10 @@ module.exports = async (client, message) => {
     }
 
     if (command.ownerOnly == true) {
-        if (!config.owners.includes(message.author.id)) {
+        if (!config.owners.includes(message.author.id) && !config.secOwners.includes(message.author.id)) {
             const embed = new Discord.MessageEmbed()
                 .setAuthor('Error')
-                .setDescription('An error occurred while executing the command:\n`This command is restricted to the owner of the bot.`')
+                .setDescription('An error occurred while executing the command:\n`This command is restricted to the owners of the bot.`')
                 .setColor('RED')
                 .setFooter(config.defaultFooter);
             message.channel.send(embed);
@@ -85,12 +85,11 @@ module.exports = async (client, message) => {
         await client.db.set(`${message.guild.id}-dj`, { state: false, role: undefined });
         return;
     }
-    const role = message.guild.roles.cache.get(dj.role);
 
     if (dj.state == true && !message.member.roles.cache.has(dj.role) && !client.config.owners.includes(message.author.id)) {
         const embed = new Discord.MessageEmbed()
             .setAuthor('Error')
-            .setDescription(`An error occurred while executing the command:\n\`DJ only mode is on and you do not have the DJ role. (${role.name})\``)
+            .setDescription(`An error occurred while executing the command:\n\`DJ only mode is on and you do not have the DJ role. (<@${dj.role}>)\``)
             .setColor('RED')
             .setFooter(config.defaultFooter);
         message.channel.send(embed);
