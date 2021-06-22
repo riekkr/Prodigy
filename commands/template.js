@@ -1,7 +1,6 @@
 /* eslint-disable */
-// Common imports
-const { MessageEmbed } = require('discord.js');
 const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: '', // Command name
