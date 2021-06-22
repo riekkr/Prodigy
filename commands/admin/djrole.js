@@ -22,9 +22,9 @@ module.exports = {
                 .setColor(client.config.defaultColor);
             return message.channel.send(embed);
         }
-        let newRole = message.mentions.roles.first() || message.guild.roles.cache.find(r => r.id === args[0]) || message.guild.roles.cache.find(r => r.name === args[0]);
+        let newRole = message.mentions.roles.first() || message.guild.roles.cache.find(r => r.id === args[0]) || message.guild.roles.cache.find(r => r.name.toLowerCase() === args.join(' ').toLowerCase());
         if (!newRole) return message.reply('you provided an invalid role.');
-        currentState.role = newRole.id;
+        currentState.role = `${newRole.id}`;
         await client.db.set(`${message.guild.id}-dj`, currentState);
         const embed = new MessageEmbed()
             .setAuthor('DJ Role', message.guild.iconURL())

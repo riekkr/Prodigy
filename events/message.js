@@ -86,7 +86,6 @@ module.exports = async (client, message) => {
         return;
     }
     const rle = message.guild.roles.cache.find(r => r.id == dj.role);
-    console.log(rle);
 
     if (dj.state == true && !message.member.roles.cache.has(dj.role) && !client.config.owners.includes(message.author.id)) {
         const embed = new Discord.MessageEmbed()
