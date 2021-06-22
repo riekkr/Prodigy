@@ -11,6 +11,7 @@ module.exports = {
         if (!args.length && message.member.previousCharacterQuery == undefined) return message.channel.send('**Invalid usage:** Command `talents` requires exactly 1 string argument.');
         let char = args.join(' ') || message.member.previousCharacterQuery;
         const talents = client.genshin.talents(char);
+        if (!talents) return message.reply('the character ' + char + ' was not found in the database.');
         let pages = [];
         let csp;
         let current = 0;

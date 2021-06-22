@@ -14,7 +14,7 @@ module.exports = {
         const query = args.join(' ');
         const c = db.characters(query);
         let color;
-        if (!c) return message.reply('Invalid character');
+        if (!c) return message.reply('the character ' + query + ' was not found in the database.');
         if (c.element == 'Anemo') color = '#339999';
         else if (c.element == 'Pyro') color = '#b32134';
         else if (c.element == 'Electro') color = '#7725db';
