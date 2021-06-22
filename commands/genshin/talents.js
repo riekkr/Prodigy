@@ -1,3 +1,5 @@
+const { MessageEmbed } = require('discord.js');
+
 module.exports = {
     name: 'talents', // Command name
     description: 'Shows talent details of a Genshin Impact character.', // Short description of what the command does
@@ -12,25 +14,26 @@ module.exports = {
         let char = args.join(' ') || message.member.previousCharacterQuery;
         const talents = client.genshin.talents(char);
         if (!talents) return message.reply('the character ' + char + ' was not found in the database.');
+        const characterInfo = client.genshin.characters(char);
         let pages = [];
         let csp;
         let current = 0;
         if (talents.combatsp) {
-            csp = `**__${talents.combatsp.name}__**\n\n${talents.combatsp.info}\n\n**${talents.name}** | Special`;
+            csp = `**__${talents.combatsp.name}__**\n\n${talents.combatsp.info}\n\nSpecial`;
         } else {
             csp = `No special\n\n**${talents.name}** | Special`;
         }
-        const c1 = `**__${talents.combat1.name}__**\n\n${talents.combat1.info}\n\n**${talents.name}** | Combat 1 | Page **1** of **8**`;
+        const c1 = `**__${talents.combat1.name}__**\n\n${talents.combat1.info}\n\nCombat 1 | Page **1** of **8**`;
         pages.push(c1);
-        const c2 = `**__${talents.combat2.name}__**\n\n${talents.combat2.info}\n\n**${talents.name}** | Combat 2 | Page **2** of **8**`;
+        const c2 = `**__${talents.combat2.name}__**\n\n${talents.combat2.info}\n\nCombat 2 | Page **2** of **8**`;
         pages.push(c2);
-        const c3 = `**__${talents.combat3.name}__**\n\n${talents.combat3.info}\n\n**${talents.name}** | Combat 3 | Page **3** of **8**`;
+        const c3 = `**__${talents.combat3.name}__**\n\n${talents.combat3.info}\n\nCombat 3 | Page **3** of **8**`;
         pages.push(c3);
-        const p1 = `**__${talents.passive1.name}__**\n\n${talents.passive1.info}\n\n**${talents.name}** | Passive 1 | Page **4** of **8**`;
+        const p1 = `**__${talents.passive1.name}__**\n\n${talents.passive1.info}\n\nPassive 1 | Page **4** of **8**`;
         pages.push(p1);
-        const p2 = `**__${talents.passive2.name}__**\n\n${talents.passive2.info}\n\n**${talents.name}** | Passive 2 | Page **5** of **8**`;
+        const p2 = `**__${talents.passive2.name}__**\n\n${talents.passive2.info}\n\nPassive 2 | Page **5** of **8**`;
         pages.push(p2);
-        const p3 = `**__${talents.passive3.name}__**\n\n${talents.passive3.info}\n\n**${talents.name}** | Passive 3 | Page **6** of **8**`;
+        const p3 = `**__${talents.passive3.name}__**\n\n${talents.passive3.info}\n\nPassive 3 | Page **6** of **8**`;
         pages.push(p3);
         const cs = `${csp} | Page **7** of **8**`;
         pages.push(cs);
@@ -41,8 +44,16 @@ module.exports = {
         for (let i = 0; i < c.length; i++) {
             costs.push(`**Level ${i + 2}:** ${c[i].map(c => `${c.count} ${c.name}`).join(', ')}`);
         }
-        costs.push(`\n**${talents.name}** | Costs | Page **8** of **8**`);
+        costs.push('\nCosts | Page **8** of **8**');
         pages.push(costs.join('\n'));
+        for (let i = 0; i < pages.length; i++) {
+            const embed = new MessageEmbed()
+                .setDescription(pages[i])
+                .setAuthor(characterInfo.name, characterInfo.images.image)
+                .setColor(client.config.defaultColor)
+                .setFooter(client.config.defaultFooter);
+            pages[i] = embed;
+        }
         const msg = await message.channel.send(pages[0]);
         await msg.react('🔺');
         await msg.react('🔻');
