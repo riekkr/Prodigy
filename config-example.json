@@ -3,6 +3,7 @@
     "lavalinkHost": "",
     "lavalinkPort": 1100,
     "lavalinkPassword": "",
+    "initialVolume": 90,
     "mongoURL": "",
     "globalPrefix": "",
     "defaultFooter": "",

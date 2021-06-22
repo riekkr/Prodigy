@@ -19,7 +19,7 @@ module.exports = {
             textChannel: message.channel.id,
             selfDeafen: true,
             selfMute: true,
-            volume: 70
+            volume: client.config.initialVolume
         });
         if (!player.textChannel) player.textChannel = message.channel.id;
         if (player.state !== 'CONNECTED') player.connect();

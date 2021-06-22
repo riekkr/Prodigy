@@ -1,9 +1,5 @@
 module.exports = async (app, client) => {
     app.get('/play', async (req, res) => {
-        res.status(405);
-        res.json({ code: 405, message: 'Request type not supported' });
-    });
-    app.post('/play', async (req, res) => {
         const params = req.query;
         if (!params.guildID || !params.userID || !params.query) {
             res.status(400);
@@ -17,7 +13,7 @@ module.exports = async (app, client) => {
             voiceChannel: user.voice.channel.id,
             selfDeafen: true,
             selfMute: true,
-            volume: 70
+            volume: client.config.initialVolume
         });
         const result = await client.manager.search(params.query, user.user);
         if (player.state !== 'CONNECTED') player.connect();
