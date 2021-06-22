@@ -16,9 +16,12 @@ module.exports = {
         if (!player.textChannel) player.textChannel = message.channel.id;
 
         let np = player.queue.current;
-        let bar = createProgressBar(player.position, player.queue.current.duration, 20);
+        let bar = createProgressBar(player.position, player.queue.current.duration, 25);
+        if (np.isStream == true) bar = '';
         let songDuration = prettyms(np.duration, { colonNotation: true, secondsDecimalDigits: 0 });
+        if (np.isStream == true) songDuration = '∞';
         let currentPosition = prettyms(player.position, { colonNotation: true, secondsDecimalDigits: 0 });
+        if (np.isStream == true) currentPosition = 'LIVE';
 
         const embed = new MessageEmbed()
             .setAuthor(message.guild.name, message.guild.iconURL())

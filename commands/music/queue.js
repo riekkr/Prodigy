@@ -13,22 +13,27 @@ module.exports = {
     async execute(client, message, args, prefix, player) {
         if (!player) return message.reply('there is nothing playing in this server.');
         if (!player.queue.current) return message.reply('there is nothing playing.');
+        let currentDuration = prettyms(player.queue.current.duration, { colonNotation: true, secondsDecimalDigits: 0 });
+        if (player.queue.current.isStream == true) currentDuration = 'LIVE';
         if (player.queue.length < 1) {
-            return message.channel.send(`**Now playing:** ${player.queue.current.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')} (<${player.queue.current.uri}>) \`${prettyms(player.queue.current.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\`\n\n*No tracks in queue.*`);
+            return message.channel.send(`**Now playing:** ${player.queue.current.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')} (<${player.queue.current.uri}>) \`${currentDuration}\`\n\n*No tracks in queue.*`);
         }
         if (!player.textChannel) player.textChannel = message.channel.id;
         const finalMessages = [];
         let chunked = _.chunk(player.queue, 10);
-        let totalDuration = player.queue.duration;
+        let totalDuration = prettyms(player.queue.duration, { colonNotation: true, secondsDecimalDigits: 0 });
+        if (player.queue.find(s => s.isStream == true)) totalDuration = '∞';
         for (let i = 0; i < chunked.length; i++) {
             let text;
             let messageArr = [];
             messageArr.push(`**__Queue for ${message.guild.name}__**`);
-            messageArr.push(`**Total duration:** \`${prettyms(totalDuration, { colonNotation: true, secondsDecimalDigits: 0 })}\``);
-            messageArr.push(`**Now playing:** ${player.queue.current.title} (<${player.queue.current.uri}>) \`${prettyms(player.queue.current.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\` | Requested by **${player.queue.current.requester.tag}**\n`);
+            messageArr.push(`**Total duration:** \`${totalDuration}\``);
+            messageArr.push(`**Now playing:** ${player.queue.current.title} (<${player.queue.current.uri}>) \`${currentDuration}\` | Requested by **${player.queue.current.requester.tag}**\n`);
             for (let e = 0; e < chunked[i].length; e++) {
                 let track = chunked[i][e];
-                messageArr.push(`**\`${e+(10*i)+1}\`**: **${track.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** \`${prettyms(track.duration, { colonNotation: true, secondsDecimalDigits: 0 })}\` | Requested by **${track.requester.tag}**`);
+                let trackDura = prettyms(track.duration, { colonNotation: true, secondsDecimalDigits: 0 });
+                if (track.isStream == true) trackDura = 'LIVE';
+                messageArr.push(`**\`${e+(10*i)+1}\`**: **${track.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** \`${trackDura}\` | Requested by **${track.requester.tag}**`);
             }
             messageArr.push(`\n**${player.queue.length}** tracks in queue | Page **${i+1}** of **${chunked.length}**`);
             text = messageArr.join('\n');
