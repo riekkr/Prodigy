@@ -18,7 +18,8 @@ module.exports = {
             voiceChannel: message.member.voice.channel.id,
             textChannel: message.channel.id,
             selfDeafen: true,
-            selfMute: true
+            selfMute: true,
+            volume: 70
         });
         if (!player.textChannel) player.textChannel = message.channel.id;
         if (player.state !== 'CONNECTED') player.connect();

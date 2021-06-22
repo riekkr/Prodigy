@@ -16,7 +16,8 @@ module.exports = async (app, client) => {
             guild: guild.id,
             voiceChannel: user.voice.channel.id,
             selfDeafen: true,
-            selfMute: true
+            selfMute: true,
+            volume: 70
         });
         const result = await client.manager.search(params.query, user.user);
         if (player.state !== 'CONNECTED') player.connect();
