@@ -26,6 +26,8 @@ module.exports = {
                 av = 'Requires DJ role when DJ mode is on';
             } else if (!command.dj && command.ownerOnly == true) {
                 av = 'Owner only';
+            } else if (!command.dj && !command.ownerOnly) {
+                av = 'Available to everyone';
             }
             const inf = new MessageEmbed()
                 .setColor(client.config.defaultColor)
