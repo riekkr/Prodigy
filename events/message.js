@@ -85,14 +85,17 @@ module.exports = async (client, message) => {
         await client.db.set(`${message.guild.id}-dj`, { state: false, role: undefined });
         return;
     }
+    const rle = message.guild.roles.cache.find(r => r.id == dj.role);
+    console.log(rle);
 
     if (dj.state == true && !message.member.roles.cache.has(dj.role) && !client.config.owners.includes(message.author.id)) {
         const embed = new Discord.MessageEmbed()
             .setAuthor('Error')
-            .setDescription(`An error occurred while executing the command:\n\`DJ only mode is on and you do not have the DJ role. (<@${dj.role}>)\``)
+            .setDescription(`An error occurred while executing the command:\n\`DJ only mode is on and you do not have the DJ role. (${rle.name} | ${rle.id})\``)
             .setColor('RED')
             .setFooter(config.defaultFooter);
         message.channel.send(embed);
+        console.log(dj.role);
         return;
     }
 

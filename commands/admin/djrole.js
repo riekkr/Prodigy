@@ -1,3 +1,5 @@
+const { MessageEmbed } = require('discord.js');
+
 module.exports = {
     name: 'djrole', // Command name
     description: 'Sets the DJ role for the server.', // Short description of what the command does
@@ -9,6 +11,26 @@ module.exports = {
 
     // eslint-disable-next-line no-unused-vars
     async execute(client, message, args, prefix, player) {
-        return message.reply('this command is currently disabled.');
+        let currentState = await client.db.get(`${message.guild.id}-dj`);
+        const role = currentState.role;
+        if (!args.length) {
+            const currentRole = message.guild.roles.cache.get(role).toString() || 'not set';
+            const embed = new MessageEmbed()
+                .setAuthor('DJ Role', message.guild.iconURL())
+                .setDescription('The DJ role for this server is ' + currentRole)
+                .setFooter(client.config.defaultFooter)
+                .setColor(client.config.defaultColor);
+            return message.channel.send(embed);
+        }
+        let newRole = message.mentions.roles.first() || message.guild.roles.cache.find(r => r.id === args[0]) || message.guild.roles.cache.find(r => r.name === args[0]);
+        if (!newRole) return message.reply('you provided an invalid role.');
+        currentState.role = newRole.id;
+        await client.db.set(`${message.guild.id}-dj`, currentState);
+        const embed = new MessageEmbed()
+            .setAuthor('DJ Role', message.guild.iconURL())
+            .setDescription('The DJ role was set to ' + newRole.toString())
+            .setFooter(client.config.defaultFooter)
+            .setColor(client.config.defaultColor);
+        return message.channel.send(embed);
     }
 };
