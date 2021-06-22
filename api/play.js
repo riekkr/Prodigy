@@ -12,7 +12,7 @@ module.exports = async (app, client) => {
             guild: guild.id,
             voiceChannel: user.voice.channel.id,
             selfDeafen: true,
-            selfMute: true,
+            selfMute: false,
             volume: client.config.initialVolume
         });
         const result = await client.manager.search(params.query, user.user);

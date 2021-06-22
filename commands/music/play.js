@@ -18,7 +18,7 @@ module.exports = {
             voiceChannel: message.member.voice.channel.id,
             textChannel: message.channel.id,
             selfDeafen: true,
-            selfMute: true,
+            selfMute: false,
             volume: client.config.initialVolume
         });
         if (!player.textChannel) player.textChannel = message.channel.id;
