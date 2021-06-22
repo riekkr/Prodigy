@@ -29,7 +29,6 @@ module.exports = {
             .setAuthor(c.name)
             .setTitle('Character Information')
             .setURL(c.url.fandom)
-            .setThumbnail(c.images.image)
             .setImage(c.images.cover1)
             .addFields([
                 {
