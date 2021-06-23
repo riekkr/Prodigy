@@ -72,7 +72,7 @@ module.exports = {
                 .setFooter(client.config.defaultFooter, client.user.avatarURL())
                 .setAuthor('Prodigy | Help', )
                 .setTitle('Commands')
-                .setDescription(`Prodigy is a Discord bot mainly written for music, created by tkkr#7552.\nFor more information, use \`${prefix}info\`.\nFor more information about a command, use \`${prefix}help\``)
+                .setDescription(`Prodigy is a Discord bot mainly written for music, created by tkkr#7552.\nFor more information, use \`${prefix}info\`.\nFor more information about a command, use \`${prefix}help <command>\`.`)
                 .addFields([
                     {
                         name: 'Admin',
