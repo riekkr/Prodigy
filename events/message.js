@@ -94,7 +94,7 @@ module.exports = async (client, message) => {
             .setColor('RED')
             .setFooter(config.defaultFooter);
         message.channel.send(embed);
-        console.log(dj.role);
+        // console.log(dj.role);
         return;
     }
 
