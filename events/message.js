@@ -45,7 +45,7 @@ module.exports = async (client, message) => {
     if (locked.state == true && !config.owners.includes(message.author.id)) {
         const embed = new Discord.MessageEmbed()
             .setAuthor('Error')
-            .setDescription('An error occurred while executing the command:\n`All commands are currently locked.`')
+            .setDescription(`An error occurred while executing the command:\n\`All commands are currently disabled. (${locked.reason})\``)
             .setColor('RED')
             .setFooter(config.defaultFooter);
         message.channel.send(embed);
