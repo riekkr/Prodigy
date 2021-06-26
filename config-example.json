@@ -14,5 +14,7 @@
     "spotifyClientSecret": "",
     "port": 6969,
     "osuAPI": "",
-    "genshincookie": "ltoken=; ltuid="
+    "genshincookie": "ltoken=; ltuid=",
+    "status": "dnd",
+    "activity": "prdg.tk | p!help"
 }
