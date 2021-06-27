@@ -39,6 +39,7 @@ client.config = config;
 client.config.defaultFooter = client.config.defaultFooter.replace('{version}', 'v' + version);
 client.commands = new Discord.Collection();
 client.genshin = genshin;
+client.buttons = require('discord-buttons')(client);
 
 const manager = new Manager({
     nodes: nodes,
