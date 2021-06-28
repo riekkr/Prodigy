@@ -42,7 +42,6 @@ module.exports = {
         }
         let final = [];
         let currentPage = 0;
-        console.log(arrays);
         for (let i = 0; i < pages.length; i++) {
             const embed = new MessageEmbed()
                 .setAuthor(lyrics.artist)
