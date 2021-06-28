@@ -34,11 +34,11 @@ module.exports = {
         res = await res.json();
         res = res.data;
         const lyrics = res[0];
-        const raw = lyrics.lyrics;
+        const raw = lyrics.lyrics.split('\n');
         const arrays = _.chunk(raw, 30);
         let pages = [];
         for (let i = 0; i < arrays.length; i++) {
-            pages.push(arrays[i]);
+            pages.push(arrays[i].join('\n'));
         }
         let final = [];
         let currentPage = 0;
