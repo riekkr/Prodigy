@@ -17,8 +17,8 @@
 
 ### Links
 - [Documentation](https://docs.prdg.tk)
-- [Invite](https://prdg.tk/invite)
-- [GitHub](https://prdg.tk/github)
+- [Invite](https://discord.com/oauth2/authorize?client_id=823090420338524161&scope=bot&permissions=7515663606)
+- [GitHub](https://github.com/thaddeuskkr/Prodigy)
 
 ### Contact
 - **Discord:** thaddeuskkr#4416
