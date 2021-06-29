@@ -1,6 +1,6 @@
 {
   "name": "prodigy",
-  "version": "1.12.1",
+  "version": "1.12.2",
   "description": "Prodigy is a Discord bot with many features",
   "main": "index.js",
   "scripts": {
@@ -32,7 +32,7 @@
     "erela.js-spotify": "^1.2.0",
     "erlpack": "github:discord/erlpack",
     "express": "^5.0.0-alpha.8",
-    "genshin-db": "^3.7.1",
+    "genshin-db": "^3.7.3",
     "genshin-kit": "^2.1.0",
     "keyv": "^4.0.3",
     "libsodium-wrappers": "^0.7.9",
@@ -43,6 +43,6 @@
     "zlib-sync": "^0.1.7"
   },
   "devDependencies": {
-    "eslint": "^7.28.0"
+    "eslint": "^7.29.0"
   }
 }
