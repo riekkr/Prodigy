@@ -34,7 +34,7 @@ module.exports = {
                 .setFooter(client.config.defaultFooter)
                 .setAuthor('Prodigy | Help')
                 .setTitle('Command Information')
-                .setDescription(`Detailed information about the \`${command.name}\` command`)
+                .setDescription(`Detailed information about the \`${command.name}\` command.\n- **[Documentation](https://docs.prdg.tk)**`)
                 .addFields([
                     {
                         name: 'Name',

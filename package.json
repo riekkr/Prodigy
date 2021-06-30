@@ -1,6 +1,6 @@
 {
   "name": "prodigy",
-  "version": "1.12.2",
+  "version": "1.13.0",
   "description": "Prodigy is a Discord bot with many features",
   "main": "index.js",
   "scripts": {
@@ -34,6 +34,7 @@
     "express": "^5.0.0-alpha.8",
     "genshin-db": "^3.7.3",
     "genshin-kit": "^2.1.0",
+    "got": "^11.8.2",
     "keyv": "^4.0.3",
     "libsodium-wrappers": "^0.7.9",
     "lodash": "^4.17.21",

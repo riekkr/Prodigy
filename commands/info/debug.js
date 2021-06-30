@@ -7,6 +7,6 @@ module.exports = {
     requiredPermissions: [],
 
     async execute(client, message, args, prefix) {
-        message.channel.send('**Debug:** Command execution successful.' + '\n' + `**Message:** ${message.content}\n**Client:** ${client.user.toString()}\n**Arguments:** ${args.join(' ')}\n**Prefix:** ${prefix}`);
+        message.channel.send('**Debug:** Command execution successful.' + '\n' + `**Message:** ${message.content}\n**Client:** ${client.user.toString()}\n**Arguments:** ${args.join(' ')}\n**Prefix:** ${prefix}\n**Version:** ${client.version}`);
     }
 };

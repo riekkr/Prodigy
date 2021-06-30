@@ -79,6 +79,7 @@ const owner = fs.readdirSync('./commands/owner').filter(file => file.endsWith('.
 const admin = fs.readdirSync('./commands/admin').filter(file => file.endsWith('.js'));
 const osu = fs.readdirSync('./commands/osu').filter(file => file.endsWith('.js'));
 const gen = fs.readdirSync('./commands/genshin').filter(file => file.endsWith('.js'));
+const tools = fs.readdirSync('./commands/tools').filter(file => file.endsWith('.js'));
 
 for (const file of music) {
     const cmd = require(`./commands/music/${file}`);
@@ -108,6 +109,11 @@ for (const file of osu) {
 for (const file of gen) {
     const cmd = require(`./commands/genshin/${file}`);
     cmd.category = 'genshin';
+    client.commands.set(cmd.name.toLowerCase(), cmd);
+}
+for (const file of tools) {
+    const cmd = require(`./commands/tools/${file}`);
+    cmd.category = 'tools';
     client.commands.set(cmd.name.toLowerCase(), cmd);
 }
 logger.info(`${client.commands.size} commands and ${Object.keys(client._events).length} events loaded.`);
