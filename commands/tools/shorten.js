@@ -13,7 +13,7 @@ module.exports = {
     async execute(client, message, args) {
         if (!args.length) return message.channel.send('**Invalid usage:** Command `shorten` requires one or more string arguments.');
         let longURL = args[0];
-        let shortened = args[1] || undefined;
+        let shortened = args[1].replace('https://prdg.tk/', '').replace('http://prdg.tk/', '') || undefined;
         const options = {
             method: 'POST',
             url: 'https://api.short.io/links',
@@ -27,13 +27,18 @@ module.exports = {
             },
             responseType: 'json'
         };
-        let res = await got(options);
-        res = res.body; 
-        const embed = new MessageEmbed()
-            .setAuthor('Link shortened')
-            .setDescription(`Successfully shortened your URL.\n${res.shortURL}`)
-            .setColor(client.config.defaultColor)
-            .setFooter(client.config.defaultFooter);
-        return message.channel.send(embed);
+        got(options).catch(err => {
+            if (err.message.includes('409')) {
+                return message.reply('short URL already exists. Try again with a different shortened name.');
+            }
+        }).then(res => {
+            res = res.body; 
+            const embed = new MessageEmbed()
+                .setAuthor('Link shortened')
+                .setDescription(`Successfully shortened your URL.\n**${res.shortURL || `https://prdg.tk/${shortened}`}**`)
+                .setColor(client.config.defaultColor)
+                .setFooter(client.config.defaultFooter);
+            return message.channel.send(embed);
+        });
     }
 };
