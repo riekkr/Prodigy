@@ -95,6 +95,10 @@ module.exports = {
                         value: '`' + client.commands.filter(cmd => cmd.category == 'genshin').map(c => c.name).join('`, `') + '`'
                     },
                     {
+                        name: 'Tools',
+                        value: '`' + client.commands.filter(cmd => cmd.category == 'tools').map(c => c.name).join('`, `') + '`'
+                    },
+                    {
                         name: 'Owner',
                         value: '`' + client.commands.filter(cmd => cmd.category == 'owner').map(c => c.name).join('`, `') + '`'
                     }
