@@ -53,20 +53,20 @@ module.exports = {
         collector1.on('collect', async (reaction, user) => { // Up
             reaction.users.remove(user.id);
             if (currentPage == 0) {
-                await m.edit({ embed: finalMessages[finalMessages.length - 1] });
+                await m.edit(finalMessages[finalMessages.length - 1]);
                 currentPage = finalMessages.length - 1;
             } else {
-                await m.edit({ embed: finalMessages[currentPage - 1] });
+                await m.edit(finalMessages[currentPage - 1]);
                 currentPage--;
             }
         });
         collector2.on('collect', async (reaction, user) => { // Down
             reaction.users.remove(user.id);
             if (currentPage == finalMessages.length - 1) {
-                await m.edit({ embed: finalMessages[0] });
+                await m.edit(finalMessages[0]);
                 currentPage = 0;
             } else {
-                await m.edit({ embed: finalMessages[currentPage + 1] });
+                await m.edit(finalMessages[currentPage + 1]);
                 currentPage++;
             }
         });
