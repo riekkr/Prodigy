@@ -41,11 +41,23 @@ module.exports = {
         };
         /* eslint-enable no-unused-vars */
         // This doesn't work right now
-        /*
         if (args.script.startsWith('```') && args.script.endsWith('```')) {
-            args.script = args.script.replace(/(^.*?\s)|(\n.*$)/g, '');
+            args.script = args.script.replace('```js', '').replace('```', '');
         }
-        */ 
+
+        if (args.script.includes('client') || args.script.includes('ctx')) {
+            if (!client.config.owners.includes(message.author.id)) {
+                let scr = args.script;
+                if (scr.includes('.setAvatar')) return message.reply('you aren\'t allowed to use the `.setAvatar()` function.');
+                if (scr.includes('.setUsername')) return message.reply('you aren\'t allowed to use the `.setUsername()` function.');
+                if (scr.includes('.setNickname')) return message.reply('you aren\'t allowed to use the `.setNickname()` function.');
+                if (scr.includes('.setStatus')) return message.reply('you aren\'t allowed to use the `.setStatus()` function.');
+                if (scr.includes('.setPresence')) return message.reply('you aren\'t allowed to use the `.setPresence()` function.');
+                if (scr.includes('.setActivity')) return message.reply('you aren\'t allowed to use the `.setActivity()` function.');
+                if (scr.includes('.destroy')) return message.reply('you aren\'t allowed to use the `.destroy()` function.');
+                if (scr.includes('.login')) return message.reply('you aren\'t allowed to use the `.login()` function.');
+            }
+        }
 
         let hrDiff;
         try {

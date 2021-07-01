@@ -38,6 +38,7 @@ client.logger = logger;
 client.config = config;
 client.config.defaultFooter = client.config.defaultFooter.replace('{version}', 'v' + version);
 client.commands = new Discord.Collection();
+client.snipes = new Discord.Collection();
 client.genshin = genshin;
 client.buttons = require('discord-buttons')(client);
 
@@ -80,6 +81,7 @@ const admin = fs.readdirSync('./commands/admin').filter(file => file.endsWith('.
 const osu = fs.readdirSync('./commands/osu').filter(file => file.endsWith('.js'));
 const gen = fs.readdirSync('./commands/genshin').filter(file => file.endsWith('.js'));
 const tools = fs.readdirSync('./commands/tools').filter(file => file.endsWith('.js'));
+const nsfw = fs.readdirSync('./commands/nsfw').filter(file => file.endsWith('.js'));
 
 for (const file of music) {
     const cmd = require(`./commands/music/${file}`);
@@ -116,11 +118,20 @@ for (const file of tools) {
     cmd.category = 'tools';
     client.commands.set(cmd.name.toLowerCase(), cmd);
 }
+for (const file of nsfw) {
+    const cmd = require(`./commands/nsfw/${file}`);
+    cmd.category = 'nsfw';
+    client.commands.set(cmd.name.toLowerCase(), cmd);
+}
 logger.info(`${client.commands.size} commands and ${Object.keys(client._events).length} events loaded.`);
 
 process.on('unhandledRejection', async (err) => {
     logger.error('Unhandled rejection:');
     console.log(err);
+});
+
+process.on('exit', async () => {
+    logger.info('Shutting down gracefully...');
 });
 
 const apiFiles = fs.readdirSync('./api').filter(file => file.endsWith('.js'));
