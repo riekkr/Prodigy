@@ -47,11 +47,11 @@ module.exports = {
             if (!player.playing && !player.paused && !player.queue.size) player.play();
             break;
         case 'LOAD_FAILED':
-            message.channel.send(`An unknown error occurred and loading failed for your query **${args.join(' ')}**.\n**Details:** \`${res.exception.severity} | ${res.exception.message}\``);
+            message.channel.send(`An unknown error occurred and loading failed for your query **${args.join(' ')}**.\n**Details:** \`${res.exception.severity} | ${res.exception.message.split('\n').join(' ')}\``);
             client.logger.error(`LOAD_FAILED for query: "${args.join(' ')}"`);
             client.logger.error('Details:');
             client.logger.error(`Severity: ${res.exception.severity}`);
-            client.logger.error(`Message: ${res.exception.message}`);
+            client.logger.error(`Message: ${res.exception.message.split('\n').join(' ')}`);
             break;
         default:
             client.logger.error('Unknown loadType: ' + res.loadType + '\n' + res);
