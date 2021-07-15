@@ -12,7 +12,7 @@ module.exports = {
     dj: false, // Whether DJ only mode being on will prevent the command from being run
 
     async execute(client, message, args) {
-        if (message.channel.nsfw == false) message.channel.send('⚠️ **THIS CHANNEL IS NOT MARKED AS NSFW** ⚠️');
+        if (message.channel.nsfw == false) return message.reply('this command can only be used in NSFW marked channels.');
         let book = await api.getBook(args.join(' ')).catch(async () => { return await message.reply('invalid doujin ID.'); });
         const pages = [];
         for (let i = 0; i < book.pages.length; i++) {
