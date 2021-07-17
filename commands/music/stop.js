@@ -16,6 +16,6 @@ module.exports = {
         player.destroy();
         if (message.channel.lastNowPlayingMessage) message.channel.lastNowPlayingMessage.delete();
         message.channel.lastNowPlayingMessage = false;
-        return message.reply('stopped the music.');
+        return message.react('✅');
     }
 };
