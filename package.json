@@ -1,6 +1,6 @@
 {
   "name": "prodigy",
-  "version": "1.14.0",
+  "version": "1.15.0",
   "description": "Prodigy is a Discord bot with many features",
   "main": "index.js",
   "scripts": {
@@ -23,8 +23,8 @@
     "cat-loggr": "^1.2.2",
     "child_process": "^1.0.2",
     "common-tags": "^2.0.0-alpha.1",
-    "discord-buttons": "^3.2.1",
-    "discord-hentai": "^1.1.0",
+    "discord-buttons": "^4.0.0",
+    "discord-hentai": "^1.1.1",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
     "erela.js": "^2.3.3",
@@ -33,8 +33,8 @@
     "erela.js-spotify": "^1.2.0",
     "erlpack": "github:discord/erlpack",
     "express": "^5.0.0-alpha.8",
-    "genshin-db": "^3.7.3",
-    "genshin-kit": "^2.1.0",
+    "genshin-db": "^3.7.4",
+    "genshin-kit": "^2.2.0",
     "got": "^11.8.2",
     "keyv": "^4.0.3",
     "libsodium-wrappers": "^0.7.9",
@@ -42,11 +42,11 @@
     "nhentai-api": "^3.0.2",
     "pretty-ms": "^7.0.1",
     "puppeteer": "^10.1.0",
-    "socket.io": "^4.1.2",
+    "socket.io": "^4.1.3",
     "utf-8-validate": "^5.0.5",
     "zlib-sync": "^0.1.7"
   },
   "devDependencies": {
-    "eslint": "^7.29.0"
+    "eslint": "^7.30.0"
   }
 }
