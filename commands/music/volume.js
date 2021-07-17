@@ -19,6 +19,6 @@ module.exports = {
         const oldVolume = player.volume;
         if (newVolume > 200 || newVolume < 1) return message.channel.send('**Invalid usage:** Volume can only be from **1%** to **200%**.');
         player.setVolume(newVolume);
-        return message.reply(`the volume was changed from **${oldVolume}%** to **${newVolume}%**.`);
+        return message.react('✅');
     }
 };
