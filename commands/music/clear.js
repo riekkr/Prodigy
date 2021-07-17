@@ -15,6 +15,6 @@ module.exports = {
         if (player.queue.length < 1) return message.reply('there aren\'t any songs in the queue to shuffle.');
         if (!player.textChannel) player.textChannel = message.channel.id;
         player.queue.clear();
-        return message.react(✅);
+        return message.react('✅');
     }
 };
