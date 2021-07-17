@@ -57,6 +57,7 @@ module.exports = {
             }
         }
 
-        message.reply(`**${bool ? 'enabled' : 'disabled'}** ${type} repeat.`);
+        if (type == 'queue') return message.react('🔁');
+        else if (type == 'track') return message.react('🔂');
     }
 };
