@@ -36,6 +36,7 @@ db.on('error', (err) => {
 client.db = db;
 client.logger = logger;
 client.config = config;
+client.version = version;
 client.config.defaultFooter = client.config.defaultFooter.replace('{version}', 'v' + version);
 client.commands = new Discord.Collection();
 client.snipes = new Discord.Collection();
