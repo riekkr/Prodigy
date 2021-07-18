@@ -17,7 +17,8 @@ module.exports = {
             .setColor(client.config.defaultColor)
             .setFooter(client.config.defaultFooter)
             .setDescription(msg.content)
-            .setImage(msg.image);
+            .setImage(msg.image)
+            .setTimestamp(msg.timestamp);
         return message.channel.send(embed);
     }
 };
