@@ -20,6 +20,7 @@ module.exports = async (client, message) => {
         prefix = guildPrefix;
     }
     if (!message.content.startsWith(prefix) && pl.includes(message.channel.id)) {
+        if (config.blacklist.includes(message.author.id)) return message.reply('you are blacklisted from using commands.');
         const specArgs = message.content.split(/ +/);
         const commandName = specArgs.shift().toLowerCase();
         if (client.commands.filter(c => c.category === 'music').get(commandName) || client.commands.filter(c => c.category === 'music').find(cmd => cmd.aliases && cmd.aliases.includes(commandName))) {
@@ -109,6 +110,7 @@ module.exports = async (client, message) => {
         // console.log(dj.role);
         return;
     }
+    if (config.blacklist.includes(message.author.id)) return message.reply('you are blacklisted from using commands.');
 
     try {
         const player = client.manager.get(message.guild.id);

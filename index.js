@@ -175,12 +175,14 @@ async function update (guild, def) {
             .setImage(client.config.image)
             .setFooter(client.config.defaultFooter)
             .setDescription('**Prodigy - Welcome!**\nTo play a track, type its name or URL in this channel.');
-        message.edit({ embed });
+        message.edit('', { embed });
         return;
     }
     const player = await client.manager.get(guild);
+    if (!player) return;
     const queue = player.queue || false;
     let dura = prettyms(queue.current.duration, { colonNotation: true, secondsDecimalDigits: 0 });
+    if (!queue.current.thumbnail) await queue.current.resolve();
     if (queue.current.isStream === true) dura = 'LIVE';
     let thumb = queue.current.displayThumbnail('maxresdefault');
     let thB = true;
