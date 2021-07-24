@@ -50,7 +50,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["erela.js-deezer", "npm:1.0.5"],
             ["erela.js-facebook", "npm:1.0.4"],
             ["erela.js-spotify", "npm:1.2.0"],
-            ["erlpack", "npm:0.1.3"],
             ["eslint", "npm:7.31.0"],
             ["express", "npm:5.0.0-alpha.8"],
             ["genshin-db", "npm:3.8.1"],
@@ -64,8 +63,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["pretty-ms", "npm:7.0.1"],
             ["puppeteer", "npm:10.1.0"],
             ["socket.io", "npm:4.1.3"],
-            ["utf-8-validate", "npm:5.0.5"],
-            ["zlib-sync", "npm:0.1.7"]
+            ["utf-8-validate", "npm:5.0.5"]
           ],
           "linkType": "SOFT",
         }]
@@ -574,16 +572,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/base64id-npm-2.0.0-ef4afeee0a-9151705349.zip/node_modules/base64id/",
           "packageDependencies": [
             ["base64id", "npm:2.0.0"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["bindings", [
-        ["npm:1.5.0", {
-          "packageLocation": "./.yarn/cache/bindings-npm-1.5.0-77ce1d213c-bd623dec58.zip/node_modules/bindings/",
-          "packageDependencies": [
-            ["bindings", "npm:1.5.0"],
-            ["file-uri-to-path", "npm:1.0.0"]
           ],
           "linkType": "HARD",
         }]
@@ -1464,18 +1452,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["erlpack", [
-        ["npm:0.1.3", {
-          "packageLocation": "./.yarn/unplugged/erlpack-npm-0.1.3-da3e92777a/node_modules/erlpack/",
-          "packageDependencies": [
-            ["erlpack", "npm:0.1.3"],
-            ["bindings", "npm:1.5.0"],
-            ["nan", "npm:2.14.2"],
-            ["node-gyp", "npm:8.1.0"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["err-code", [
         ["npm:2.0.3", {
           "packageLocation": "./.yarn/cache/err-code-npm-2.0.3-082e0ff9a7-14e09e9990.zip/node_modules/err-code/",
@@ -1794,15 +1770,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["file-entry-cache", "npm:6.0.1"],
             ["flat-cache", "npm:3.0.4"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["file-uri-to-path", [
-        ["npm:1.0.0", {
-          "packageLocation": "./.yarn/cache/file-uri-to-path-npm-1.0.0-1043ac6206-5ddb9682f0.zip/node_modules/file-uri-to-path/",
-          "packageDependencies": [
-            ["file-uri-to-path", "npm:1.0.0"]
           ],
           "linkType": "HARD",
         }]
@@ -2859,16 +2826,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["nan", [
-        ["npm:2.14.2", {
-          "packageLocation": "./.yarn/unplugged/nan-npm-2.14.2-e3ede8ce5d/node_modules/nan/",
-          "packageDependencies": [
-            ["nan", "npm:2.14.2"],
-            ["node-gyp", "npm:8.1.0"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["natural-compare", [
         ["npm:1.4.0", {
           "packageLocation": "./.yarn/cache/natural-compare-npm-1.4.0-97b75b362d-2daf93d9bb.zip/node_modules/natural-compare/",
@@ -3301,7 +3258,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["erela.js-deezer", "npm:1.0.5"],
             ["erela.js-facebook", "npm:1.0.4"],
             ["erela.js-spotify", "npm:1.2.0"],
-            ["erlpack", "npm:0.1.3"],
             ["eslint", "npm:7.31.0"],
             ["express", "npm:5.0.0-alpha.8"],
             ["genshin-db", "npm:3.8.1"],
@@ -3315,8 +3271,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["pretty-ms", "npm:7.0.1"],
             ["puppeteer", "npm:10.1.0"],
             ["socket.io", "npm:4.1.3"],
-            ["utf-8-validate", "npm:5.0.5"],
-            ["zlib-sync", "npm:0.1.7"]
+            ["utf-8-validate", "npm:5.0.5"]
           ],
           "linkType": "SOFT",
         }]
@@ -4377,17 +4332,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["yauzl", "npm:2.10.0"],
             ["buffer-crc32", "npm:0.2.13"],
             ["fd-slicer", "npm:1.1.0"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["zlib-sync", [
-        ["npm:0.1.7", {
-          "packageLocation": "./.yarn/unplugged/zlib-sync-npm-0.1.7-1ddfcf4171/node_modules/zlib-sync/",
-          "packageDependencies": [
-            ["zlib-sync", "npm:0.1.7"],
-            ["nan", "npm:2.14.2"],
-            ["node-gyp", "npm:8.1.0"]
           ],
           "linkType": "HARD",
         }]
