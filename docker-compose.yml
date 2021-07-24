@@ -6,7 +6,8 @@ services:
         restart: on-failure
         tty: true
         environment: 
-            - token=notyet
+            - TOKEN=notyet
+            - DEBUG=true
         ports:
             - 6969:6969
         volumes:
