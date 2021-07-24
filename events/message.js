@@ -22,14 +22,14 @@ module.exports = async (client, message) => {
     if (!message.content.startsWith(prefix) && pl.includes(message.channel.id)) {
         const specArgs = message.content.split(/ +/);
         const commandName = specArgs.shift().toLowerCase();
-        if (client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))) {
+        if (client.commands.filter(c => c.category === 'music').get(commandName) || client.commands.filter(c => c.category === 'music').find(cmd => cmd.aliases && cmd.aliases.includes(commandName))) {
             const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
             const player = client.manager.get(message.guild.id);
             command.execute(client, message, specArgs, prefix, player, true);
             return;
         }
         const command = client.commands.get('play');
-        command.execute(client, message, message.content.split(/ +/), true);
+        command.execute(client, message, message.content.split(/ +/), undefined, undefined, true);
         await message.delete();
         return;
     }
