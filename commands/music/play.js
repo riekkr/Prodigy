@@ -48,13 +48,13 @@ module.exports = {
             break;
         case 'LOAD_FAILED':
             message.channel.send(`An unknown error occurred and loading failed for your query **${args.join(' ')}**.\n**Details:** \`${res.exception.severity} | ${res.exception.message.split('\n').join(' ')}\``);
-            client.logger.error(`LOAD_FAILED for query: "${args.join(' ')}"`);
-            client.logger.error('Details:');
-            client.logger.error(`Severity: ${res.exception.severity}`);
-            client.logger.error(`Message: ${res.exception.message.split('\n').join(' ')}`);
+            client.log(2, `LOAD_FAILED for query: "${args.join(' ')}"`);
+            client.log(2, 'Details:');
+            client.log(2, `Severity: ${res.exception.severity}`);
+            client.log(2, `Message: ${res.exception.message.split('\n').join(' ')}`);
             break;
         default:
-            client.logger.error('Unknown loadType: ' + res.loadType + '\n' + res);
+            client.log(2, 'Unknown loadType: ' + res.loadType + '\n' + res);
             break;
         }
     }

@@ -9,8 +9,8 @@ module.exports = {
     requiredPermissions: [],
     
     async execute (client, message) {
-        client.logger.warn(`Shutdown requested by ${message.author.tag}`);
-        client.db.set('shutdownRequestedBy', message.author.id);
+        client.log(3, `Shutdown requested by ${message.author.tag}`);
+        await client.db.set('shutdownRequestedBy', message.author.id);
         const embed = new MessageEmbed()
             .setAuthor('Shutting down...', client.user.avatarURL())
             .setColor(client.config.defaultColor)

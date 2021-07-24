@@ -1,3 +1,3 @@
 module.exports = async (client, node) => {
-    client.logger.info(`Node "${node.options.identifier}" connected.`);
+    client.log(1, `Node "${node.options.identifier}" connected.`);
 };

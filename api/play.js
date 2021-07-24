@@ -46,13 +46,13 @@ module.exports = async (app, client) => {
         case 'LOAD_FAILED':
             res.status(403);
             res.json({ code: 403, message: 'Error - load failed', exception: res.exception });
-            client.logger.error(`LOAD_FAILED for query: "${req.query}"`);
-            client.logger.error('Details:');
-            client.logger.error(`Severity: ${res.exception.severity}`);
-            client.logger.error(`Message: ${res.exception.message}`);
+            client.log(2, `LOAD_FAILED for query: "${req.query}"`);
+            client.log(2, 'Details:');
+            client.log(2, `Severity: ${res.exception.severity}`);
+            client.log(2, `Message: ${res.exception.message}`);
             break;
         default:
-            client.logger.error('Unknown loadType: ' + result.loadType);
+            client.log(2, 'Unknown loadType: ' + result.loadType);
             break;
         }
     });

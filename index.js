@@ -1,7 +1,6 @@
 require('dotenv').config();
 const Discord = require('discord.js');
-const Catloggr = require('cat-loggr');
-const logger = new Catloggr();
+const chalk = require('chalk');
 const fs = require('fs');
 const config = require('./config.json');
 const Keyv = require('keyv');
@@ -11,7 +10,7 @@ const genshin = require('genshin-db');
 
 const server = express();
 server.listen(config.port, () => {
-    logger.info('Listening on port ' + config.port);
+    log(1, 'Listening on port ' + config.port);
 });
 
 const { Manager } = require('erela.js');
@@ -24,17 +23,28 @@ const nodes = [
         id: 'Prodigy',
         host: config.lavalinkHost,
         port: config.lavalinkPort,
-        password: config.lavalinkPassword
+        password: config.lavalinkPassword,
+        clientName: 'ProdigyV2'
     }
 ];
 
 const client = new Discord.Client();
 const db = new Keyv(config.mongoURL, { namespace: 'default' });
 db.on('error', (err) => {
-    logger.error('Connection error: ' + err);
+    log(2, 'Connection error: ' + err);
 });
+client.debug = false;
+if (process.argv.join(' ').includes('-d') || process.argv.join(' ').includes('--debug')) {
+    console.log(chalk.bgBlack(chalk.red('*********************** WARNING! ***********************')));
+    console.log(chalk.bgBlack(chalk.red('*           Prodigy is running in debug mode           *')));
+    console.log(chalk.bgBlack(chalk.red('*    It is dangerous to run in debug mode normally.    *')));
+    console.log(chalk.bgBlack(chalk.red('* Remove the --debug / -d flag to turn off debug mode. *')));
+    console.log(chalk.bgBlack(chalk.red('*  You may encounter security and performance issues.  *')));
+    console.log(chalk.bgBlack(chalk.red('********************************************************')));
+    client.debug = true;
+}
 client.db = db;
-client.logger = logger;
+client.log = log;
 client.config = config;
 client.version = version;
 client.config.defaultFooter = client.config.defaultFooter.replace('{version}', 'v' + version);
@@ -124,19 +134,49 @@ for (const file of nsfw) {
     cmd.category = 'nsfw';
     client.commands.set(cmd.name.toLowerCase(), cmd);
 }
-logger.info(`${client.commands.size} commands and ${Object.keys(client._events).length} events loaded.`);
+log(1, `${client.commands.size} commands and ${Object.keys(client._events).length} events loaded.`);
 
 process.on('unhandledRejection', async (err) => {
-    logger.error('Unhandled rejection:');
+    log(2, 'Unhandled rejection:');
     console.log(err);
 });
 
 process.on('exit', async () => {
-    logger.info('Shutting down gracefully...');
+    log(1, 'Shutting down gracefully...');
 });
 
 const apiFiles = fs.readdirSync('./api').filter(file => file.endsWith('.js'));
 for (const file of apiFiles) {
     require(`./api/${file}`)(server, client);
 }
+
+function log (type, details) {
+    const time = new Date();
+    let hours = time.getHours();
+    let minutes = time.getMinutes();
+    let seconds = time.getSeconds();
+    if (time.getMinutes().toString().length === 1) {
+        minutes = `0${time.getMinutes()}`;
+    }
+    if (time.getHours().toString().length === 1) {
+        hours = `0${time.getHours()}`;
+    }
+    if (time.getSeconds().toString().length === 1) {
+        seconds = `0${time.getSeconds()}`;
+    }
+    const format = `${time.getDate()}/${time.getMonth() + 1}/${time.getFullYear()} ${hours}:${minutes}:${seconds}`;
+    if (type === 'debug' || type === 'd' || type === 0) {
+        if (client.debug === true) console.log(chalk.bold(chalk.bgBlack(chalk.green(`${format} [DEBUG] `))) + details);
+    }
+    if (type === 'info' || type === 'i' || type === 1) {
+        console.log(chalk.bold(chalk.bgBlack(chalk.magenta(`${format} [INFO] `))) + details);
+    }
+    if (type === 'error' || type === 'err' || type === 'e' || type === 2) {
+        console.log(chalk.bold(chalk.bgBlack(chalk.red(`${format} [ERROR] `))) + details);
+    }
+    if (type === 'warn' || type === 'w' || type === 3) {
+        console.log(chalk.bold(chalk.bgBlack(chalk.yellow(`${format} [ERROR] `))) + details);
+    }
+}
+
 client.login(config.token);
