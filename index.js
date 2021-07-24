@@ -18,6 +18,8 @@ const Spotify = require('erela.js-spotify');
 const Deezer = require('erela.js-deezer');
 const Facebook = require('erela.js-facebook');
 
+console.clear();
+
 const nodes = [
     {
         id: 'Prodigy',
@@ -54,9 +56,9 @@ client.snipes = new Discord.Collection();
 client.genshin = genshin;
 // client.buttons = require('discord-buttons')(client);
 const embed = new Discord.MessageEmbed()
-    .setAuthor('Nothing playing', client.user.avatarURL(), 'https://prdg.tk')
+    .setAuthor('Nothing playing', config.avatarURL, config.website)
     .setColor(client.config.defaultColor)
-    .setImage(client.config.defaultImage)
+    .setImage(client.config.image)
     .setFooter(client.config.defaultFooter)
     .setDescription('Prodigy - Welcome!\nTo play a track, type its name or URL in this channel.');
 client.pl.embed = embed;
