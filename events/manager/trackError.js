@@ -3,7 +3,10 @@ module.exports = async (client, player, track, payload) => {
     let channel = client.channels.cache.get(player.textChannel);
     if (channel.lastNowPlayingMessage) channel.lastNowPlayingMessage.delete();
     channel.lastNowPlayingMessage = undefined;
-    channel.send(`Failed to play track **${track.title}**.`);
-    console.log(track);
-    console.log(payload);
+    channel.send(`Failed to play track **${track.title}**.`).then(msg => {
+        if (player.n === true) {
+            msg.delete({ timeout: 10000 });
+        }
+    });
+    client.log(2, payload);
 };

@@ -1,3 +1,5 @@
+// noinspection JSClosureCompilerSyntax
+
 require('dotenv').config();
 const Discord = require('discord.js');
 const chalk = require('chalk');
@@ -7,11 +9,11 @@ const Keyv = require('keyv');
 const { version } = require('./package.json');
 const express = require('express');
 const genshin = require('genshin-db');
+const prettyms = require('pretty-ms');
+const fetch = require('node-fetch');
 
 const server = express();
-server.listen(config.port, () => {
-    log(1, 'Listening on port ' + config.port);
-});
+server.listen(config.port, () => log(1, `Listening on port ${config.port}`));
 
 const { Manager } = require('erela.js');
 const Spotify = require('erela.js-spotify');
@@ -32,9 +34,7 @@ const nodes = [
 
 const client = new Discord.Client();
 const db = new Keyv(config.mongoURL, { namespace: 'default' });
-db.on('error', (err) => {
-    log(2, 'Connection error: ' + err);
-});
+db.on('error', err => log(2, `Connection error: ${err}`));
 client.debug = false;
 if (process.argv.join(' ').includes('-d') || process.argv.join(' ').includes('--debug')) {
     console.log(chalk.bgBlack(chalk.red('*********************** WARNING! ***********************')));
@@ -45,32 +45,25 @@ if (process.argv.join(' ').includes('-d') || process.argv.join(' ').includes('--
     console.log(chalk.bgBlack(chalk.red('********************************************************')));
     client.debug = true;
 }
-client.pl = {};
+client.update = update;
 client.db = db;
 client.log = log;
 client.config = config;
 client.version = version;
-client.config.defaultFooter = client.config.defaultFooter.replace('{version}', 'v' + version);
+client.config.defaultFooter = client.config.defaultFooter.replace('{version}', `v${version}`);
 client.commands = new Discord.Collection();
 client.snipes = new Discord.Collection();
 client.genshin = genshin;
 // client.buttons = require('discord-buttons')(client);
-const embed = new Discord.MessageEmbed()
-    .setAuthor('Nothing playing', config.avatarURL, config.website)
-    .setColor(client.config.defaultColor)
-    .setImage(client.config.image)
-    .setFooter(client.config.defaultFooter)
-    .setDescription('Prodigy - Welcome!\nTo play a track, type its name or URL in this channel.');
-client.pl.embed = embed;
 
 const manager = new Manager({
-    nodes: nodes,
+    nodes,
     plugins: [
         new Spotify({
             clientID: config.spotifyClientID,
             clientSecret: config.spotifyClientSecret
         }),
-        new Deezer(),
+        new Deezer({ playlistLimit: 0, albumLimit: 0 }),
         new Facebook()
     ],
     shards: 1,
@@ -146,18 +139,83 @@ for (const file of nsfw) {
 }
 log(1, `${client.commands.size} commands and ${Object.keys(client._events).length} events loaded.`);
 
-process.on('unhandledRejection', async (err) => {
+process.on('unhandledRejection', async err => {
     log(2, 'Unhandled rejection:');
-    console.log(err);
+    log(2, err);
 });
 
-process.on('exit', async () => {
-    log(1, 'Shutting down gracefully...');
-});
+process.on('exit', async () => log(1, 'Shutting down gracefully...'));
 
 const apiFiles = fs.readdirSync('./api').filter(file => file.endsWith('.js'));
 for (const file of apiFiles) {
     require(`./api/${file}`)(server, client);
+}
+
+async function update (guild, def) {
+    let objc;
+    const obj = await db.get(`${guild}-pl`);
+    const messageID = obj.messageID;
+    const channelID = obj.channelID;
+    const channel = client.channels.cache.get(channelID);
+    let message = await channel.messages.fetch(messageID).catch(async () => {
+        const msg = await channel.send(text, { embed });
+        objc = {
+            messageID: msg.id,
+            channelID: msg.channel.id
+        };
+        await client.db.set(`${guild}-pl`, objc);
+        message = msg;
+        await msg.pin({reason: 'Automated by Prodigy'});
+    });
+    if (!message) message = await channel.messages.fetch(objc.messageID);
+    if (def) {
+        const embed = new Discord.MessageEmbed()
+            .setAuthor('Nothing playing', client.config.avatarURL, client.config.website)
+            .setColor(client.config.defaultColor)
+            .setImage(client.config.image)
+            .setFooter(client.config.defaultFooter)
+            .setDescription('**Prodigy - Welcome!**\nTo play a track, type its name or URL in this channel.');
+        message.edit({ embed });
+        return;
+    }
+    const player = await client.manager.get(guild);
+    const queue = player.queue || false;
+    let dura = prettyms(queue.current.duration, { colonNotation: true, secondsDecimalDigits: 0 });
+    if (queue.current.isStream === true) dura = 'LIVE';
+    let thumb = queue.current.displayThumbnail('maxresdefault');
+    const res = await fetch(queue.current.displayThumbnail('maxresdefault'));
+    if (res.status === 404) thumb = queue.current.displayThumbnail('hqdefault');
+    const embed = new Discord.MessageEmbed()
+        .setAuthor(queue.current.title, queue.current.requester.avatarURL(), queue.current.uri)
+        .setColor(client.config.defaultColor)
+        .setImage(thumb)
+        .setFooter(`Track loop: ${player.trackRepeat ? 'On' : 'Off'} | Queue loop: ${player.queueRepeat ? 'On' : 'Off'} | ${player.paused ? 'Paused' : 'Not paused'}\nNo tracks in queue`)
+        .setDescription(`**Requested by:** ${queue.current.requester.toString()}\n**Artist / Channel:** ${queue.current.author}\n**Duration:** ${dura}`);
+    let text;
+    if (queue.size > 0) {
+        let totalDuration = prettyms(player.queue.duration, { colonNotation: true, secondsDecimalDigits: 0 });
+        if (player.queue.find(s => s.isStream === true)) totalDuration = '∞';
+        const shortQueue = player.queue.slice(0, 10);
+        const shortArr = [];
+        for (let i = 0; i < shortQueue.length; i++) {
+            let trackDura = prettyms(shortQueue[i].duration, { colonNotation: true, secondsDecimalDigits: 0 });
+            if (shortQueue[i].isStream === true) trackDura = 'LIVE';
+            shortArr.push(`**\`${i+1}\`**: **${shortQueue[i].title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** \`${trackDura}\` | Requested by **${shortQueue[i].requester.tag}**`);
+        }
+        if (queue.size > 10) shortArr.push('*Use `queue` to view the full queue.*');
+        text = shortArr.join('\n');
+        embed.setFooter(`Track loop: ${player.trackRepeat ? 'On' : 'Off'} | Queue loop: ${player.queueRepeat ? 'On' : 'Off'} | ${player.paused ? 'Paused' : 'Not paused'}\nTotal duration: ${totalDuration}`);
+    } else {
+        text = '';
+    }
+    channel.messages.fetch()
+        .then(fetched => {
+            const notPinned = fetched.filter(fetchedMsg => !fetchedMsg.pinned);
+
+            channel.bulkDelete(notPinned, true);
+        })
+        .catch(err => log(2, err));
+    message.edit(text, { embed });
 }
 
 function log (type, details) {

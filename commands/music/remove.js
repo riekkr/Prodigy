@@ -16,49 +16,46 @@ module.exports = {
             const startPos = args[0] - 1;
             if (isNaN(args[1])) return message.channel.send('**Invalid usage:** Command `remove` requires exactly 1 or 2 integer arguments.');
             const endPos = args[1] - 1;
-            if (args[0] < 1 || args[1] > player.queue.length) return message.channel.send('**Invalid usage:** Argument `startIndex` needs to be more than 0 and argument `endIndex` needs to be below ' + player.queue.length + '.');
+            if (args[0] < 1 || args[1] > player.queue.length) return message.channel.send(`**Invalid usage:** Argument \`startIndex\` needs to be more than 0 and argument \`endIndex\` needs to be below ${player.queue.length}.`);
             let q = [...player.queue];
             const numToRm = args[1] - startPos;
             const removedTracks = q.splice(startPos, numToRm);
             const msg = await message.reply(`**remove these tracks from the queue?**\n${removedTracks.map(t => `\`${t.title}\``).join('\n')}`);
             await msg.react('❌');
             await msg.react('✅');
-            const yesFilter = (reaction, user) => reaction.emoji.name == '✅' && user.id === message.author.id;
-            const noFilter = (reaction, user) => reaction.emoji.name == '❌' && user.id === message.author.id;
+            const yesFilter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+            const noFilter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
             const yesCollector = msg.createReactionCollector(yesFilter, { time: 5 * 60 * 1000 });
             const noCollector = msg.createReactionCollector(noFilter, { time: 5 * 60 * 1000 });
             yesCollector.on('collect', async () => {
-                msg.reactions.removeAll();
+                await msg.reactions.removeAll();
                 player.queue.remove(startPos, endPos + 1);
                 await msg.edit(`Removed **${removedTracks.length}** tracks from the queue.`);
-                return;
             });
             noCollector.on('collect', async () => {
-                msg.reactions.removeAll();
+                await msg.reactions.removeAll();
                 await msg.edit('Cancelled command.');
-                return;
             });
         } else {
-            if (args[0] > player.queue.length) return message.channel.send('**Invalid usage:** Command `remove` has to have an argument be above 1 and below ' + player.queue.length + '.');
+            if (args[0] > player.queue.length) return message.channel.send(`**Invalid usage:** Command \`remove\` has to have an argument be above 1 and below ${player.queue.length}.`);
             const trackPosition = args[0] - 1;
             const trackRemoved = player.queue[trackPosition];
             const msg = await message.reply(`remove **${trackRemoved.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** from the queue?`);
             await msg.react('❌');
             await msg.react('✅');
-            const yesFilter = (reaction, user) => reaction.emoji.name == '✅' && user.id === message.author.id;
-            const noFilter = (reaction, user) => reaction.emoji.name == '❌' && user.id === message.author.id;
+            const yesFilter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+            const noFilter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
             const yesCollector = msg.createReactionCollector(yesFilter, { time: 5 * 60 * 1000 });
             const noCollector = msg.createReactionCollector(noFilter, { time: 5 * 60 * 1000 });
             yesCollector.on('collect', async () => {
-                msg.reactions.removeAll();
+                await msg.reactions.removeAll();
                 player.queue.remove(trackPosition);
                 await msg.edit(`Removed **${trackRemoved.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** from the queue.`);
-                return;
+                client.update(message.guild.id, true);
             });
             noCollector.on('collect', async () => {
-                msg.reactions.removeAll();
+                await msg.reactions.removeAll();
                 await msg.edit('Cancelled command.');
-                return;
             });
         }
     }

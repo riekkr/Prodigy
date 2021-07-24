@@ -37,8 +37,8 @@ module.exports = {
         const raw = lyrics.lyrics.split('\n');
         const arrays = _.chunk(raw, 30);
         let pages = [];
-        for (let i = 0; i < arrays.length; i++) {
-            pages.push(arrays[i].join('\n'));
+        for (const item of arrays) {
+            pages.push(item.join('\n'));
         }
         let final = [];
         let currentPage = 0;
@@ -56,13 +56,13 @@ module.exports = {
         let msg = await message.channel.send(final[0]);
         await msg.react('🔺');
         await msg.react('🔻');
-        const upFilter = (reaction, user) => reaction.emoji.name == '🔺' && user.id === message.author.id;
-        const downFilter = (reaction, user) => reaction.emoji.name == '🔻' && user.id === message.author.id;
+        const upFilter = (reaction, user) => reaction.emoji.name === '🔺' && user.id === message.author.id;
+        const downFilter = (reaction, user) => reaction.emoji.name === '🔻' && user.id === message.author.id;
         const collector1 = msg.createReactionCollector(upFilter, { time: 10 * 60 * 1000 });
         const collector2 = msg.createReactionCollector(downFilter, { time: 10 * 60 * 1000 });
         collector1.on('collect', async (reaction, user) => { // Up
-            reaction.users.remove(user.id);
-            if (currentPage == 0) {
+            await reaction.users.remove(user.id);
+            if (currentPage === 0) {
                 await msg.edit({ embed: final[final.length - 1] });
                 currentPage = final.length - 1;
             } else {
@@ -71,8 +71,8 @@ module.exports = {
             }
         });
         collector2.on('collect', async (reaction, user) => { // Down
-            reaction.users.remove(user.id);
-            if (currentPage == final.length - 1) {
+            await reaction.users.remove(user.id);
+            if (currentPage === final.length - 1) {
                 await msg.edit({ embed: final[currentPage + 1] });
                 currentPage = 0;
             } else {

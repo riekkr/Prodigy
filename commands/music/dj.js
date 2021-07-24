@@ -16,27 +16,27 @@ module.exports = {
             return;
         } 
         let json = data;
-        if (json.role == undefined) {
+        if (json.role === undefined) {
             message.reply(`there isn't a DJ role set for this server. Set one using \`${prefix}djrole\` and try again.`);
             return;
         } 
         const currentState = json.state;
         if (!args.length) {
-            if (currentState == false) {
+            if (currentState === false) {
                 json.state = true;
                 message.reply('enabled DJ only mode for this server.');
-            } else if (currentState == true) {
+            } else if (currentState === true) {
                 json.state = false;
                 message.reply('disabled DJ only mode for this server.');
             }
             await client.db.set(`${message.guild.id}-dj`, json);
         } else {
-            if (args[0] == 'on' || args[0] == 'true') {
-                if (json.state == true) return message.reply('DJ only mode is already enabled.');
+            if (args[0] === 'on' || args[0] === 'true') {
+                if (json.state === true) return message.reply('DJ only mode is already enabled.');
                 json.state = true;
                 message.reply('enabled DJ only mode for this server.');
-            } else if (args[0] == 'off' || args[0] == 'false') {
-                if (json.state == false) return message.reply('DJ only mode is already disabled.');
+            } else if (args[0] === 'off' || args[0] === 'false') {
+                if (json.state === false) return message.reply('DJ only mode is already disabled.');
                 json.state = false;
                 message.reply('disabled DJ only mode for this server.');
             } else {

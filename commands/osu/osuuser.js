@@ -20,16 +20,16 @@ module.exports = {
         const mode = parsedArgs[1] || 'osu!';
         let rawMode = 0;
         let displayMode;
-        if (mode.toLowerCase() == 'osu!' || mode.toLowerCase() == 'osu' || mode == 0) {
+        if (mode.toLowerCase() === 'osu!' || mode.toLowerCase() === 'osu' || mode === 0) {
             rawMode = 0;
             displayMode = 'osu!';
-        } else if (mode.toLowerCase() == 'taiko' || mode == 1) {
+        } else if (mode.toLowerCase() === 'taiko' || mode === 1) {
             rawMode = 1;
             displayMode = 'osu!taiko';
-        } else if (mode.toLowerCase() == 'ctb' || mode.toLowerCase() == 'catchthebeat' || mode == 'osu!catch' || mode == 'catch' || mode == 2) {
+        } else if (mode.toLowerCase() === 'ctb' || mode.toLowerCase() === 'catchthebeat' || mode === 'osu!catch' || mode === 'catch' || mode === 2) {
             rawMode = 2;
             displayMode = 'osu!catch';
-        } else if (mode.toLowerCase() == 'mania' || mode.toLowerCase() == 'osu!mania' || mode.toLowerCase() == 'osumania' || mode == 3) {
+        } else if (mode.toLowerCase() === 'mania' || mode.toLowerCase() === 'osu!mania' || mode.toLowerCase() === 'osumania' || mode === 3) {
             rawMode = 3;
             displayMode = 'osu!mania';
         } else {
@@ -131,7 +131,7 @@ module.exports = {
                 },
                 {
                     name: 'Accuracy',
-                    value: Number(json.accuracy).toFixed(3) + '%',
+                    value: `${Number(json.accuracy).toFixed(3)}%`,
                     inline: true
                 },
                 {
@@ -186,6 +186,6 @@ module.exports = {
         message.channel.send(embed);
         message.channel.send(recentEmb1);
         message.channel.send(recentEmb2);
-        return;
+
     }
 };

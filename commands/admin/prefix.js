@@ -17,7 +17,7 @@ module.exports = {
                 .setFooter(client.config.defaultFooter);
             return message.channel.send(embed);
         } else {
-            client.db.set(message.guild.id, args.join(' '));
+            await client.db.set(message.guild.id, args.join(' '));
             const embed = new MessageEmbed()
                 .setAuthor('Prefix', message.guild.iconURL())
                 .setDescription(`Prefix changed from \`${prefix}\` to \`${args.join(' ')}\`.`)

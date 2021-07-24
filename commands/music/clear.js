@@ -15,6 +15,7 @@ module.exports = {
         if (player.queue.length < 1) return message.reply('there aren\'t any songs in the queue to clear.');
         if (!player.textChannel) player.textChannel = message.channel.id;
         player.queue.clear();
+        client.update(message.guild.id, true);
         return message.react('✅');
     }
 };

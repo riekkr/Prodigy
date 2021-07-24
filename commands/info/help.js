@@ -20,11 +20,11 @@ module.exports = {
             }
             if (!command) return message.reply('that\'s not a valid command.');
             let av;
-            if (command.dj == true && command.ownerOnly == true) {
+            if (command.dj === true && command.ownerOnly === true) {
                 av = 'Owner only and requires DJ role when DJ mode is on';
-            } else if (command.dj == true && !command.ownerOnly) {
+            } else if (command.dj === true && !command.ownerOnly) {
                 av = 'Requires DJ role when DJ mode is on';
-            } else if (!command.dj && command.ownerOnly == true) {
+            } else if (!command.dj && command.ownerOnly === true) {
                 av = 'Owner only';
             } else if (!command.dj && !command.ownerOnly) {
                 av = 'Available to everyone';
@@ -50,7 +50,7 @@ module.exports = {
                     },
                     {
                         name: 'Aliases',
-                        value: '`' + command.aliases.join('`, `') + '`'
+                        value: `\`${command.aliases.join('`, `')}\``
                     },
                     {
                         name: 'Example usage',
@@ -76,31 +76,31 @@ module.exports = {
                 .addFields([
                     {
                         name: 'Admin',
-                        value: '`' + client.commands.filter(cmd => cmd.category == 'admin').map(c => c.name).join('`, `') + '`'
+                        value: `\`${client.commands.filter(cmd => cmd.category === 'admin').map(c => c.name).join('`, `')}\``
                     },
                     {
                         name: 'Informative',
-                        value:  '`' + client.commands.filter(cmd => cmd.category == 'info').map(c => c.name).join('`, `') + '`'
+                        value:  `\`${client.commands.filter(cmd => cmd.category === 'info').map(c => c.name).join('`, `')}\``
                     },
                     {
                         name: 'Music',
-                        value: '`' + client.commands.filter(cmd => cmd.category == 'music').map(c => c.name).join('`, `') + '`'
+                        value: `\`${client.commands.filter(cmd => cmd.category === 'music').map(c => c.name).join('`, `')}\``
                     },
                     {
                         name: 'osu!',
-                        value: '`' + client.commands.filter(cmd => cmd.category == 'osu').map(c => c.name).join('`, `') + '`'
+                        value: `\`${client.commands.filter(cmd => cmd.category === 'osu').map(c => c.name).join('`, `')}\``
                     },
                     {
                         name: 'Genshin Impact',
-                        value: '`' + client.commands.filter(cmd => cmd.category == 'genshin').map(c => c.name).join('`, `') + '`'
+                        value: `\`${client.commands.filter(cmd => cmd.category === 'genshin').map(c => c.name).join('`, `')}\``
                     },
                     {
                         name: 'Tools',
-                        value: '`' + client.commands.filter(cmd => cmd.category == 'tools').map(c => c.name).join('`, `') + '`'
+                        value: `\`${client.commands.filter(cmd => cmd.category === 'tools').map(c => c.name).join('`, `')}\``
                     },
                     {
                         name: 'Owner',
-                        value: '`' + client.commands.filter(cmd => cmd.category == 'owner').map(c => c.name).join('`, `') + '`'
+                        value: `\`${client.commands.filter(cmd => cmd.category === 'owner').map(c => c.name).join('`, `')}\``
                     }
                 ]);
             return message.channel.send(embed);

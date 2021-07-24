@@ -14,14 +14,14 @@ module.exports = {
         const query = args.join(' ');
         const c = db.characters(query);
         let color;
-        if (!c) return message.reply('the character ' + query + ' was not found in the database.');
-        if (c.element == 'Anemo') color = '#339999';
-        else if (c.element == 'Pyro') color = '#b32134';
-        else if (c.element == 'Electro') color = '#7725db';
-        else if (c.element == 'Cryo') color = '#add8e6';
-        else if (c.element == 'Hydro') color = '#1c4966';
-        else if (c.element == 'Dendro') color = '#249225';
-        else if (c.element == 'Geo') color = '#ffcc00';
+        if (!c) return message.reply(`the character ${query} was not found in the database.`);
+        if (c.element === 'Anemo') color = '#339999';
+        else if (c.element === 'Pyro') color = '#b32134';
+        else if (c.element === 'Electro') color = '#7725db';
+        else if (c.element === 'Cryo') color = '#add8e6';
+        else if (c.element === 'Hydro') color = '#1c4966';
+        else if (c.element === 'Dendro') color = '#249225';
+        else if (c.element === 'Geo') color = '#ffcc00';
         else color = client.config.defaultColor;
         const embed = new MessageEmbed()
             .setColor(color)

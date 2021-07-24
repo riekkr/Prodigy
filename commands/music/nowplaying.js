@@ -17,11 +17,11 @@ module.exports = {
 
         let np = player.queue.current;
         let bar = createProgressBar(player.position, player.queue.current.duration, 25);
-        if (np.isStream == true) bar = '';
+        if (np.isStream === true) bar = '';
         let songDuration = prettyms(np.duration, { colonNotation: true, secondsDecimalDigits: 0 });
-        if (np.isStream == true) songDuration = '∞';
+        if (np.isStream === true) songDuration = '∞';
         let currentPosition = prettyms(player.position, { colonNotation: true, secondsDecimalDigits: 0 });
-        if (np.isStream == true) currentPosition = 'LIVE';
+        if (np.isStream === true) currentPosition = 'LIVE';
 
         const embed = new MessageEmbed()
             .setAuthor(message.guild.name, message.guild.iconURL())
@@ -63,14 +63,13 @@ module.exports = {
         function createProgressBar (current, end, size) {
             if (isNaN(current) || isNaN(end)) return 'Arguments current and end have to be integers.';
             const percentage = current / end;
-            const progress = Math.round((size * percentage));
+            const progress = Math.round(size * percentage);
             const emptyProgress = size - progress;
 
             const progressText = '▇'.repeat(progress);
             const emptyProgressText = '—'.repeat(emptyProgress);
-            
-            const bar = `\`[${progressText}${emptyProgressText}]\``;
-            return bar;
+
+            return `\`[${progressText}${emptyProgressText}]\``;
         }
     }
 };

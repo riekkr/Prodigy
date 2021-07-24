@@ -13,10 +13,11 @@ module.exports = {
         if (!channel) return message.reply('you aren\'t in a voice channel.');
         if (channel.id !== player.voiceChannel) return message.reply('you aren\'t in the same voice channel as the bot.');
         if (!player.queue.current) return message.reply('there is nothing playing.');
-        if (player.paused == false) return message.reply('the player is not paused.');
+        if (player.paused === false) return message.reply('the player is not paused.');
         if (!player.textChannel) player.textChannel = message.channel.id;
-        let vc = message.guild.channels.cache.find(c => c.id == player.voiceChannel);
+        let vc = message.guild.channels.cache.find(c => c.id === player.voiceChannel);
         player.pause(false);
+        client.update(message.guild.id, true);
         return message.channel.send(`Resumed **${player.queue.current.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** in **${vc.name}**.`);
     }
 };

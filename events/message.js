@@ -2,27 +2,39 @@ const Discord = require('discord.js');
 
 module.exports = async (client, message) => {
     const config = client.config;
-    if (message.author.bot) return;
-    let args;
-    let prefix;
-    const guildPrefix = await client.db.get(message.guild.id);
-    if (message.guild) { 
-        if (message.content.startsWith(config.globalPrefix)) {
-            if (typeof guildPrefix == 'undefined') {
-                prefix = config.globalPrefix;
-            } else {
-                return;
-                // prefix = config.globalPrefix
-            }
-        } else if (message.content.startsWith(guildPrefix)) {
-            prefix = guildPrefix;
-        }
-        if (!prefix) return;
-        args = message.content.slice(prefix.length).trim().split(/ +/);
-    } else {
-        const slice = message.content.startsWith(config.globalPrefix) ? config.globalPrefix.length : 0;
-        args = message.content.slice(slice).split(/ +/);
+    if (!message.guild) {
+        return client.log(0, `DM from ${message.author.tag}: ${message.content}`);
     }
+    if (message.author.bot) return;
+    let prefix;
+    const pl = await client.db.get('pl');
+    const guildPrefix = await client.db.get(message.guild.id);
+    if (message.content.startsWith(config.globalPrefix)) {
+        if (typeof guildPrefix == 'undefined') {
+            prefix = config.globalPrefix;
+        } else {
+            return;
+            // prefix = config.globalPrefix
+        }
+    } else if (message.content.startsWith(guildPrefix)) {
+        prefix = guildPrefix;
+    }
+    if (!message.content.startsWith(prefix) && pl.includes(message.channel.id)) {
+        const specArgs = message.content.split(/ +/);
+        const commandName = specArgs.shift().toLowerCase();
+        if (client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName))) {
+            const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+            const player = client.manager.get(message.guild.id);
+            command.execute(client, message, specArgs, prefix, player, true);
+            return;
+        }
+        const command = client.commands.get('play');
+        command.execute(client, message, message.content.split(/ +/), true);
+        await message.delete();
+        return;
+    }
+    if (!prefix) return;
+    let args = message.content.slice(prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
     const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
     if (!command) {
@@ -38,11 +50,11 @@ module.exports = async (client, message) => {
         }
     }
 
-    let locked = await client.db.get('locked');
+    const locked = await client.db.get('locked');
     if (!locked) {
         await client.db.set('locked', { state: false, reason: 'none' });
     }
-    if (locked.state == true && !config.owners.includes(message.author.id)) {
+    if (locked.state === true && !config.owners.includes(message.author.id)) {
         const embed = new Discord.MessageEmbed()
             .setAuthor('Error')
             .setDescription(`An error occurred while executing the command:\n\`All commands are currently disabled. (${locked.reason})\``)
@@ -52,7 +64,7 @@ module.exports = async (client, message) => {
         return;
     }
 
-    if (command.ownerOnly == true) {
+    if (command.ownerOnly === true) {
         if (!config.owners.includes(message.author.id) && !config.secOwners.includes(message.author.id)) {
             const embed = new Discord.MessageEmbed()
                 .setAuthor('Error')
@@ -65,7 +77,7 @@ module.exports = async (client, message) => {
     }
 
     if (command.requiredPermissions.length > 0) {
-        let arrLen = command.requiredPermissions.length;
+        const arrLen = command.requiredPermissions.length;
         for (let i = 0; i < arrLen; i++) {
             if (!message.member.hasPermission(command.requiredPermissions[i]) && !client.config.owners.includes(message.author.id)) {
                 const embed = new Discord.MessageEmbed()
@@ -85,9 +97,9 @@ module.exports = async (client, message) => {
         await client.db.set(`${message.guild.id}-dj`, { state: false, role: undefined });
         return;
     }
-    const rle = message.guild.roles.cache.find(r => r.id == dj.role);
+    const rle = message.guild.roles.cache.find(r => r.id === dj.role);
 
-    if (dj.state == true && !message.member.roles.cache.has(dj.role) && !client.config.owners.includes(message.author.id)) {
+    if (dj.state === true && !message.member.roles.cache.has(dj.role) && !client.config.owners.includes(message.author.id)) {
         const embed = new Discord.MessageEmbed()
             .setAuthor('Error')
             .setDescription(`An error occurred while executing the command:\n\`DJ only mode is on and you do not have the DJ role. (${rle.name} | ${rle.id})\``)
@@ -99,7 +111,7 @@ module.exports = async (client, message) => {
     }
 
     try {
-        let player = client.manager.get(message.guild.id);
+        const player = client.manager.get(message.guild.id);
         command.execute(client, message, args, prefix, player);
         client.log(0, `${message.author.tag} ran command ${command.name} in ${message.guild.name}`);
     } catch (err) {
@@ -117,9 +129,8 @@ module.exports = async (client, message) => {
             .addField('User', message.author.toString())
             .addField('Server', message.guild.name);
         for (let i = 0; i < client.config.owners.length; i++) {
-            let user = client.users.cache.find(u => u.id == client.config.owners[i]);
+            const user = client.users.cache.find(u => u.id === client.config.owners[i]);
             user.send(reportEmbed);
         }
-        return;
     }
 };

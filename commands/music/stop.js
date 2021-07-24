@@ -16,6 +16,7 @@ module.exports = {
         player.destroy();
         if (message.channel.lastNowPlayingMessage) message.channel.lastNowPlayingMessage.delete();
         message.channel.lastNowPlayingMessage = false;
+        client.update(message.guild.id, true);
         return message.react('✅');
     }
 };

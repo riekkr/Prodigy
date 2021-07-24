@@ -10,14 +10,14 @@ module.exports = {
     dj: false, // Whether DJ only mode being on will prevent the command from being run
 
     // eslint-disable-next-line no-unused-vars
-    async execute(client, message, args, prefix, player) {
+    async execute(client, message, args) {
         let currentState = await client.db.get(`${message.guild.id}-dj`);
         const role = currentState.role;
         if (!args.length) {
             const currentRole = message.guild.roles.cache.get(role).toString() || 'not set';
             const embed = new MessageEmbed()
                 .setAuthor('DJ Role', message.guild.iconURL())
-                .setDescription('The DJ role for this server is ' + currentRole)
+                .setDescription(`The DJ role for this server is ${currentRole}`)
                 .setFooter(client.config.defaultFooter)
                 .setColor(client.config.defaultColor);
             return message.channel.send(embed);
@@ -28,7 +28,7 @@ module.exports = {
         await client.db.set(`${message.guild.id}-dj`, currentState);
         const embed = new MessageEmbed()
             .setAuthor('DJ Role', message.guild.iconURL())
-            .setDescription('The DJ role was set to ' + newRole.toString())
+            .setDescription(`The DJ role was set to ${newRole.toString()}`)
             .setFooter(client.config.defaultFooter)
             .setColor(client.config.defaultColor);
         return message.channel.send(embed);

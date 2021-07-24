@@ -18,7 +18,6 @@ module.exports = {
             props.category = command.category;
             client.commands.set(command.name, props);
             message.reply(`reloaded **${command.name}**.`);
-            return;
         }
     }
 };

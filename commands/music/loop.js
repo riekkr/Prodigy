@@ -15,41 +15,41 @@ module.exports = {
         const loopType = args[0];
         let bool = args[1] || 'toggle';
         let type;
-        if (!args.length || loopType == 'song' || loopType == 'track' || loopType == 's' || loopType == 't') type = 'track';
-        else if (loopType == 'queue' || loopType == 'q') type = 'queue';
+        if (!args.length || loopType === 'song' || loopType === 'track' || loopType === 's' || loopType === 't') type = 'track';
+        else if (loopType === 'queue' || loopType === 'q') type = 'queue';
         else return message.reply('invalid arguments provided.');
 
-        if (type == 'queue') {
-            if (bool == 'toggle') {
-                if (player.queueRepeat == false) {
+        if (type === 'queue') {
+            if (bool === 'toggle') {
+                if (player.queueRepeat === false) {
                     bool = true;
                     player.setQueueRepeat(true);
                 } else {
                     bool = false;
                     player.setQueueRepeat(false);
                 }
-            } else if (bool == 'on' || bool == 'true' || bool == 't') {
+            } else if (bool === 'on' || bool === 'true' || bool === 't') {
                 bool = true;
                 player.setQueueRepeat(true);
-            } else if (bool == 'off' || bool == 'false' || bool == 'f') {
+            } else if (bool === 'off' || bool === 'false' || bool === 'f') {
                 bool = false;
                 player.setQueueRepeat(false);
             } else {
                 return message.reply('invalid boolean argument. Accepts `on/off/true/false/t/f`.');
             }
-        } else if (type == 'track') {
-            if (bool == 'toggle') {
-                if (player.trackRepeat == false) {
+        } else if (type === 'track') {
+            if (bool === 'toggle') {
+                if (player.trackRepeat === false) {
                     bool = true;
                     player.setTrackRepeat(true);
                 } else {
                     bool = false;
                     player.setTrackRepeat(false);
                 }
-            } else if (bool == 'on' || bool == 'true' || bool == 't') {
+            } else if (bool === 'on' || bool === 'true' || bool === 't') {
                 bool = true;
                 player.setTrackRepeat(true);
-            } else if (bool == 'off' || bool == 'false' || bool == 'f') {
+            } else if (bool === 'off' || bool === 'false' || bool === 'f') {
                 bool = false;
                 player.setTrackRepeat(false);
             } else {
@@ -57,7 +57,9 @@ module.exports = {
             }
         }
 
-        if (type == 'queue') return message.react('🔁');
-        else if (type == 'track') return message.react('🔂');
+        client.update(message.guild.id, true);
+
+        if (type === 'queue') return message.react('🔁');
+        else if (type === 'track') return message.react('🔂');
     }
 };

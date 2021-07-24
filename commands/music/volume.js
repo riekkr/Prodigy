@@ -16,7 +16,6 @@ module.exports = {
         if (!player.textChannel) player.textChannel = message.channel.id;
         if (args.length < 1) return message.channel.send(`**Current volume:** \`${player.volume}%\`.`);
         const newVolume = args[0].replace('%', '');
-        const oldVolume = player.volume;
         if (newVolume > 200 || newVolume < 1) return message.channel.send('**Invalid usage:** Volume can only be from **1%** to **200%**.');
         player.setVolume(newVolume);
         return message.react('✅');
