@@ -11,4 +11,3 @@ services:
             - 6969:6969
         volumes:
             - .:/usr/src/app
-            - /usr/src/app/node_modules

@@ -3,3 +3,10 @@ node_modules
 .vscode
 .idea
 assets/hidden/*
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
