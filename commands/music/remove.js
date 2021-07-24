@@ -51,7 +51,7 @@ module.exports = {
                 await msg.reactions.removeAll();
                 player.queue.remove(trackPosition);
                 await msg.edit(`Removed **${trackRemoved.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** from the queue.`);
-                client.update(message.guild.id, true);
+                client.update(message.guild.id);
             });
             noCollector.on('collect', async () => {
                 await msg.reactions.removeAll();

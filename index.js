@@ -183,8 +183,15 @@ async function update (guild, def) {
     let dura = prettyms(queue.current.duration, { colonNotation: true, secondsDecimalDigits: 0 });
     if (queue.current.isStream === true) dura = 'LIVE';
     let thumb = queue.current.displayThumbnail('maxresdefault');
-    const res = await fetch(queue.current.displayThumbnail('maxresdefault'));
-    if (res.status === 404) thumb = queue.current.displayThumbnail('hqdefault');
+    let thB = true;
+    if (queue.current.thumbnail === null) {
+        thumb = client.config.image;
+        thB = false;
+    }
+    if (thB === true) {
+        const res = await fetch(queue.current.displayThumbnail('maxresdefault'));
+        if (res.status === 404) thumb = queue.current.displayThumbnail('hqdefault');
+    }
     const embed = new Discord.MessageEmbed()
         .setAuthor(queue.current.title, queue.current.requester.avatarURL(), queue.current.uri)
         .setColor(client.config.defaultColor)

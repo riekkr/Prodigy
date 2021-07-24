@@ -17,11 +17,11 @@ module.exports = {
         if (player.paused === true) {
             message.reply('the player is already paused. Resuming.');
             player.pause(false);
-            client.update(message.guild.id, true);
+            client.update(message.guild.id);
         } else {
             let vc = message.guild.channels.cache.find(c => c.id === player.voiceChannel);
             player.pause(true);
-            client.update(message.guild.id, true);
+            client.update(message.guild.id);
             return message.channel.send(`Paused **${player.queue.current.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** in **${vc.name}**.`);
         }
     }

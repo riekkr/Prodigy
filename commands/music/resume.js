@@ -17,7 +17,7 @@ module.exports = {
         if (!player.textChannel) player.textChannel = message.channel.id;
         let vc = message.guild.channels.cache.find(c => c.id === player.voiceChannel);
         player.pause(false);
-        client.update(message.guild.id, true);
+        client.update(message.guild.id);
         return message.channel.send(`Resumed **${player.queue.current.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** in **${vc.name}**.`);
     }
 };

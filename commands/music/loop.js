@@ -57,7 +57,7 @@ module.exports = {
             }
         }
 
-        client.update(message.guild.id, true);
+        client.update(message.guild.id);
 
         if (type === 'queue') return message.react('🔁');
         else if (type === 'track') return message.react('🔂');
