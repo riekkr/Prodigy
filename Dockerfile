@@ -6,4 +6,4 @@ COPY package.json yarn.lock ./
 
 COPY . . 
 EXPOSE 6969:6969
-CMD [ "yarn", "node", ".", "-d" ]
+CMD [ "yarn", "node", "." ]
