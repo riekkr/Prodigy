@@ -10,6 +10,7 @@
     "defaultColor": "",
     "unknownCommandMessage": false,
     "owners": [],
+    "secOwners": [],
     "spotifyClientID": "",
     "spotifyClientSecret": "",
     "port": 6969,
@@ -18,5 +19,8 @@
     "status": "dnd",
     "activity": "prdg.tk | p!help",
     "ksoft": "",
-    "short": ""
+    "short": "",
+    "image": "",
+    "avatarURL": "",
+    "website": ""
 }
