@@ -43,6 +43,7 @@ if (process.argv.join(' ').includes('-d') || process.argv.join(' ').includes('--
     console.log(chalk.bgBlack(chalk.red('********************************************************')));
     client.debug = true;
 }
+client.pl = {};
 client.db = db;
 client.log = log;
 client.config = config;
@@ -52,6 +53,13 @@ client.commands = new Discord.Collection();
 client.snipes = new Discord.Collection();
 client.genshin = genshin;
 // client.buttons = require('discord-buttons')(client);
+const embed = new Discord.MessageEmbed()
+    .setAuthor('Nothing playing', client.user.avatarURL(), 'https://prdg.tk')
+    .setColor(client.config.defaultColor)
+    .setImage(client.config.defaultImage)
+    .setFooter(client.config.defaultFooter)
+    .setDescription('Prodigy - Welcome!\nTo play a track, type its name or URL in this channel.');
+client.pl.embed = embed;
 
 const manager = new Manager({
     nodes: nodes,
