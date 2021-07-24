@@ -1,6 +1,11 @@
 # Prodigy Discord Bot
 **Rewritten and faster than ever!**
 
+## v2
+**After weeks of testing, v2 has been released.**  
+The last v1 commit was [`fe9114bb6b1a374f4fd6ada2a1f65702c40eb3fd`](https://github.com/riekkr/Prodigy/commits/fe9114bb6b1a374f4fd6ada2a1f65702c40eb3fd).
+
+
 ### Features
 - Volume control
 - Filters (coming soon)
