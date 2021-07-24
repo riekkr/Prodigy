@@ -10,7 +10,7 @@ module.exports = {
     dj: false, // Whether DJ only mode being on will prevent the command from being run
 
     async execute(client, message, args) {
-        if (!args.length && message.member.previousCharacterQuery == undefined) return message.channel.send('**Invalid usage:** Command `constellations` requires exactly 1 string argument.');
+        if (!args.length && message.member.previousCharacterQuery === undefined) return message.channel.send('**Invalid usage:** Command `constellations` requires exactly 1 string argument.');
         let char = args.join(' ') || message.member.previousCharacterQuery;
         const cons = Object.values(client.genshin.constellation(char));
         cons.shift();
