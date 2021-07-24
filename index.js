@@ -36,7 +36,7 @@ const client = new Discord.Client();
 const db = new Keyv(config.mongoURL, { namespace: 'default' });
 db.on('error', err => log(2, `Connection error: ${err}`));
 client.debug = false;
-if (process.argv.join(' ').includes('-d') || process.argv.join(' ').includes('--debug')) {
+if (process.argv.join(' ').includes('-d') || process.argv.join(' ').includes('--debug') || process.env.DEBUG === 'true') {
     console.log(chalk.bgBlack(chalk.red('*********************** WARNING! ***********************')));
     console.log(chalk.bgBlack(chalk.red('*           Prodigy is running in debug mode           *')));
     console.log(chalk.bgBlack(chalk.red('*    It is dangerous to run in debug mode normally.    *')));
