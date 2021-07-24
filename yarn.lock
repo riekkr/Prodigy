@@ -1609,7 +1609,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"genshin-db@npm:^3.7.4":
+"genshin-db@npm:^3.8.1":
   version: 3.8.1
   resolution: "genshin-db@npm:3.8.1"
   dependencies:
@@ -2754,7 +2754,7 @@ __metadata:
     erela.js-spotify: ^1.2.0
     eslint: ^7.30.0
     express: ^5.0.0-alpha.8
-    genshin-db: ^3.7.4
+    genshin-db: ^3.8.1
     genshin-kit: ^2.2.0
     got: ^11.8.2
     keyv: ^4.0.3

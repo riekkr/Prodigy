@@ -32,7 +32,7 @@
     "erela.js-facebook": "^1.0.4",
     "erela.js-spotify": "^1.2.0",
     "express": "^5.0.0-alpha.8",
-    "genshin-db": "^3.7.4",
+    "genshin-db": "^3.8.1",
     "genshin-kit": "^2.2.0",
     "got": "^11.8.2",
     "keyv": "^4.0.3",
