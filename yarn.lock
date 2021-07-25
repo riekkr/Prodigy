@@ -871,6 +871,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"discord.js-rate-limiter@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "discord.js-rate-limiter@npm:1.1.0"
+  dependencies:
+    limiter: 1.1.5
+  peerDependencies:
+    discord.js: ">=12.0.0"
+  checksum: bca7652f4509bc1a68196ac727476e81539aa0126ec273490463427760736328451c441375e1d1217f2047661431fb0c817498a99047030a4d60b0fac829fa79
+  languageName: node
+  linkType: hard
+
 "discord.js@npm:^12.5.3":
   version: 12.5.3
   resolution: "discord.js@npm:12.5.3"
@@ -1856,6 +1867,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"limiter@npm:1.1.5":
+  version: 1.1.5
+  resolution: "limiter@npm:1.1.5"
+  checksum: 83f7aa20fefdcfc72a76f034ce804ad8d0063cd94c3ebd9c9b08157051b3f76b099cb953ccd09a0117ed06b876773c6b3876afd88be8d11ced252a8a85603786
+  languageName: node
+  linkType: hard
+
 "lodash.clonedeep@npm:^4.5.0":
   version: 4.5.0
   resolution: "lodash.clonedeep@npm:4.5.0"
@@ -2439,6 +2457,7 @@ __metadata:
     common-tags: ^2.0.0-alpha.1
     discord-buttons: ^4.0.0
     discord.js: ^12.5.3
+    discord.js-rate-limiter: ^1.1.0
     dotenv: ^10.0.0
     erela.js: ^2.3.3
     erela.js-deezer: ^1.0.5

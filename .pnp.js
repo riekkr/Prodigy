@@ -44,6 +44,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["common-tags", "npm:2.0.0-alpha.1"],
             ["discord-buttons", "npm:4.0.0"],
             ["discord.js", "npm:12.5.3"],
+            ["discord.js-rate-limiter", "virtual:f850665d537b6d83658e04ac441e8e3f423e65883b7302486189ca21adaee6015046c3feea951771d38fed7eb929da4b78bd383b2dd0ee91bfbdebbfe5cddd9c#npm:1.1.0"],
             ["dotenv", "npm:10.0.0"],
             ["erela.js", "npm:2.3.3"],
             ["erela.js-deezer", "npm:1.0.5"],
@@ -1112,6 +1113,29 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["setimmediate", "npm:1.0.5"],
             ["tweetnacl", "npm:1.0.3"],
             ["ws", "virtual:cf56da7683803aa9264f916bdb4d485008dca0988e9e122f3753d126f3aa20bc7f9e07a02e7a15b6e115d384905f8a0966a806be17cc75f4d753d1d69bf33907#npm:7.5.3"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["discord.js-rate-limiter", [
+        ["npm:1.1.0", {
+          "packageLocation": "./.yarn/cache/discord.js-rate-limiter-npm-1.1.0-65b3d3d109-bca7652f45.zip/node_modules/discord.js-rate-limiter/",
+          "packageDependencies": [
+            ["discord.js-rate-limiter", "npm:1.1.0"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:f850665d537b6d83658e04ac441e8e3f423e65883b7302486189ca21adaee6015046c3feea951771d38fed7eb929da4b78bd383b2dd0ee91bfbdebbfe5cddd9c#npm:1.1.0", {
+          "packageLocation": "./.yarn/$$virtual/discord.js-rate-limiter-virtual-e85436773f/0/cache/discord.js-rate-limiter-npm-1.1.0-65b3d3d109-bca7652f45.zip/node_modules/discord.js-rate-limiter/",
+          "packageDependencies": [
+            ["discord.js-rate-limiter", "virtual:f850665d537b6d83658e04ac441e8e3f423e65883b7302486189ca21adaee6015046c3feea951771d38fed7eb929da4b78bd383b2dd0ee91bfbdebbfe5cddd9c#npm:1.1.0"],
+            ["@types/discord.js", null],
+            ["discord.js", "npm:12.5.3"],
+            ["limiter", "npm:1.1.5"]
+          ],
+          "packagePeers": [
+            "@types/discord.js",
+            "discord.js"
           ],
           "linkType": "HARD",
         }]
@@ -2226,6 +2250,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["limiter", [
+        ["npm:1.1.5", {
+          "packageLocation": "./.yarn/cache/limiter-npm-1.1.5-aa11b1b2de-83f7aa20fe.zip/node_modules/limiter/",
+          "packageDependencies": [
+            ["limiter", "npm:1.1.5"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["lodash", [
         ["npm:4.17.21", {
           "packageLocation": "./.yarn/cache/lodash-npm-4.17.21-6382451519-4983720b9a.zip/node_modules/lodash/",
@@ -2899,6 +2932,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["common-tags", "npm:2.0.0-alpha.1"],
             ["discord-buttons", "npm:4.0.0"],
             ["discord.js", "npm:12.5.3"],
+            ["discord.js-rate-limiter", "virtual:f850665d537b6d83658e04ac441e8e3f423e65883b7302486189ca21adaee6015046c3feea951771d38fed7eb929da4b78bd383b2dd0ee91bfbdebbfe5cddd9c#npm:1.1.0"],
             ["dotenv", "npm:10.0.0"],
             ["erela.js", "npm:2.3.3"],
             ["erela.js-deezer", "npm:1.0.5"],
