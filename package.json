@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "yarn node .",
+    "debug": "yarn node . -d",
+    "log": "yarn node . -d > log.txt"
   },
   "repository": {
     "type": "git",
