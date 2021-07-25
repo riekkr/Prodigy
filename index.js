@@ -11,6 +11,7 @@ const express = require('express');
 const genshin = require('genshin-db');
 const prettyms = require('pretty-ms');
 const fetch = require('node-fetch');
+const { RateLimiter } = require('discord.js-rate-limiter');
 
 const server = express();
 server.listen(config.port, () => log(1, `Listening on port ${config.port}`));
@@ -45,6 +46,7 @@ if (process.argv.join(' ').includes('-d') || process.argv.join(' ').includes('--
     console.log(chalk.bgBlack(chalk.red('********************************************************')));
     client.debug = true;
 }
+client.rateLimiter = new RateLimiter(1, 2000);
 client.update = update;
 client.db = db;
 client.log = log;

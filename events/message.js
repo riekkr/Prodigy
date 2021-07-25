@@ -20,7 +20,9 @@ module.exports = async (client, message) => {
         prefix = guildPrefix;
     }
     if (!message.content.startsWith(prefix) && pl.includes(message.channel.id)) {
-        if (config.blacklist.includes(message.author.id)) return message.reply('you are blacklisted from using commands.');
+        if (config.blacklist.includes(message.author.id)) return;
+        const limited = client.rateLimiter.take(message.author.id);
+        if (limited) return message.channel.send('⚠️ - **You are being rate limited.**').then(msg => msg.delete({ timeout: 5000 }));
         const specArgs = message.content.split(/ +/);
         const commandName = specArgs.shift().toLowerCase();
         if (client.commands.filter(c => c.category === 'music').get(commandName) || client.commands.filter(c => c.category === 'music').find(cmd => cmd.aliases && cmd.aliases.includes(commandName))) {
@@ -110,8 +112,9 @@ module.exports = async (client, message) => {
         // console.log(dj.role);
         return;
     }
-    if (config.blacklist.includes(message.author.id)) return message.reply('you are blacklisted from using commands.');
-
+    if (config.blacklist.includes(message.author.id)) return message.reply('you are banned from using commands.');
+    const limited = client.rateLimiter.take(message.author.id);
+    if (limited) return message.channel.send('⚠️ - **You are being rate limited.**').then(msg => msg.delete({ timeout: 10000 }));
     try {
         const player = client.manager.get(message.guild.id);
         command.execute(client, message, args, prefix, player);
