@@ -22,6 +22,7 @@ const Deezer = require('erela.js-deezer');
 const Facebook = require('erela.js-facebook');
 
 console.clear();
+console.log('');
 
 const nodes = [
     {
