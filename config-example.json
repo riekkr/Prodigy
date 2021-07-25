@@ -21,5 +21,7 @@
     "short": "",
     "image": "",
     "avatarURL": "",
-    "website": ""
+    "website": "",
+    "blacklist": [],
+    "commandCooldown": 1500
 }
