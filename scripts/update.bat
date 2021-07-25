@@ -1,0 +1,3 @@
+@echo off
+echo Updating Prodigy...
+git pull origin master
