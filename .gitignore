@@ -10,3 +10,4 @@ assets/hidden/*
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+.env
