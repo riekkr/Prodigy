@@ -33,9 +33,18 @@ const nodes = [
         clientName: 'ProdigyV2'
     }
 ];
+let namespace;
+let dev;
+if (process.env.ENVIRONMENT === 'development') {
+    namespace = 'dev';
+    dev = true;
+} else {
+    namespace = 'default';
+    dev = false;
+}
 
 const client = new Discord.Client();
-const db = new Keyv(config.mongoURL, { namespace: 'default' });
+const db = new Keyv(config.mongoURL, { namespace });
 db.on('error', err => log(2, `Connection error: ${err}`));
 client.debug = false;
 if (process.argv.join(' ').includes('-d') || process.argv.join(' ').includes('--debug') || process.env.DEBUG === 'true') {
@@ -259,4 +268,4 @@ function log (type, details) {
     }
 }
 
-client.login(config.token);
+client.login(dev ? config.canaryToken : config.token);
