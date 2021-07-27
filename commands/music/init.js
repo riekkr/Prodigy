@@ -6,7 +6,7 @@ module.exports = {
     aliases: ['in'], // An array of alternate commands that trigger the command
     usage: '{p}init', // How the command is invocated, "{p}" is replaced by the prefix in the server
     ownerOnly: false, // Restricts the command to the bot owner
-    requiredPermissions: [], // An array of permissions the user needs to run the command
+    requiredPermissions: ['MANAGE_CHANNELS'], // An array of permissions the user needs to run the command
     dj: false, // Whether DJ only mode being on will prevent the command from being run
 
     async execute(client, message) {
