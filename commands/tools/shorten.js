@@ -28,7 +28,7 @@ module.exports = {
             responseType: 'json'
         };
         got(options).catch(err => {
-            if (err.message.includes('409')) {
+            if (err.message.includes('400')) {
                 return message.reply('short URL already exists. Try again with a different shortened name.');
             }
         }).then(res => {
