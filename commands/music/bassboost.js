@@ -12,7 +12,9 @@ module.exports = {
             none: 0.0,
             low: 0.10,
             medium: 0.15,
-            high: 0.25
+            high: 0.25,
+            extra: 0.50,
+            dumb: 1.00
         };
         if (!player) return message.reply('there is nothing playing.');
         const { channel } = message.member.voice;
@@ -27,6 +29,6 @@ module.exports = {
                 ({ band: i, gain: levels[level] })
             );
         player.setEQ(...bands);
-        return message.reply(`set bass boost level to ${level}.`);
+        return message.reply(`setting bass boost level to ${level}.`);
     }
 };
