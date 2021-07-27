@@ -10,6 +10,7 @@ module.exports = {
     ownerOnly: false, // Restricts the command to the bot owner
     requiredPermissions: [], // An array of permissions the user needs to run the command
     dj: false, // Whether DJ only mode being on will prevent the command from being run
+    sameVC: false, // Requires the user to be in the same voice channel as the bot to run the command (Not done)
 
     async execute(client, message, args, prefix, player) {
     }
