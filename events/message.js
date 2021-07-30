@@ -21,7 +21,7 @@ module.exports = async (client, message) => {
     }
     if (!message.content.startsWith(prefix) && pl.includes(message.channel.id)) {
         if (config.blacklist.includes(message.author.id)) return;
-        const limited = client.rateLimiter.take(message.author.id);
+        const limited = client.rateLimiter.take(`${message.author.id}-new`);
         if (limited) return message.channel.send('⚠️ - **You are being rate limited.**').then(msg => msg.delete({ timeout: 5000 }));
         const specArgs = message.content.split(/ +/);
         const commandName = specArgs.shift().toLowerCase();
@@ -113,11 +113,11 @@ module.exports = async (client, message) => {
         return;
     }
     if (config.blacklist.includes(message.author.id)) return message.reply('you are banned from using commands.');
-    const limited = client.rateLimiter.take(message.author.id);
-    if (limited) return message.channel.send('⚠️ - **You are being rate limited.**').then(msg => msg.delete({ timeout: 10000 }));
+    const limited = client.rateLimiter.take(`${message.author.id}-${commandName}`);
+    if (limited) return message.channel.send(`⚠️ - Failed to run command ${commandName}: **You are being rate limited.**`).then(msg => msg.delete({ timeout: 10000 }));
     try {
         const player = client.manager.get(message.guild.id);
-        command.execute(client, message, args, prefix, player);
+        await command.execute(client, message, args, prefix, player);
         client.log(0, `${message.author.tag} ran command ${command.name} in ${message.guild.name}`);
     } catch (err) {
         client.log(2, err);
