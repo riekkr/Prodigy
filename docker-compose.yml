@@ -12,3 +12,16 @@ services:
             - 6969:6969
         volumes:
             - .:/usr/src/app
+    prodigy-canary:
+        build: .
+        container_name: prodigyc
+        restart: on-failure
+        tty: true
+        environment:
+            - TOKEN=notyet
+            - DEBUG=true
+            - ENVIRONMENT=development
+        ports:
+            - 6970:6969
+        volumes:
+            - .:/usr/src/canary
