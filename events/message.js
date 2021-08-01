@@ -114,7 +114,10 @@ module.exports = async (client, message) => {
     }
     if (config.blacklist.includes(message.author.id)) return message.reply('you are banned from using commands.');
     const limited = client.rateLimiter.take(`${message.author.id}-${commandName}`);
-    if (limited) return message.channel.send(`⚠️ - Failed to run command ${commandName}: **You are being rate limited.**`).then(msg => msg.delete({ timeout: 10000 }));
+    if (limited) return message.channel.send(`⚠️ - Failed to run command ${commandName}: **You are being rate limited.**`).then(msg => {
+        msg.delete({ timeout: 10000 });
+        message.delete({ timeout: 10000 });
+    });
     try {
         const player = client.manager.get(message.guild.id);
         await command.execute(client, message, args, prefix, player);
