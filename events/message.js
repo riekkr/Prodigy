@@ -22,7 +22,10 @@ module.exports = async (client, message) => {
     if (!message.content.startsWith(prefix) && pl.includes(message.channel.id)) {
         if (config.blacklist.includes(message.author.id)) return;
         const limited = client.rateLimiter.take(`${message.author.id}-new`);
-        if (limited) return message.channel.send('⚠️ - **You are being rate limited.**').then(msg => msg.delete({ timeout: 5000 }));
+        if (limited) return message.channel.send('⚠️ - **You are being rate limited.**').then(msg => {
+            msg.delete({ timeout: 5000 });
+            message.delete({ timeout: 5000 });
+        });
         const specArgs = message.content.split(/ +/);
         const commandName = specArgs.shift().toLowerCase();
         if (client.commands.filter(c => c.category === 'music').get(commandName) || client.commands.filter(c => c.category === 'music').find(cmd => cmd.aliases && cmd.aliases.includes(commandName))) {
