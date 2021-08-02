@@ -70,10 +70,11 @@ client.snipes = new Discord.Collection();
 client.genshin = genshin;
 // client.buttons = require('discord-buttons')(client);
 
-AutoPoster(config.topgg, client)
-    .on('posted', async () => log(0, `Posted stats to top.gg - ${client.guilds.cache.size} servers with ${client.users.cache.size} users`));
+if (!client.debug) {
+    AutoPoster(config.topgg, client)
+        .on('posted', async () => log(0, `Posted stats to top.gg - ${client.guilds.cache.size} servers with ${client.users.cache.size} users`));
 // Will add webhooks at a later date.
-
+}
 const manager = new Manager({
     nodes,
     plugins: [
