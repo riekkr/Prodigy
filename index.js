@@ -12,6 +12,8 @@ const genshin = require('genshin-db');
 const prettyms = require('pretty-ms');
 const fetch = require('node-fetch');
 const { RateLimiter } = require('discord.js-rate-limiter');
+// const Topgg = require('@top-gg/sdk'); // Support webhooks next time
+const { AutoPoster } = require('topgg-autoposter');
 
 const server = express();
 server.listen(config.port, () => log(1, `Listening on port ${config.port}`));
@@ -67,6 +69,9 @@ client.commands = new Discord.Collection();
 client.snipes = new Discord.Collection();
 client.genshin = genshin;
 // client.buttons = require('discord-buttons')(client);
+
+AutoPoster(config.topgg, client)
+    .on('posted', async () => log(0, `Posted stats to top.gg - ${client.guilds.cache.size} servers with ${client.users.cache.size} users`));
 
 const manager = new Manager({
     nodes,

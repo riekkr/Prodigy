@@ -38,6 +38,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["@keyv/mongo", "npm:1.1.0"],
+            ["@top-gg/sdk", "npm:3.1.2"],
             ["bufferutil", "npm:4.0.3"],
             ["chalk", "npm:4.1.1"],
             ["child_process", "npm:1.0.2"],
@@ -61,6 +62,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["node-fetch", "npm:2.6.1"],
             ["pretty-ms", "npm:7.0.1"],
             ["socket.io", "npm:4.1.3"],
+            ["topgg-autoposter", "npm:2.0.0"],
             ["utf-8-validate", "npm:5.0.5"]
           ],
           "linkType": "SOFT",
@@ -157,6 +159,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@jpbberry/typed-emitter", [
+        ["npm:1.0.1", {
+          "packageLocation": "./.yarn/cache/@jpbberry-typed-emitter-npm-1.0.1-b60561ea5b-288c13bb63.zip/node_modules/@jpbberry/typed-emitter/",
+          "packageDependencies": [
+            ["@jpbberry/typed-emitter", "npm:1.0.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["@keyv/mongo", [
         ["npm:1.1.0", {
           "packageLocation": "./.yarn/cache/@keyv-mongo-npm-1.1.0-03f5d4b4a2-a21a1e2b10.zip/node_modules/@keyv/mongo/",
@@ -203,6 +214,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@tootallnate-once-npm-1.1.2-0517220057-d030f3fb14.zip/node_modules/@tootallnate/once/",
           "packageDependencies": [
             ["@tootallnate/once", "npm:1.1.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@top-gg/sdk", [
+        ["npm:3.1.2", {
+          "packageLocation": "./.yarn/cache/@top-gg-sdk-npm-3.1.2-48f4bea14f-735c25630c.zip/node_modules/@top-gg/sdk/",
+          "packageDependencies": [
+            ["@top-gg/sdk", "npm:3.1.2"],
+            ["node-fetch", "npm:2.6.1"],
+            ["raw-body", "npm:2.4.1"]
           ],
           "linkType": "HARD",
         }]
@@ -2926,6 +2948,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["prodigy", "workspace:."],
             ["@keyv/mongo", "npm:1.1.0"],
+            ["@top-gg/sdk", "npm:3.1.2"],
             ["bufferutil", "npm:4.0.3"],
             ["chalk", "npm:4.1.1"],
             ["child_process", "npm:1.0.2"],
@@ -2949,6 +2972,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["node-fetch", "npm:2.6.1"],
             ["pretty-ms", "npm:7.0.1"],
             ["socket.io", "npm:4.1.3"],
+            ["topgg-autoposter", "npm:2.0.0"],
             ["utf-8-validate", "npm:5.0.5"]
           ],
           "linkType": "SOFT",
@@ -3059,6 +3083,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["raw-body", "npm:2.4.0"],
             ["bytes", "npm:3.1.0"],
             ["http-errors", "npm:1.7.2"],
+            ["iconv-lite", "npm:0.4.24"],
+            ["unpipe", "npm:1.0.0"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:2.4.1", {
+          "packageLocation": "./.yarn/cache/raw-body-npm-2.4.1-e6e30ccf94-dc56e010d2.zip/node_modules/raw-body/",
+          "packageDependencies": [
+            ["raw-body", "npm:2.4.1"],
+            ["bytes", "npm:3.1.0"],
+            ["http-errors", "npm:1.7.3"],
             ["iconv-lite", "npm:0.4.24"],
             ["unpipe", "npm:1.0.0"]
           ],
@@ -3605,6 +3640,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["topgg-autoposter", [
+        ["npm:2.0.0", {
+          "packageLocation": "./.yarn/cache/topgg-autoposter-npm-2.0.0-88df8fb111-77c3fb66d9.zip/node_modules/topgg-autoposter/",
+          "packageDependencies": [
+            ["topgg-autoposter", "npm:2.0.0"],
+            ["@jpbberry/typed-emitter", "npm:1.0.1"],
+            ["@top-gg/sdk", "npm:3.1.2"],
+            ["typescript", "patch:typescript@npm%3A4.3.5#builtin<compat/typescript>::version=4.3.5&hash=ddfc1b"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["tslib", [
         ["npm:2.3.0", {
           "packageLocation": "./.yarn/cache/tslib-npm-2.3.0-277e75e108-7b4fc9feff.zip/node_modules/tslib/",
@@ -3649,6 +3696,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["type-is", "npm:1.6.18"],
             ["media-typer", "npm:0.3.0"],
             ["mime-types", "npm:2.1.31"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["typescript", [
+        ["patch:typescript@npm%3A4.3.5#builtin<compat/typescript>::version=4.3.5&hash=ddfc1b", {
+          "packageLocation": "./.yarn/cache/typescript-patch-aa8fabd973-7f0b8343f7.zip/node_modules/typescript/",
+          "packageDependencies": [
+            ["typescript", "patch:typescript@npm%3A4.3.5#builtin<compat/typescript>::version=4.3.5&hash=ddfc1b"]
           ],
           "linkType": "HARD",
         }]
