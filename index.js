@@ -50,12 +50,12 @@ const db = new Keyv(config.mongoURL, { namespace });
 db.on('error', err => log(2, `Connection error: ${err}`));
 client.debug = false;
 if (process.argv.join(' ').includes('-d') || process.argv.join(' ').includes('--debug') || process.env.DEBUG === 'true') {
-    console.log(chalk.bgBlack(chalk.red('*********************** WARNING! ***********************')));
-    console.log(chalk.bgBlack(chalk.red('*           Prodigy is running in debug mode           *')));
-    console.log(chalk.bgBlack(chalk.red('*    It is dangerous to run in debug mode normally.    *')));
-    console.log(chalk.bgBlack(chalk.red('* Remove the --debug / -d flag to turn off debug mode. *')));
-    console.log(chalk.bgBlack(chalk.red('*  You may encounter security and performance issues.  *')));
-    console.log(chalk.bgBlack(chalk.red('********************************************************')));
+    console.log(chalk.red('*********************** WARNING! ***********************'));
+    console.log(chalk.red('*           Prodigy is running in debug mode           *'));
+    console.log(chalk.red('*    It is dangerous to run in debug mode normally.    *'));
+    console.log(chalk.red('* Remove the --debug / -d flag to turn off debug mode. *'));
+    console.log(chalk.red('*  You may encounter security and performance issues.  *'));
+    console.log(chalk.red('********************************************************'));
     client.debug = true;
 }
 client.rateLimiter = new RateLimiter(1, 2000);
@@ -261,16 +261,16 @@ function log (type, details) {
     }
     const format = `${time.getDate()}/${time.getMonth() + 1}/${time.getFullYear()} ${hours}:${minutes}:${seconds}`;
     if (type === 'debug' || type === 'd' || type === 0) {
-        if (client.debug === true) console.log(chalk.bold(chalk.bgBlack(chalk.green(`${format} [DEBUG] `))) + details);
+        if (client.debug === true) console.log(chalk.bold(chalk.green(`${format} [DEBUG] `)) + details);
     }
     if (type === 'info' || type === 'i' || type === 1) {
-        console.log(chalk.bold(chalk.bgBlack(chalk.magenta(`${format} [INFO] `))) + details);
+        console.log(chalk.bold(chalk.magenta(`${format} [INFO] `)) + details);
     }
     if (type === 'error' || type === 'err' || type === 'e' || type === 2) {
         console.log(chalk.bold(chalk.bgBlack(chalk.red(`${format} [ERROR] `))) + details);
     }
     if (type === 'warn' || type === 'w' || type === 3) {
-        console.log(chalk.bold(chalk.bgBlack(chalk.yellow(`${format} [ERROR] `))) + details);
+        console.log(chalk.bold(chalk.yellow(`${format} [ERROR] `)) + details);
     }
 }
 
