@@ -72,6 +72,7 @@ client.genshin = genshin;
 
 AutoPoster(config.topgg, client)
     .on('posted', async () => log(0, `Posted stats to top.gg - ${client.guilds.cache.size} servers with ${client.users.cache.size} users`));
+// Will add webhooks at a later date.
 
 const manager = new Manager({
     nodes,
