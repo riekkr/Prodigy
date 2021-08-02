@@ -1,2 +1,2 @@
 echo "> Updating Prodigy..."
-git pull origin master
+git pull origin master --ff-only
