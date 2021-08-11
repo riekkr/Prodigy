@@ -1,7 +1,7 @@
 < Prodigy - Changelog >
 
 Updated: 11/8/2021
-         11:25pm (GMT+8)
+         12:25am (GMT+8)
 
 latest
 --------------------------------------------------
@@ -9,6 +9,8 @@ major changes:
 + command blacklist
 + rate limiting for all commands (1.5s)
 + update script for easier self-hosting
++ update to discord.js v13 and fix all breaking changes
++ added this changelog command
 
 bugfixes:
 + added extra log line
@@ -29,4 +31,3 @@ packages:
 
 planned updates:
 + webhooks for top.gg
-+ discord.js v13 update
