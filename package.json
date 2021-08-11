@@ -1,6 +1,6 @@
 {
   "name": "prodigy",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Prodigy is a Discord bot with many features",
   "main": "index.js",
   "scripts": {
@@ -23,19 +23,19 @@
     "@keyv/mongo": "^1.1.0",
     "@top-gg/sdk": "^3.1.2",
     "bufferutil": "^4.0.3",
-    "chalk": "^4.1.1",
+    "chalk": "^4.1.2",
     "child_process": "^1.0.2",
     "common-tags": "^2.0.0-alpha.1",
     "discord-buttons": "^4.0.0",
-    "discord.js": "^12.5.3",
-    "discord.js-rate-limiter": "^1.1.0",
+    "discord.js": "^13.0.1",
+    "discord.js-rate-limiter": "^1.2.0",
     "dotenv": "^10.0.0",
     "erela.js": "^2.3.3",
-    "erela.js-deezer": "^1.0.5",
+    "erela.js-deezer": "^1.0.7",
     "erela.js-facebook": "^1.0.4",
     "erela.js-spotify": "^1.2.0",
     "express": "^5.0.0-alpha.8",
-    "genshin-db": "^3.8.1",
+    "genshin-db": "^3.9.4",
     "got": "^11.8.2",
     "keyv": "^4.0.3",
     "libsodium-wrappers": "^0.7.9",
@@ -48,6 +48,6 @@
     "utf-8-validate": "^5.0.5"
   },
   "devDependencies": {
-    "eslint": "^7.30.0"
+    "eslint": "^7.32.0"
   }
 }
