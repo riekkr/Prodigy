@@ -20,10 +20,10 @@ module.exports = {
                 .setDescription(`The DJ role for this server is ${currentRole}`)
                 .setFooter(client.config.defaultFooter)
                 .setColor(client.config.defaultColor);
-            return message.channel.send(embed);
+            return message.channel.send({ embeds: [embed] });
         }
         let newRole = message.mentions.roles.first() || message.guild.roles.cache.find(r => r.id === args[0]) || message.guild.roles.cache.find(r => r.name.toLowerCase() === args.join(' ').toLowerCase());
-        if (!newRole) return message.reply('you provided an invalid role.');
+        if (!newRole) return message.reply('You provided an invalid role.');
         currentState.role = `${newRole.id}`;
         await client.db.set(`${message.guild.id}-dj`, currentState);
         const embed = new MessageEmbed()
@@ -31,6 +31,6 @@ module.exports = {
             .setDescription(`The DJ role was set to ${newRole.toString()}`)
             .setFooter(client.config.defaultFooter)
             .setColor(client.config.defaultColor);
-        return message.channel.send(embed);
+        return message.channel.send({ embeds: [embed] });
     }
 };

@@ -17,7 +17,7 @@ module.exports = {
             .setImage(client.config.image)
             .setFooter(client.config.defaultFooter)
             .setDescription('**Prodigy - Welcome!**\nTo play a track, type its name or URL in this channel.');
-        const msg = await message.channel.send(embed);
+        const msg = await message.channel.send({ embeds: [embed] });
         await msg.pin({ reason: 'Automated by Prodigy' });
         const obj = {
             channelID: message.channel.id,

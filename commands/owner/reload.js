@@ -9,15 +9,15 @@ module.exports = {
 
     async execute(client, message, args) {
         if (!args.length) return message.channel.send('**Invalid usage:** Command `reload` requires exactly 1 string argument.');
-        else if (!client.commands.has(args[0]) && !client.commands.find(c => c.aliases.includes(args[0]))) return message.reply('that\'s not a valid command.');
+        else if (!client.commands.has(args[0]) && !client.commands.find(c => c.aliases.includes(args[0]))) return message.reply('That\'s not a valid command.');
         else {
             const command = client.commands.get(args[0]) || client.commands.find(c => c.aliases.includes(args[0]));
             delete require.cache[require.resolve(`../${command.category}/${command.name}.js`)];
-            client.commands.delete(command.name);
+            await client.commands.delete(command.name);
             const props = require(`../${command.category}/${command.name}.js`);
             props.category = command.category;
-            client.commands.set(command.name, props);
-            message.reply(`reloaded **${command.name}**.`);
+            await client.commands.set(command.name, props);
+            message.reply(`Reloaded **${command.name}**.`);
         }
     }
 };

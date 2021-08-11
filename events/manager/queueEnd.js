@@ -13,7 +13,7 @@ module.exports = async (client, player) => {
         .setDescription('The queue has ended.')
         .setFooter(client.config.defaultFooter)
         .setColor(client.config.defaultColor);
-    const msg = await channel.send(embed);
+    const msg = await channel.send({ embeds: [embed] });
     msg.delete({ timeout: 5000 });
     player.destroy();
 };

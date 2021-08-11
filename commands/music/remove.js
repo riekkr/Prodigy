@@ -8,8 +8,8 @@ module.exports = {
     dj: true, // Whether DJ only mode being on will prevent the command from being run
 
     async execute(client, message, args, prefix, player) {
-        if (!player) return message.reply('there is nothing playing in this server.');
-        if (!player.queue.current) return message.reply('there is nothing playing.');
+        if (!player) return message.reply('There is nothing playing in this server.');
+        if (!player.queue.current) return message.reply('There is nothing playing.');
         if (isNaN(args[0])) return message.channel.send('**Invalid usage:** Command `remove` requires exactly 1 or 2 integer arguments.');
         if (!player.textChannel) player.textChannel = message.channel.id;
         if (args.length > 1) {
@@ -20,13 +20,13 @@ module.exports = {
             let q = [...player.queue];
             const numToRm = args[1] - startPos;
             const removedTracks = q.splice(startPos, numToRm);
-            const msg = await message.reply(`**remove these tracks from the queue?**\n${removedTracks.map(t => `\`${t.title}\``).join('\n')}`);
+            const msg = await message.reply(`**Remove these tracks from the queue?**\n${removedTracks.map(t => `\`${t.title}\``).join('\n')}`);
             await msg.react('❌');
             await msg.react('✅');
             const yesFilter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
             const noFilter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
-            const yesCollector = msg.createReactionCollector(yesFilter, { time: 5 * 60 * 1000 });
-            const noCollector = msg.createReactionCollector(noFilter, { time: 5 * 60 * 1000 });
+            const yesCollector = msg.createReactionCollector({ filter: yesFilter, time: 5 * 60 * 1000 });
+            const noCollector = msg.createReactionCollector({ filter: noFilter, time: 5 * 60 * 1000 });
             yesCollector.on('collect', async () => {
                 await msg.reactions.removeAll();
                 player.queue.remove(startPos, endPos + 1);
@@ -40,13 +40,13 @@ module.exports = {
             if (args[0] > player.queue.length) return message.channel.send(`**Invalid usage:** Command \`remove\` has to have an argument be above 1 and below ${player.queue.length}.`);
             const trackPosition = args[0] - 1;
             const trackRemoved = player.queue[trackPosition];
-            const msg = await message.reply(`remove **${trackRemoved.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** from the queue?`);
+            const msg = await message.reply(`Remove **${trackRemoved.title.replace('*', '\\*').replace('_', '\\_').replace('`', '\\`').replace('>', '\\>').replace('~', '\\~')}** from the queue?`);
             await msg.react('❌');
             await msg.react('✅');
             const yesFilter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
             const noFilter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
-            const yesCollector = msg.createReactionCollector(yesFilter, { time: 5 * 60 * 1000 });
-            const noCollector = msg.createReactionCollector(noFilter, { time: 5 * 60 * 1000 });
+            const yesCollector = msg.createReactionCollector({ filter: yesFilter, time: 5 * 60 * 1000 });
+            const noCollector = msg.createReactionCollector({ filter: noFilter, time: 5 * 60 * 1000 });
             yesCollector.on('collect', async () => {
                 await msg.reactions.removeAll();
                 player.queue.remove(trackPosition);

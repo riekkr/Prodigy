@@ -11,8 +11,8 @@ module.exports = {
     dj: false, // Whether DJ only mode being on will prevent the command from being run
 
     async execute(client, message, args, prefix, player) {
-        if (!player) return message.reply('there is nothing playing in this server.');
-        if (!player.queue.current) return message.reply('there is nothing playing.');
+        if (!player) return message.reply('There is nothing playing in this server.');
+        if (!player.queue.current) return message.reply('There is nothing playing.');
         let currentDuration = prettyms(player.queue.current.duration, { colonNotation: true, secondsDecimalDigits: 0 });
         if (player.queue.current.isStream === true) currentDuration = 'LIVE';
         if (player.queue.length < 1) {
@@ -46,9 +46,9 @@ module.exports = {
         const upFilter = (reaction, user) => reaction.emoji.name === '🔺' && user.id === message.author.id;
         const downFilter = (reaction, user) => reaction.emoji.name === '🔻' && user.id === message.author.id;
         const jumpFilter = (reaction, user) => reaction.emoji.name === '🔹' && user.id === message.author.id;
-        const collector1 = m.createReactionCollector(upFilter, { time: 5 * 60 * 1000 });
-        const collector2 = m.createReactionCollector(downFilter, { time: 5 * 60 * 1000 });
-        const collector3 = m.createReactionCollector(jumpFilter, { time: 5 * 60 * 1000 });
+        const collector1 = m.createReactionCollector({ filter: upFilter, time: 5 * 60 * 1000 });
+        const collector2 = m.createReactionCollector({ filter: downFilter, time: 5 * 60 * 1000 });
+        const collector3 = m.createReactionCollector({ filter: jumpFilter, time: 5 * 60 * 1000 });
         collector1.on('collect', async (reaction, user) => { // Up
             await reaction.users.remove(user.id);
             if (currentPage === 0) {
@@ -76,7 +76,7 @@ module.exports = {
             const collector = message.channel.createMessageCollector(filter, { limit: 1, time: 15000 });
             collector.on('collect', ms => {
                 if (Number(ms.content) < 1 || Number(ms.content) > chunked.length) {
-                    message.reply(`requires a number from 1 to ${chunked.length}.`).then(mx => mx.delete({ timeout: 10000 }));
+                    message.reply(`Requires a number from 1 to ${chunked.length}.`).then(mx => mx.delete({ timeout: 10000 }));
                     ms.delete();
                     msg.delete();
                     return;

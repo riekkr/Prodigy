@@ -17,7 +17,7 @@ module.exports = async (client, player, track) => {
             .setFooter(`No tracks in queue | ${client.config.defaultFooter}`, channel.guild.iconURL())
             .setColor(client.config.defaultColor)
             .setThumbnail(track.displayThumbnail('maxresdefault') || track.displayThumbnail('hqdefault') || track.displayThumbnail('mqdefault') || track.thumbnail);
-        let msg = await channel.send(embed);
+        let msg = await channel.send({ embeds: [embed] });
         if (channel.lastNowPlayingMessage) channel.lastNowPlayingMessage.delete();
         channel.lastNowPlayingMessage = msg;
         return;
@@ -35,7 +35,7 @@ module.exports = async (client, player, track) => {
         .setFooter(`${player.queue.size} track(s) in queue | ${client.config.defaultFooter}`, channel.guild.iconURL())
         .setColor(client.config.defaultColor)
         .setThumbnail(track.displayThumbnail('maxresdefault') || track.displayThumbnail('hqdefault') || track.displayThumbnail('mqdefault') || track.thumbnail);
-    let msg = await channel.send(embed);
+    let msg = await channel.send({ embeds: [embed] });
     if (channel.lastNowPlayingMessage) channel.lastNowPlayingMessage.delete();
     channel.lastNowPlayingMessage = msg;
 };  

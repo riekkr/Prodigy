@@ -15,7 +15,7 @@ module.exports = {
                 .setDescription(`The current prefix for this server is \`${prefix}\`.`)
                 .setColor(client.config.defaultColor)
                 .setFooter(client.config.defaultFooter);
-            return message.channel.send(embed);
+            return message.channel.send({ embeds: [embed] });
         } else {
             await client.db.set(message.guild.id, args.join(' '));
             const embed = new MessageEmbed()
@@ -23,7 +23,7 @@ module.exports = {
                 .setDescription(`Prefix changed from \`${prefix}\` to \`${args.join(' ')}\`.`)
                 .setColor(client.config.defaultColor)
                 .setFooter(client.config.defaultFooter);
-            return message.channel.send(embed);
+            return message.channel.send({ embeds: [embed] });
         }
     }
 };

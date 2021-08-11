@@ -10,12 +10,12 @@ module.exports = {
     dj: false, // Whether DJ only mode being on will prevent the command from being run
 
     async execute(client, message, args) {
-        if (!args.length && message.member.previousCharacterQuery === undefined) return message.channel.send('**Invalid usage:** Command `constellations` requires exactly 1 string argument.');
+        if (!args.length && message.member.previousCharacterQuery === undefined) return message.reply('**Invalid usage:** Command `constellations` requires exactly 1 string argument.');
         let char = args.join(' ') || message.member.previousCharacterQuery;
         const cons = Object.values(client.genshin.constellation(char));
         cons.shift();
         const imgs = Object.values(cons.pop());
-        if (!cons) return message.reply(`the character ${char} was not found in the database.`);
+        if (!cons) return message.reply(`The character ${char} was not found in the database.`);
         const characterInfo = client.genshin.characters(char);
         let pages = [];
         let current = 0;
@@ -29,13 +29,13 @@ module.exports = {
                 .setColor(client.config.defaultColor);
             pages.push(embed);
         }
-        const msg = await message.channel.send(pages[0]);
+        const msg = await message.channel.send({ embeds: [pages[0]] });
         await msg.react('🔺');
         await msg.react('🔻');
         const upFilter = (reaction, user) => reaction.emoji.name === '🔺' && user.id === message.author.id;
         const downFilter = (reaction, user) => reaction.emoji.name === '🔻' && user.id === message.author.id;
-        const collector1 = msg.createReactionCollector(upFilter, { time: 5 * 60 * 1000 });
-        const collector2 = msg.createReactionCollector(downFilter, { time: 5 * 60 * 1000 });
+        const collector1 = msg.createReactionCollector({ filter: upFilter, time: 5 * 60 * 1000 });
+        const collector2 = msg.createReactionCollector({ filter: downFilter, time: 5 * 60 * 1000 });
         collector1.on('collect', async (reaction, user) => { // Up
             await reaction.users.remove(user.id);
             if (current === 0) {

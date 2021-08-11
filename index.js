@@ -44,8 +44,22 @@ if (process.env.ENVIRONMENT === 'development') {
     namespace = 'default';
     dev = false;
 }
-
-const client = new Discord.Client();
+const { Intents } = require('discord.js');
+const client = new Discord.Client({
+    intents: [
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_MEMBERS,
+        Intents.FLAGS.GUILD_BANS,
+        Intents.FLAGS.GUILD_INVITES,
+        Intents.FLAGS.GUILD_VOICE_STATES,
+        Intents.FLAGS.GUILD_PRESENCES,
+        Intents.FLAGS.GUILD_MESSAGES,
+        Intents.FLAGS.GUILD_MESSAGES,
+        Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+        Intents.FLAGS.DIRECT_MESSAGES,
+        Intents.FLAGS.DIRECT_MESSAGE_REACTIONS
+    ]
+});
 const db = new Keyv(config.mongoURL, { namespace });
 db.on('error', err => log(2, `Connection error: ${err}`));
 client.debug = false;
@@ -177,7 +191,7 @@ async function update (guild, def) {
     const channelID = obj.channelID;
     const channel = client.channels.cache.get(channelID);
     let message = await channel.messages.fetch(messageID).catch(async () => {
-        const msg = await channel.send(text, { embed });
+        const msg = await channel.send(text, { embeds: [embed] });
         objc = {
             messageID: msg.id,
             channelID: msg.channel.id
@@ -268,10 +282,10 @@ function log (type, details) {
         console.log(chalk.bold(chalk.magenta(`${format} [INFO] `)) + details);
     }
     if (type === 'error' || type === 'err' || type === 'e' || type === 2) {
-        console.log(chalk.bold(chalk.bgBlack(chalk.red(`${format} [ERROR] `))) + details);
+        console.log(chalk.bold(chalk.red(`${format} [ERROR] `)) + details);
     }
     if (type === 'warn' || type === 'w' || type === 3) {
-        console.log(chalk.bold(chalk.yellow(`${format} [ERROR] `)) + details);
+        console.log(chalk.bold(chalk.yellow(`${format} [WARN] `)) + details);
     }
 }
 

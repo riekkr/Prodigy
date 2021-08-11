@@ -29,7 +29,7 @@ module.exports = {
         };
         got(options).catch(err => {
             if (err.message.includes('400')) {
-                return message.reply('short URL already exists. Try again with a different shortened name.');
+                return message.reply('Short URL already exists. Try again with a different shortened name.');
             }
         }).then(res => {
             res = res.body; 
@@ -38,7 +38,7 @@ module.exports = {
                 .setDescription(`Successfully shortened your URL.\n**${res.shortURL || `https://prdg.tk/${shortened}`}**`)
                 .setColor(client.config.defaultColor)
                 .setFooter(client.config.defaultFooter);
-            return message.channel.send(embed);
+            return message.channel.send({ embeds: [embed] });
         });
     }
 };

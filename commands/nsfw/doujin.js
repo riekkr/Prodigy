@@ -12,8 +12,8 @@ module.exports = {
     dj: false, // Whether DJ only mode being on will prevent the command from being run
 
     async execute(client, message, args) {
-        if (message.channel.nsfw === false) return message.reply('this command can only be used in NSFW marked channels.');
-        let book = await api.getBook(args.join(' ')).catch(async () => await message.reply('invalid doujin ID.'));
+        if (message.channel.nsfw === false) return message.reply('This command can only be used in NSFW marked channels.');
+        let book = await api.getBook(args.join(' ')).catch(async () => await message.reply('Invalid doujin ID.'));
         const pages = [];
         for (let i = 0; i < book.pages.length; i++) {
             const embed = new MessageEmbed()
@@ -23,7 +23,7 @@ module.exports = {
                 .setColor(client.config.defaultColor);
             pages.push(embed);
         }
-        let msg = await message.channel.send(pages[0]);
+        let msg = await message.channel.send({ embeds: [pages[0]] });
         let currentPage = 0;
         await msg.react('🔺');
         await msg.react('🔻');
@@ -31,9 +31,9 @@ module.exports = {
         const upFilter = (reaction, user) => reaction.emoji.name === '🔺' && user.id === message.author.id;
         const downFilter = (reaction, user) => reaction.emoji.name === '🔻' && user.id === message.author.id;
         const jumpFilter = (reaction, user) => reaction.emoji.name === '🔹' && user.id === message.author.id;
-        const collector1 = msg.createReactionCollector(upFilter, { time: 5 * 60 * 1000 });
-        const collector2 = msg.createReactionCollector(downFilter, { time: 5 * 60 * 1000 });
-        const collector3 = msg.createReactionCollector(jumpFilter, { time: 5 * 60 * 1000 });
+        const collector1 = msg.createReactionCollector({ filter: upFilter, time: 5 * 60 * 1000 });
+        const collector2 = msg.createReactionCollector({ filter: downFilter, time: 5 * 60 * 1000 });
+        const collector3 = msg.createReactionCollector({ filter: jumpFilter, time: 5 * 60 * 1000 });
         collector1.on('collect', async (reaction, user) => { // Up
             await reaction.users.remove(user.id);
             if (currentPage === 0) {
@@ -61,7 +61,7 @@ module.exports = {
             const collector = message.channel.createMessageCollector(filter, { limit: 1, time: 15000 });
             collector.on('collect', ms => {
                 if (Number(ms.content) < 1 || Number(ms.content) > book.pages.length) {
-                    message.reply(`requires a number from 1 to ${book.pages.length}.`).then(mx => mx.delete({ timeout: 10000 }));
+                    message.reply(`Requires a number from 1 to ${book.pages.length}.`).then(mx => mx.delete({ timeout: 10000 }));
                     ms.delete();
                     msg.delete();
                     return;

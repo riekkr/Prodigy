@@ -16,8 +16,8 @@ module.exports = {
         let query;
         let textonly = false;
         if (!args.length) {
-            if (!player) return message.reply('there is nothing playing in this server. Please provide a query.');
-            if (!player.queue.current) return message.reply('there is nothing playing. Please provide a query.');
+            if (!player) return message.reply('There is nothing playing in this server. Please provide a query.');
+            if (!player.queue.current) return message.reply('There is nothing playing. Please provide a query.');
             query = player.queue.current.title;
         } else {
             if (args.includes('-i')) {
@@ -53,13 +53,13 @@ module.exports = {
                 .setDescription(pages[i]);
             final.push(embed);
         }
-        let msg = await message.channel.send(final[0]);
+        let msg = await message.channel.send({ embeds: [final[0]] });
         await msg.react('🔺');
         await msg.react('🔻');
         const upFilter = (reaction, user) => reaction.emoji.name === '🔺' && user.id === message.author.id;
         const downFilter = (reaction, user) => reaction.emoji.name === '🔻' && user.id === message.author.id;
-        const collector1 = msg.createReactionCollector(upFilter, { time: 10 * 60 * 1000 });
-        const collector2 = msg.createReactionCollector(downFilter, { time: 10 * 60 * 1000 });
+        const collector1 = msg.createReactionCollector({ filter: upFilter, time: 10 * 60 * 1000 });
+        const collector2 = msg.createReactionCollector({ filter: downFilter, time: 10 * 60 * 1000 });
         collector1.on('collect', async (reaction, user) => { // Up
             await reaction.users.remove(user.id);
             if (currentPage === 0) {

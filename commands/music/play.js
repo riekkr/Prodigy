@@ -29,7 +29,7 @@ module.exports = {
         switch (res.loadType) {
         case 'NO_MATCHES':
             if (!player.queue.current) player.destroy();
-            message.reply('there weren\'t any results found for your query.').then(msg => {
+            message.reply('There weren\'t any results found for your query.').then(msg => {
                 if (noResponse) msg.delete({ timeout: 10000 });
             });
             break;

@@ -1,6 +1,6 @@
 {
   "name": "prodigy",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Prodigy is a Discord bot with many features",
   "main": "index.js",
   "scripts": {

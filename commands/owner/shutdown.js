@@ -15,7 +15,7 @@ module.exports = {
             .setAuthor('Shutting down...', client.user.avatarURL())
             .setColor(client.config.defaultColor)
             .setFooter(client.config.defaultFooter);
-        await message.channel.send(embed);
+        await message.channel.send({ embeds: [embed] });
         await process.exit();
     }
 };

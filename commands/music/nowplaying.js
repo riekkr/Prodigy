@@ -11,8 +11,8 @@ module.exports = {
     dj: false, // Whether DJ only mode being on will prevent the command from being run
 
     async execute(client, message, args, prefix, player) {
-        if (!player) return message.reply('there is nothing playing in this server.');
-        if (!player.queue.current) return message.reply('there is nothing playing.');
+        if (!player) return message.reply('There is nothing playing in this server.');
+        if (!player.queue.current) return message.reply('There is nothing playing.');
         if (!player.textChannel) player.textChannel = message.channel.id;
 
         let np = player.queue.current;
@@ -58,7 +58,7 @@ module.exports = {
                     inline: true
                 }
             ]);
-        return message.channel.send(embed);
+        return message.channel.send({ embeds: [embed] });
 
         function createProgressBar (current, end, size) {
             if (isNaN(current) || isNaN(end)) return 'Arguments current and end have to be integers.';

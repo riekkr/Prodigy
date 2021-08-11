@@ -8,8 +8,8 @@ module.exports = {
     dj: true, // Whether DJ only mode being on will prevent the command from being run
 
     async execute(client, message, args, prefix, player) {
-        if (!player) return message.reply('there is nothing playing in this server.');
-        if (!player.queue.current) return message.reply('there is nothing playing.');
+        if (!player) return message.reply('There is nothing playing in this server.');
+        if (!player.queue.current) return message.reply('There is nothing playing.');
         if (!player.textChannel) player.textChannel = message.channel.id;
 
         const loopType = args[0];
@@ -17,7 +17,7 @@ module.exports = {
         let type;
         if (!args.length || loopType === 'song' || loopType === 'track' || loopType === 's' || loopType === 't') type = 'track';
         else if (loopType === 'queue' || loopType === 'q') type = 'queue';
-        else return message.reply('invalid arguments provided.');
+        else return message.reply('Invalid arguments provided.');
 
         if (type === 'queue') {
             if (bool === 'toggle') {
@@ -35,7 +35,7 @@ module.exports = {
                 bool = false;
                 player.setQueueRepeat(false);
             } else {
-                return message.reply('invalid boolean argument. Accepts `on/off/true/false/t/f`.');
+                return message.reply('Invalid boolean argument. Accepts `on/off/true/false/t/f`.');
             }
         } else if (type === 'track') {
             if (bool === 'toggle') {
@@ -53,7 +53,7 @@ module.exports = {
                 bool = false;
                 player.setTrackRepeat(false);
             } else {
-                return message.reply('invalid boolean argument. Accepts `on/off/true/false/t/f`.');
+                return message.reply('Invalid boolean argument. Accepts `on/off/true/false/t/f`.');
             }
         }
 

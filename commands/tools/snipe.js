@@ -11,7 +11,7 @@ module.exports = {
 
     async execute(client, message) {
         const msg = client.snipes.get(message.channel.id);
-        if (!msg) return message.reply('no recently deleted messages saved in cache.');
+        if (!msg) return message.reply('No recently deleted messages saved in cache.');
         const embed = new MessageEmbed()
             .setAuthor(msg.author.tag, msg.author.avatarURL())
             .setColor(client.config.defaultColor)
@@ -19,6 +19,6 @@ module.exports = {
             .setDescription(msg.content)
             .setImage(msg.image)
             .setTimestamp(msg.timestamp);
-        return message.channel.send(embed);
+        return message.channel.send({ embeds: [embed] });
     }
 };

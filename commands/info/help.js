@@ -18,7 +18,7 @@ module.exports = {
             } else if (client.commands.find(c => c.aliases.includes(name))) {
                 command = client.commands.find(c => c.aliases.includes(name));
             }
-            if (!command) return message.reply('that\'s not a valid command.');
+            if (!command) return message.reply('That\'s not a valid command.');
             let av;
             if (command.dj === true && command.ownerOnly === true) {
                 av = 'Owner only and requires DJ role when DJ mode is on';
@@ -65,7 +65,7 @@ module.exports = {
                         value: `\`${command.requiredPermissions.join('`, `') || 'None'}\``
                     }
                 ]);
-            message.channel.send(inf);
+            message.channel.send({ embeds: [inf] });
         } else {
             const embed = new MessageEmbed()
                 .setColor(client.config.defaultColor)
@@ -103,7 +103,7 @@ module.exports = {
                         value: `\`${client.commands.filter(cmd => cmd.category === 'owner').map(c => c.name).join('`, `')}\``
                     }
                 ]);
-            return message.channel.send(embed);
+            return message.channel.send({ embeds: [embed] });
         }
     }
 };

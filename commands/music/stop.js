@@ -8,10 +8,10 @@ module.exports = {
     dj: true, // Whether DJ only mode being on will prevent the command from being run
 
     async execute(client, message, args, prefix, player) {
-        if (!player) return message.reply('there is nothing playing in this server.');
+        if (!player) return message.reply('There is nothing playing in this server.');
         const channel = message.member.voice.channel;
-        if (!channel) return message.reply('you aren\'t in a voice channel.');
-        if (channel.id !== player.voiceChannel) return message.reply('you aren\'t in the same voice channel as the bot.');
+        if (!channel) return message.reply('You aren\'t in a voice channel.');
+        if (channel.id !== player.voiceChannel) return message.reply('You aren\'t in the same voice channel as the bot.');
         if (!player.textChannel) player.textChannel = message.channel.id;
         player.destroy();
         if (message.channel.lastNowPlayingMessage) message.channel.lastNowPlayingMessage.delete();

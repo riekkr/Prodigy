@@ -16,10 +16,10 @@ module.exports = {
             extra: 0.50,
             dumb: 1.00
         };
-        if (!player) return message.reply('there is nothing playing.');
+        if (!player) return message.reply('There is nothing playing.');
         const { channel } = message.member.voice;
-        if (!channel) return message.reply('you aren\'t in a voice channel.');
-        if (channel.id !== player.voiceChannel) return message.reply('you aren\'t in the same voice channel as the bot.');
+        if (!channel) return message.reply('You aren\'t in a voice channel.');
+        if (channel.id !== player.voiceChannel) return message.reply('You aren\'t in the same voice channel as the bot.');
 
         let level = 'none';
         if (args.length && args[0].toLowerCase() in levels) level = args[0].toLowerCase();
@@ -29,6 +29,6 @@ module.exports = {
                 ({ band: i, gain: levels[level] })
             );
         player.setEQ(...bands);
-        return message.reply(`setting bass boost level to ${level}.`);
+        return message.reply(`Setting bass boost level to ${level}.`);
     }
 };

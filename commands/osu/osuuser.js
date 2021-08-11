@@ -40,7 +40,7 @@ module.exports = {
         const res = await fetch(fullURL);
         let json = await res.json();
         if (!json.length) {
-            return message.reply(`user **${user}** was not found.`);
+            return message.reply(`User **${user}** was not found.`);
         }
         json = json[0];
         const recentURL = `${recentPlays}?k=${client.config.osuAPI}&u=${json.user_id}&m=${rawMode}&type=id`;
@@ -183,9 +183,9 @@ module.exports = {
             .setColor(client.config.defaultColor)
             .setFooter(client.config.defaultFooter)
             .setDescription(secondHalf.join('\n'));
-        message.channel.send(embed);
-        message.channel.send(recentEmb1);
-        message.channel.send(recentEmb2);
+        message.channel.send({ embeds: [embed] });
+        message.channel.send({ embeds: [recentEmb1] });
+        message.channel.send({ embeds: [recentEmb2] });
 
     }
 };
