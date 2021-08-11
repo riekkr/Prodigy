@@ -37,20 +37,20 @@ module.exports = {
         collector1.on('collect', async (reaction, user) => { // Up
             await reaction.users.remove(user.id);
             if (currentPage === 0) {
-                await msg.edit({ embed: pages[pages.length - 1] });
+                await msg.edit({ embeds: [pages[pages.length - 1]] });
                 currentPage = pages.length - 1;
             } else {
-                await msg.edit({ embed: pages[currentPage - 1] });
+                await msg.edit({ embeds: [pages[currentPage - 1]] });
                 currentPage--;
             }
         });
         collector2.on('collect', async (reaction, user) => { // Down
             await reaction.users.remove(user.id);
             if (currentPage === pages.length - 1) {
-                await msg.edit({ embed: pages[0] });
+                await msg.edit({ embeds: [pages[0]] });
                 currentPage = 0;
             } else {
-                await msg.edit({ embed: pages[currentPage + 1] });
+                await msg.edit({ embeds: [pages[currentPage + 1]] });
                 currentPage++;
             }
         });
@@ -66,7 +66,7 @@ module.exports = {
                     msg.delete();
                     return;
                 }
-                msg.edit({ embed: pages[Number(ms.content) - 1] });
+                msg.edit({ embeds: [pages[Number(ms.content) - 1]] });
                 currentPage = Number(ms.content) - 1;
                 collector.stop();
                 msg.delete();

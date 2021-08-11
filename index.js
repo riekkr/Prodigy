@@ -208,7 +208,7 @@ async function update (guild, def) {
             .setImage(client.config.image)
             .setFooter(client.config.defaultFooter)
             .setDescription('**Prodigy - Welcome!**\nTo play a track, type its name or URL in this channel.');
-        message.edit('', { embed });
+        await message.edit({ embeds: [embed] });
         return;
     }
     const player = await client.manager.get(guild);
@@ -248,7 +248,7 @@ async function update (guild, def) {
         text = shortArr.join('\n');
         embed.setFooter(`Track loop: ${player.trackRepeat ? 'On' : 'Off'} | Queue loop: ${player.queueRepeat ? 'On' : 'Off'} | ${player.paused ? 'Paused' : 'Not paused'}\nTotal duration: ${totalDuration}`);
     } else {
-        text = '';
+        text = '**No tracks in queue.**';
     }
     channel.messages.fetch()
         .then(fetched => {
@@ -257,7 +257,7 @@ async function update (guild, def) {
             channel.bulkDelete(notPinned, true);
         })
         .catch(err => log(2, err));
-    message.edit(text, { embed });
+    await message.edit({ content: text, embeds: [embed] });
 }
 
 function log (type, details) {

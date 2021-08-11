@@ -63,20 +63,20 @@ module.exports = {
         collector1.on('collect', async (reaction, user) => { // Up
             await reaction.users.remove(user.id);
             if (currentPage === 0) {
-                await msg.edit({ embed: final[final.length - 1] });
+                await msg.edit({ embeds: [final[final.length - 1]] });
                 currentPage = final.length - 1;
             } else {
-                await msg.edit({ embed: final[currentPage - 1] });
+                await msg.edit({ embeds: [final[currentPage - 1]] });
                 currentPage--;
             }
         });
         collector2.on('collect', async (reaction, user) => { // Down
             await reaction.users.remove(user.id);
             if (currentPage === final.length - 1) {
-                await msg.edit({ embed: final[currentPage + 1] });
+                await msg.edit({ embeds: [final[currentPage + 1]] });
                 currentPage = 0;
             } else {
-                await msg.edit({ embed: final[currentPage + 1] });
+                await msg.edit({ embeds: [final[currentPage + 1]] });
                 currentPage++;
             }
         });
