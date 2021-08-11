@@ -76,7 +76,7 @@ module.exports = {
                 await msg.edit({ embeds: [pages[0]] });
                 current = 0;
             } else {
-                await msg.edit({ embeds: [pages[current + 1] });
+                await msg.edit({ embeds: [pages[current + 1]] });
                 current++;
             }
         });
