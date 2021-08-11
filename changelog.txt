@@ -1,0 +1,32 @@
+< Prodigy - Changelog >
+
+Updated: 11/8/2021
+         11:25pm (GMT+8)
+
+latest
+--------------------------------------------------
+major changes:
++ command blacklist
++ rate limiting for all commands (1.5s)
++ update script for easier self-hosting
+
+bugfixes:
++ added extra log line
+- remove black background in logging
+- do not post stats for canary version
+
+documentation:
++ updated example config
+
+packages:
++ chalk: 4.1.1 -> 4.1.2
++ discord.js: 12.5.3 -> 13.0.1
++ discord.js-rate-limiter: 1.1.0 -> 1.2.0
++ erela.js-deezer: 1.0.5 -> 1.0.7
++ genshin-db: 3.8.1 -> 3.9.4
++ got: 11.8.2 -> 12.0.0-beta.3
++ eslint: 7.30.0 -> 7.32.0
+
+planned updates:
++ webhooks for top.gg
++ discord.js v13 update
