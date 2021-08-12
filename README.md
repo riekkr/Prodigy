@@ -1,14 +1,15 @@
 # Prodigy Discord Bot
 **Rewritten and faster than ever!**
 
-## v2
-**After weeks of testing, v2 has been released.**  
-The last v1 commit was [`fe9114bb6b1a374f4fd6ada2a1f65702c40eb3fd`](https://github.com/riekkr/Prodigy/commits/fe9114bb6b1a374f4fd6ada2a1f65702c40eb3fd).
+## v3
+Released v3 with Discord.js v13. 
+Last v2 commit: [`ebfbd37ba36e642d2a610f4aabcc409f3921b87e`](https://github.com/riekkr/Prodigy/commits/ebfbd37ba36e642d2a610f4aabcc409f3921b87e)   
+Last v1 commit: [`fe9114bb6b1a374f4fd6ada2a1f65702c40eb3fd`](https://github.com/riekkr/Prodigy/commits/fe9114bb6b1a374f4fd6ada2a1f65702c40eb3fd)  
 
 
 ### Features
 - Volume control
-- Filters (coming soon)
+- Filters
 - Live streams
 - Fast
 - 24/7 uptime
@@ -23,8 +24,8 @@ The last v1 commit was [`fe9114bb6b1a374f4fd6ada2a1f65702c40eb3fd`](https://gith
 ### Links
 - [Documentation](https://docs.prdg.tk)
 - [Invite](https://discord.com/oauth2/authorize?client_id=823090420338524161&scope=bot&permissions=7515663606)
-- [GitHub](https://github.com/thaddeuskkr/Prodigy)
+- [GitHub](https://github.com/riekkr/Prodigy)
 
 ### Contact
 - **Discord:** thaddeuskkr#4416
-- **Command:** `p!c` (WIP)
+- **Mail:** support@prdg.tk
