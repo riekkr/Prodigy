@@ -14,6 +14,9 @@ const fetch = require('node-fetch');
 const { RateLimiter } = require('discord.js-rate-limiter');
 // const Topgg = require('@top-gg/sdk'); // Support webhooks next time
 const { AutoPoster } = require('topgg-autoposter');
+// const { REST } = require('@discordjs/rest');
+// const { Routes } = require('discord-api-types/v9');
+// Adding for future slash command support
 
 const server = express();
 server.listen(config.port, () => log(1, `Listening on port ${config.port}`));
