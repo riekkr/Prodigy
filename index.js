@@ -88,7 +88,7 @@ client.genshin = genshin;
 if (!dev) {
     AutoPoster(config.topgg, client)
         .on('posted', async () => log(0, `Posted stats to top.gg - ${client.guilds.cache.size} servers with ${client.users.cache.size} users`));
-    const webhook = new Topgg.webhook(config.topgg);
+    const webhook = new Topgg.Webhook(config.topgg);
     server.post('/dbl', webhook.listener(vote => {
         log(1, `User ${vote.user} voted for Prodigy. This vote counted ${vote.isWeekend ? 'twice due to the weekend multiplier' : 'once'}.`);
         const user = client.users.cache.get(vote.user);
