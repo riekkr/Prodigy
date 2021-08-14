@@ -1,5 +1,3 @@
-// noinspection JSClosureCompilerSyntax
-
 require('dotenv').config();
 const Discord = require('discord.js');
 const chalk = require('chalk');
@@ -12,14 +10,24 @@ const genshin = require('genshin-db');
 const prettyms = require('pretty-ms');
 const fetch = require('node-fetch');
 const { RateLimiter } = require('discord.js-rate-limiter');
-// const Topgg = require('@top-gg/sdk'); // Support webhooks next time
+const Topgg = require('@top-gg/sdk');
 const { AutoPoster } = require('topgg-autoposter');
 // const { REST } = require('@discordjs/rest');
 // const { Routes } = require('discord-api-types/v9');
 // Adding for future slash command support
 
+let namespace;
+let dev;
+if (process.env.ENVIRONMENT === 'development') {
+    namespace = 'dev';
+    dev = true;
+} else {
+    namespace = 'default';
+    dev = false;
+}
+
 const server = express();
-server.listen(config.port, () => log(1, `Listening on port ${config.port}`));
+server.listen(dev ? config.devPort : config.port, () => log(1, `Listening on port ${dev ? config.devPort : config.port}`));
 
 const { Manager } = require('erela.js');
 const Spotify = require('erela.js-spotify');
@@ -38,15 +46,6 @@ const nodes = [
         clientName: 'ProdigyV2'
     }
 ];
-let namespace;
-let dev;
-if (process.env.ENVIRONMENT === 'development') {
-    namespace = 'dev';
-    dev = true;
-} else {
-    namespace = 'default';
-    dev = false;
-}
 const { Intents } = require('discord.js');
 const client = new Discord.Client({
     intents: [
@@ -85,12 +84,21 @@ client.config.defaultFooter = client.config.defaultFooter.replace('{version}', `
 client.commands = new Discord.Collection();
 client.snipes = new Discord.Collection();
 client.genshin = genshin;
-// client.buttons = require('discord-buttons')(client);
 
 if (!dev) {
     AutoPoster(config.topgg, client)
         .on('posted', async () => log(0, `Posted stats to top.gg - ${client.guilds.cache.size} servers with ${client.users.cache.size} users`));
-// Will add webhooks at a later date.
+    const webhook = new Topgg.webhook(config.topgg);
+    server.post('/dbl', webhook.listener(vote => {
+        log(1, `User ${vote.user} voted for Prodigy. This vote counted ${vote.isWeekend ? 'twice due to the weekend multiplier' : 'once'}.`);
+        const user = client.users.cache.get(vote.user);
+        const embed = new Discord.MessageEmbed()
+            .setAuthor('Thank you for voting!', user.avatarURL())
+            .setDescription(`You have voted for Prodigy on [top.gg](https://top.gg/bot/823090420338524161).\nThank you for supporting the bot.\nYour vote counted ${vote.isWeekend ? 'twice due to the weekend multiplier' : 'once'}.`)
+            .setColor('PURPLE')
+            .setFooter(client.config.defaultFooter);
+        user.send({ embeds: [embed] });
+    }));
 }
 const manager = new Manager({
     nodes,
