@@ -1,5 +1,6 @@
 {
     "token": "",
+    "canaryToken": "",
     "lavalinkHost": "",
     "lavalinkPort": 1100,
     "lavalinkPassword": "",
@@ -14,6 +15,7 @@
     "spotifyClientID": "",
     "spotifyClientSecret": "",
     "port": 6969,
+    "devPort": 6970,
     "osuAPI": "",
     "status": "dnd",
     "activity": "prdg.tk | p!help",
@@ -23,5 +25,6 @@
     "avatarURL": "",
     "website": "",
     "blacklist": [],
-    "commandCooldown": 1500
+    "commandCooldown": 1500,
+    "topgg": ""
 }
