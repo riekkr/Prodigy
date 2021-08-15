@@ -88,18 +88,18 @@ client.genshin = genshin;
 if (!dev) {
     AutoPoster(config.topgg, client)
         .on('posted', async () => log(0, `Posted stats to top.gg - ${client.guilds.cache.size} servers with ${client.users.cache.size} users`));
-    const webhook = new Topgg.Webhook(config.topgg);
-    server.post('/dbl', webhook.listener(vote => {
-        log(1, `User ${vote.user} voted for Prodigy. This vote counted ${vote.isWeekend ? 'twice due to the weekend multiplier' : 'once'}.`);
-        const user = client.users.cache.get(vote.user);
-        const embed = new Discord.MessageEmbed()
-            .setAuthor('Thank you for voting!', user.avatarURL())
-            .setDescription(`You have voted for Prodigy on [top.gg](https://top.gg/bot/823090420338524161).\nThank you for supporting the bot.\nYour vote counted ${vote.isWeekend ? 'twice due to the weekend multiplier' : 'once'}.`)
-            .setColor('PURPLE')
-            .setFooter(client.config.defaultFooter);
-        user.send({ embeds: [embed] });
-    }));
 }
+const webhook = new Topgg.Webhook(config.topgg);
+server.post('/dbl', webhook.listener(vote => {
+    log(1, `User ${vote.user} voted for Prodigy. This vote counted ${vote.isWeekend ? 'twice due to the weekend multiplier' : 'once'}.`);
+    const user = client.users.cache.get(vote.user);
+    const embed = new Discord.MessageEmbed()
+        .setAuthor('Thank you for voting!', user.avatarURL())
+        .setDescription(`You have voted for Prodigy on [top.gg](https://top.gg/bot/823090420338524161).\nThank you for supporting the bot.\nYour vote counted ${vote.isWeekend ? 'twice due to the weekend multiplier' : 'once'}.`)
+        .setColor('PURPLE')
+        .setFooter(client.config.defaultFooter);
+    if (!dev) user.send({ embeds: [embed] });
+}));
 const manager = new Manager({
     nodes,
     plugins: [
