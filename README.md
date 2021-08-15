@@ -28,4 +28,4 @@ Last v1 commit: [`fe9114bb6b1a374f4fd6ada2a1f65702c40eb3fd`](https://github.com/
 
 ### Contact
 - **Discord:** thaddeuskkr#4416
-- **Mail:** support@prdg.tk
+- **Mail:** prodigy@tkkr.tech
