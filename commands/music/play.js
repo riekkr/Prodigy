@@ -10,8 +10,10 @@ module.exports = {
 
     async execute(client, message, args, pre, plr, noResponse) {
         if (!args.length) {
-            return message.channel.send('**Invalid usage:** Command `play` requires exactly 1 string argument.');
+            return message.reply('**Invalid usage:** Command `play` requires exactly 1 string argument.');
         }
+        if (!message.member.voice) return message.reply('You are not connected to a voice channel.');
+        if (message.guild.me.voice && message.guild.me.voice.channel.id !== message.member.voice.channel.id) return message.reply('You are not in the same voice channel as the bot.')
         const res = await client.manager.search(args.join(' '), message.author);
         const player = client.manager.create({
             guild: message.guild.id,
