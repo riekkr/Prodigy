@@ -2,7 +2,7 @@ FROM node:15
 
 WORKDIR /usr/src/
 COPY package.json yarn.lock ./
-# RUN yarn add
+RUN yarn
 
 COPY . . 
 EXPOSE 6969:6969
