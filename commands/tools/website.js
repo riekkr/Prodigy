@@ -1,5 +1,5 @@
-const Discord = require('discord.js');
 const { MessageEmbed } = require('discord.js');
+const puppeteer = require('puppeteer');
 
 module.exports = {
     name: 'website', // Command name
@@ -12,6 +12,25 @@ module.exports = {
     sameVC: false, // Requires the user to be in the same voice channel as the bot to run the command (Not done)
 
     async execute(client, message, args) {
-        return message.reply('This command is currently not ready for use.');
+        const msg = await message.reply('Waiting for available browser...');
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await msg.edit(`Launched browser and navigating to <${args[0]}>...`);
+        await page.goto(args[0]);
+        await msg.edit('Waiting for page to load...');
+        await page.waitForNavigation({
+            waitUntil: 'networkidle0',
+        });
+        await msg.edit('Taking a screenshot...');
+        await page.screenshot({ path: `../../screenshots/${message.id}.png` });
+        const title = page.title();
+        await msg.edit('Closing browser...');
+        await browser.close();
+        const embed = new MessageEmbed()
+            .setAuthor(message.author.tag, message.author.avatarURL())
+            .setTitle(title)
+            .setURL(args[0])
+            .setColor(client.config.defaultColor);
+        await msg.edit({ embeds: [embed], files: [{ attachment: `../../screenshots/${message.id}.png`, name: 'screenshot.png' }] });
     }
 };
