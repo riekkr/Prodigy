@@ -11,7 +11,7 @@ function escapeRegex (str) {
 module.exports = {
     name: 'eval',
     description: 'Evaluates provided code.',
-    aliases: ['ev', 'run', 'evaluate', 'try'],
+    aliases: ['ev', 'evaluate', 'try'],
     usage: '{p}eval <code (blocks accepted)>',
     ownerOnly: true,
     requiredPermissions: [],
