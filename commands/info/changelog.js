@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { Util } = require('discord.js');
 
 module.exports = {
     name: 'changelog', // Command name
@@ -11,7 +12,8 @@ module.exports = {
     sameVC: false, // Requires the user to be in the same voice channel as the bot to run the command (Not done)
 
     async execute(client, message) {
-        const changelog = fs.readFileSync('./changelog.txt', 'utf8');
+        let changelog = fs.readFileSync('./changelog.txt', 'utf8');
+        Util.splitMessage(changelog, { maxLength: 2048, char: '\n', prepend: '```diff\n', append: '```' });
         message.reply(`\`\`\`diff\n${changelog}\n\`\`\``);
     }
 };

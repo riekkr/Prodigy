@@ -1,9 +1,31 @@
 < Prodigy - Changelog >
 
-Updated: 11/8/2021
-         12:25am (GMT+8)
-
+Updated: 16/8/2021
+         4:00pm (GMT+8)
+--------------------------------------------------
 latest
+--------------------------------------------------
+major changes:
++ add checks for user being in a voice channel using the play command
++ vote command
++ changelog split message
+
+bugfixes:
+- removed conflicting prefix for eval command
++ use util functions for eval command
++ fixed error on play command
+
+documentation:
+- no changes
+
+packages:
++ puppeteer: none -> 10.2.0
+
+planned updates:
++ #17: slash commands support (discord.js v13)
++ #18: website screenshot command
+--------------------------------------------------
+v3
 --------------------------------------------------
 major changes:
 + command blacklist
@@ -28,6 +50,3 @@ packages:
 + genshin-db: 3.8.1 -> 3.9.4
 + got: 11.8.2 -> 12.0.0-beta.3
 + eslint: 7.30.0 -> 7.32.0
-
-planned updates:
-+ webhooks for top.gg
